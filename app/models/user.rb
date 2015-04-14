@@ -28,4 +28,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, 
     :validatable
+
+  # Relations
+  has_many :vacation_requests
+  has_many :requested_days, through: :vacation_requests
 end

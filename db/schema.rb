@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414132746) do
+ActiveRecord::Schema.define(version: 20150414151954) do
+
+  create_table "requested_days", force: :cascade do |t|
+    t.date     "day",                             null: false
+    t.integer  "status",              default: 0
+    t.integer  "vacation_request_id",             null: false
+    t.integer  "validator_id"
+    t.datetime "validated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "requested_days", ["vacation_request_id"], name: "index_requested_days_on_vacation_request_id"
+  add_index "requested_days", ["validator_id"], name: "index_requested_days_on_validator_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -33,5 +46,14 @@ ActiveRecord::Schema.define(version: 20150414132746) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "vacation_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "vacation_requests", ["user_id"], name: "index_vacation_requests_on_user_id"
 
 end
