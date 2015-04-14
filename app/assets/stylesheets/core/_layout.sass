@@ -1,3 +1,22 @@
 // - - - - - - - - - - - - - - - - - - -
 // - - layout
 // global layout classes - height, width, padding, margin, etc.
+
+body
+  +display(flex)
+  +flex-direction(column)
+  min-height: 100vh
+
+  #main_header
+    min-height: 4em
+    background: #222
+
+  #main_wrapper
+    +display(flex)
+    +flex(1)
+
+    > aside
+      +flex(0 0 12em)
+    > main
+      +flex(1)
+

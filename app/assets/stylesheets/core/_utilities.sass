@@ -31,6 +31,30 @@
 //   }
 // }
 
+=unstyled-list
+  list-style: none
+  padding: 0
+  margin: 0
+
+=inline-list
+  +unstyled-list
+  li
+    display: inline-block
+
+    &:not(:last-of-type)
+      margin-right: 1em
+
+=link($primary-color: #fff, $secondary-color: darken($primary-color, 10), $font-size: 1em, $line-height: 1em)
+  +transition
+  font-size: $font-size
+  color: $primary-color
+  line-height: $line-height
+  font-weight: normal
+  text-decoration: none
+
+  &:hover
+    color: $secondary-color
+
 // - - attention
 // adds accessibility pseudo selectors to hover states.
 // @mixin attention() {
