@@ -1,0 +1,62 @@
+// - - css-burrito v1.5 | mit license | github.com/jasonreece/css-burrito
+
+// - - - - - - - - - - - - - - - - - - -
+// - - application.scss
+// contains an import section for libs, core, and modules, the inbox,
+// and a shame section for quick fixes and hacks.
+
+// - - - - - - - - - - - - - - - - - - -
+// - - libs
+// add css frameworks and libraries here.
+// be sure to load them after the variable overrides file
+// if you want to change variable values.
+@import bourbon
+@import neat
+@import font-awesome
+
+// - - variable overrides for sass libraries
+// @import "libs/library-variable-overrides";
+
+// - - reset - normalize.css v3.0.2
+// @import "libs/normalize";
+
+// - - - - - - - - - - - - - - - - - - -
+// - - core
+
+// - - core/settings
+// @font-face declarations, variables
+@import core/settings
+
+// - - core/utilities
+// extends, functions, and mixins
+@import core/utilities
+
+// - - core/base
+// base-level tags (body, p, etc.)
+@import core/base
+
+// - - core/layout
+// margin, padding, sizing
+@import core/layout
+
+// - - core/skin
+// backgrounds, borders, box-shadow, etc
+@import core/skin
+
+// - - core/typography
+// fonts and colors
+@import core/typography
+
+// - - - - - - - - - - - - - - - - - - -
+// - - modules
+// add new modules to the modules/_modules.scss file and they'll get pulled in here.
+@import modules/modules
+
+// - - - - - - - - - - - - - - - - - - -
+// - - inbox
+// the inbox allows developers, and those not actively working on the project
+// to quickly add styles that are easily seen by the maintainer of the file.
+
+// - - - - - - - - - - - - - - - - - - -
+// - - shame
+// need to add a quick fix, hack, or questionable technique?  add it here, fix it later.
