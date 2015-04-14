@@ -44,6 +44,25 @@
     &:not(:last-of-type)
       margin-right: 1em
 
+=button($primary-color: $blue, $secondary-color: #fff, $font-size: 1em)
+  +transition
+  border: 0px none
+  border-radius: $base-border-radius
+  background: $primary-color
+  font-weight: normal
+  color: $secondary-color
+  padding: .8em 1.5em
+  text-decoration: none
+  display: inline-block
+  font-size: $font-size
+  border-bottom: 3px darken($primary-color, 10) solid
+
+  &:hover
+    background: lighten($primary-color,10)
+
+  &:active
+    background: darken($primary-color,10)
+
 =link($primary-color: #fff, $secondary-color: darken($primary-color, 10), $font-size: 1em, $line-height: 1em)
   +transition
   font-size: $font-size
