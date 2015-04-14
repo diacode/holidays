@@ -23,13 +23,41 @@ module DiacodeHolidays
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Madrid'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # sass over scss
+    config.sass.preferred_syntax = :sass
+
+    config.generators do|g|
+      # Rspec generators configuration
+      g.test_framework :rspec,
+                       fixtures: false,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: false,
+                       request_specs: false,
+                       mailer_specs: false,
+                       decorator_specs: false
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+
+      # Remove some of the default generators
+      g.helper = false
+      g.javascripts = false
+      g.stylesheets = false
+      g.decorator = false
+    end
+
+    # Use compression
+    config.middleware.use Rack::Deflater
   end
 end
