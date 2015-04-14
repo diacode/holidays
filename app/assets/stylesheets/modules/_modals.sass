@@ -1,0 +1,70 @@
+.md-overlay
+  +transition()
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  z-index: 1000
+  background: rgba(#333, .85)
+  visibility: hidden
+  opacity: 0
+  overflow-y: scroll
+
+  &.md-show
+    visibility: visible
+    opacity: 1
+
+  .md-modal
+    +transition(all 0.2s)
+    +backface-visibility(hidden)
+    position: fixed
+    pointer-events: none
+    z-index: 2000
+    visibility: hidden
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    overflow-y: scroll
+
+    .md-content
+      +transition(all .5s)
+      +pad(3em)
+      border-radius: $base-border-radius
+      background: #fff
+      opacity: 0
+      position: absolute
+      pointer-events: all
+      width: 500px
+      top: -1000px
+      left: 50%
+      margin-left: -250px
+
+      .close
+        position: absolute
+        right: 1em
+        top: .5em
+        font-size: 2em
+
+      header
+        margin-bottom: 2em
+
+      h3
+        margin: 1em 0
+
+    &.md-show
+      visibility: visible
+      .md-content
+        opacity: 1
+        top: 10px
+
+    .form
+      .actions
+        text-align: right
+
+        .destroy
+          float: left
+          line-height: 3em
+
+
