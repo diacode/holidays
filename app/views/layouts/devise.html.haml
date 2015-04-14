@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title DiacodeHolidays
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'devise'
+    = csrf_meta_tags
+  %body
+    = yield
