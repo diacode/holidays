@@ -1,13 +1,17 @@
 #main_header
   background: #222
   padding: 0 2em
+  position: relative
 
-  .logo
-    float: left
-    vertical-align: middle
+  .logo-link
+    +transform(translateY(-50%))
+    position: absolute
+    left: 2em
+    top: 50%
 
   a:not(.btn)
     line-height: 4.5em
+    display: inline-block
     img
       vertical-align: middle
 
