@@ -22,7 +22,7 @@ module.exports = React.createClass
     @forceUpdate()
 
   render: () ->
-    <div>
+    <div className="calendar">
       <div className="header">
         <i className="fa fa-angle-left" onClick={@previous}></i>
         {@renderMonthLabel()}
@@ -43,7 +43,7 @@ module.exports = React.createClass
       weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} select=    {@select} selected={@props.selected} />
 
       date.add(1, "w")
-      done = count++ > 2 && monthIndex is not date.month()
+      done = count++ > 2 && monthIndex != date.month()
       monthIndex = date.month()
 
     weeks
