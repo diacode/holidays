@@ -60,6 +60,7 @@ group :development do
   gem 'quiet_assets'
   gem 'guard-livereload', require: false
   gem 'sqlite3'
+  gem 'foreman'
 end
 
 group :test do
