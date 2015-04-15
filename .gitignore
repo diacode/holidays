@@ -17,3 +17,5 @@ database.yml
 /db/*.sqlite3
 /db/*.sqlite3-journal
 node_modules
+application_bundle.js
+devise_bundle.js
