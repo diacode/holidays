@@ -29,6 +29,7 @@
     overflow-y: scroll
 
     .md-content
+      $width: 700px
       +transition(all .5s)
       +pad(3em)
       border-radius: $base-border-radius
@@ -36,10 +37,10 @@
       opacity: 0
       position: absolute
       pointer-events: all
-      width: 500px
+      width: $width
       top: -1000px
       left: 50%
-      margin-left: -250px
+      margin-left: -$width/2
 
       .close
         position: absolute
