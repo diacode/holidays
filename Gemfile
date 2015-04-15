@@ -59,6 +59,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'guard-livereload', require: false
+  gem 'foreman'
 end
 
 group :test do
