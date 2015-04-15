@@ -1,4 +1,4 @@
 #= require jquery
 #= require jquery_ujs
 
-#= require application_bundle
+#= require devise_bundle
