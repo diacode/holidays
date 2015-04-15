@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150414151954) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "requested_days", force: :cascade do |t|
     t.date     "day",                             null: false
     t.integer  "status",              default: 0
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20150414151954) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "requested_days", ["vacation_request_id"], name: "index_requested_days_on_vacation_request_id"
-  add_index "requested_days", ["validator_id"], name: "index_requested_days_on_validator_id"
+  add_index "requested_days", ["vacation_request_id"], name: "index_requested_days_on_vacation_request_id", using: :btree
+  add_index "requested_days", ["validator_id"], name: "index_requested_days_on_validator_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20150414151954) do
     t.string   "last_name"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vacation_requests", force: :cascade do |t|
     t.integer  "user_id"
@@ -54,6 +57,9 @@ ActiveRecord::Schema.define(version: 20150414151954) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "vacation_requests", ["user_id"], name: "index_vacation_requests_on_user_id"
+  add_index "vacation_requests", ["user_id"], name: "index_vacation_requests_on_user_id", using: :btree
 
+  add_foreign_key "requested_days", "users", column: "validator_id"
+  add_foreign_key "requested_days", "vacation_requests"
+  add_foreign_key "vacation_requests", "users"
 end
