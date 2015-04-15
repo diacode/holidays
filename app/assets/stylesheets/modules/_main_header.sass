@@ -1,0 +1,53 @@
+#main_header
+  background: #222
+  padding: 0 2em
+
+  .logo
+    float: left
+    vertical-align: middle
+
+  a:not(.btn)
+    line-height: 4em
+    img
+      vertical-align: middle
+
+  nav
+    float: right
+
+    > ul
+      +inline-list
+      > li
+        position: relative
+        > a
+
+        .dropdown
+          +transition
+          +unstyled-list
+          position: absolute
+          top: 100%
+          right: 0
+          list-style: none
+          max-height: 0
+          overflow: hidden
+          width: 12em
+          z-index: 999
+
+          li
+            background: #222
+            +fill-parent
+
+            a
+              +link($light-gray, #fff, 1em, 3em)
+              display: block
+              text-decoration: none
+              padding: 0 1em
+
+        &.active, &:hover
+          .dropdown
+            max-height: 400px
+
+  .avatar
+    border-radius: 50%
+    height: 40px
+    width: 40px
+    vertical-align: middle
