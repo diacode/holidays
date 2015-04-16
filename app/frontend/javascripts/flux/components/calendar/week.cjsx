@@ -4,8 +4,6 @@ Day = require './day'
 module.exports = React.createClass
   displayName: 'Week'
 
-  _onDateSelected: (date) ->
-
   render: () ->
     days = []
     date = @props.date
@@ -19,7 +17,7 @@ module.exports = React.createClass
         isToday: date.isSame new Date(), "day"
         date: date
 
-      days.push <Day day={day} dateSelected={@_onDateSelected}/>
+      days.push <Day day={day} />
       date = date.clone()
       date.add(1, "d")
 

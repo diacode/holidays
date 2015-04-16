@@ -11,3 +11,9 @@ module.exports = Marty.createActionCreators
 
   setMonth: (month) ->
     @dispatch Constants.calendar.SET_MONHT, month
+
+  addDate: (date) ->
+    @dispatch Constants.calendar.ADD_DATE, date
+
+  removeDate: (date) ->
+    @dispatch Constants.calendar.REMOVE_DATE, date

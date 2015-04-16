@@ -48,6 +48,8 @@ module.exports = Marty.createContainer Calendar,
   fetch:
     month: ->
       CalendarStore.state.month
+    selectedDates: ->
+      CalendarStore.state.selectedDates
 
   failed: (errors) ->
     console.log 'Failed rendering Calendar'

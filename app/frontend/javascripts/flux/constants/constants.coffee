@@ -8,4 +8,6 @@ module.exports = Marty.createConstants
     'NEXT_MONTH'
     'PREVIOUS_MONTH'
     'SET_MONHT'
+    'ADD_DATE'
+    'REMOVE_DATE'
   ]

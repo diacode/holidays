@@ -1,4 +1,5 @@
 classnames = require 'classnames'
+CalendarActionCreators = require '../../action_creators/calendar_action_creators'
 
 module.exports = React.createClass
   displayName: 'Day'
@@ -6,11 +7,21 @@ module.exports = React.createClass
   getInitialState: ->
     selected: false
 
+  componentWillUpdate: (nextProps, nextState) ->
+    return unless nextState.selected != @state.selected
+
+    if nextState.selected
+      CalendarActionCreators.addDate @props.day.date
+    else
+      CalendarActionCreators.removeDate @props.day.date
+
   _onClick: (e)->
     e.preventDefault()
+    selected = !@state.selected
+
     @setState
-      selected: !@state.selected
-    @props.dateSelected @props.day.date
+      selected: selected
+
 
   render: ->
     dayClasses = classnames
