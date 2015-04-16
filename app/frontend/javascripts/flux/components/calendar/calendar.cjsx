@@ -40,7 +40,7 @@ module.exports = React.createClass
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} select=    {@select} selected={@props.selected} />
+      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} select={@select} selected={@props.selected} />
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
