@@ -11,3 +11,7 @@ module.exports = Marty.createConstants
     'ADD_DATE'
     'REMOVE_DATE'
   ]
+
+  requestForm: [
+    'SET_DATES_VALIDATED'
+  ]

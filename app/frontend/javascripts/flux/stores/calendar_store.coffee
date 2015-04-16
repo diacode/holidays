@@ -10,6 +10,7 @@ module.exports = Marty.createStore
     previousMonth: Constants.calendar.PREVIOUS_MONTH
     addDate: Constants.calendar.ADD_DATE
     removeDate: Constants.calendar.REMOVE_DATE
+    reset: Constants.modal.HIDE
 
   getInitialState: ->
     month: moment().startOf("day")
@@ -37,6 +38,10 @@ module.exports = Marty.createStore
       date.isSame n
 
     @hasChanged()
+
+  reset: ->
+    @setState
+      selectedDates: []
 
 
 
