@@ -35,7 +35,7 @@ module.exports = React.createClass
   renderWeeks: () ->
     weeks = []
     done = false
-    date = @state.month.clone().startOf("month").add("w" -1).day("Sunday")
+    date = @state.month.clone().startOf("month").add("w" -1).day("Monday")
     monthIndex = date.month()
     count = 0
 
