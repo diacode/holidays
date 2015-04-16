@@ -3,18 +3,18 @@
   "description": "Diacode's holidays app",
   "version": "1.0.0",
   "devDependencies": {
-     "webpack": "~1.7.3",
-     "jsx-loader": "~0.12.2",
-     "cjsx-loader": "~2.0.1",
-     "coffee-loader": "^0.7.2",
-     "babel-loader": "~4.3.0",
-     "react": "~0.13.1",
-     "marty": "~0.9.9",
-     "classnames": "1.2.0",
-     "expose-loader": "~0.6.0",
-     "imports-loader": "~0.6.3",
-     "exports-loader": "~0.6.2",
-     "lodash": "~2.4.1",
-     "moment": "2.10.2"
-   }
+    "webpack": "~1.7.3",
+    "jsx-loader": "~0.12.2",
+    "cjsx-loader": "~2.0.1",
+    "coffee-loader": "^0.7.2",
+    "babel-loader": "~4.3.0",
+    "react": "~0.13.1",
+    "marty": "~0.9.9",
+    "classnames": "~1.2.0",
+    "expose-loader": "~0.6.0",
+    "imports-loader": "~0.6.3",
+    "exports-loader": "~0.6.2",
+    "lodash": "~2.4.1",
+    "moment": "2.10.2"
+  }
 }
