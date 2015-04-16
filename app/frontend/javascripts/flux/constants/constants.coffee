@@ -3,3 +3,9 @@ module.exports = Marty.createConstants
     'SHOW'
     'HIDE'
   ]
+
+  calendar: [
+    'NEXT_MONTH'
+    'PREVIOUS_MONTH'
+    'SET_MONHT'
+  ]
