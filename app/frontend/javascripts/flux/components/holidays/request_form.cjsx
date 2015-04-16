@@ -1,11 +1,21 @@
 Calendar = require '../calendar/calendar'
+CalendarStore = require '../../stores/calendar_store'
 
 RequestForm = React.createClass
   displayName: 'RequestForm'
 
-  mixins: [
-    React.addons.PureRenderMixin
-  ]
+  _renderSelectedDates: ->
+    return unless @props.selectedDates.length > 0
+
+    dates = @props.selectedDates.map (date) ->
+      <li>{date.format("dddd, MMMM Do YYYY")}</li>
+
+    <div>
+      <h5>Selected dates</h5>
+      <ul className="selected-dates">
+        {dates}
+      </ul>
+    </div>
 
   render: ->
     <div className="holidays-modal">
@@ -17,9 +27,10 @@ RequestForm = React.createClass
           <div className="calendar-wrapper">
             <h5>Select desired dates:</h5>
             <Calendar />
+            {@_renderSelectedDates()}
           </div>
           <div className="holidays-data-wrapper">
-            <h5>Want to sat something?</h5>
+            <h5>Want to add a comment?</h5>
             <textarea cols="30" name="" placeholder="Comments..." rows="10"></textarea>
           </div>
         </div>
@@ -31,4 +42,15 @@ RequestForm = React.createClass
       </form>
     </div>
 
-module.exports = RequestForm
+module.exports = Marty.createContainer RequestForm,
+  listenTo: [
+    CalendarStore
+  ]
+
+  fetch:
+    selectedDates: ->
+      CalendarStore.state.selectedDates
+
+  failed: (errors) ->
+    console.log 'Failed rendering Calendar'
+    console.log errors

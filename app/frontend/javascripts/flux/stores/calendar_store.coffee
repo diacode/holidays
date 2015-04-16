@@ -34,7 +34,7 @@ module.exports = Marty.createStore
 
   removeDate: (date) ->
     _.remove @state.selectedDates, (n) ->
-      n.date() == date.date()
+      date.isSame n
 
     @hasChanged()
 
