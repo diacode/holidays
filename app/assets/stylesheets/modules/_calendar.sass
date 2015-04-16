@@ -1,0 +1,103 @@
+=vertical-centre ($height)
+  height: $height
+  line-height: $height !important
+  display: inline-block
+  vertical-align: middle
+
+.calendar
+  +fill-parent
+  float: left
+  display: block
+  background: white
+  width: 300px
+  border: solid 1px $gray
+  margin-bottom: 10px
+
+  $spacing: 10px
+  $icon-width: 40px
+  $header-height: 40px
+
+  > div.header
+    float: left
+    width: 100%
+    background: $main-dark
+    height: $header-height
+    color: white
+    vertical-align: middle
+
+    > *
+      +vertical-centre($header-height)
+
+
+    >i
+      float: left
+      width: $icon-width
+      font-size: 1.125em
+      font-weight: bold
+      position: relative
+      .border-box
+      padding: 0 $spacing
+      cursor: pointer
+
+
+
+    >i.fa-angle-left
+      text-align: left
+
+
+    >i.fa-angle-right
+      text-align: right
+      margin-left: $icon-width*-1
+
+
+    >span
+      +fill-parent
+      float: left
+      width: 100%
+      font-weight: bold
+      text-transform: uppercase
+      padding-left: $icon-width+$spacing
+      margin-left: $icon-width*-1
+      text-align: center
+      padding-right: $icon-width
+      color: inherit
+
+
+  >div.week
+    float: left
+    width: 100%
+    border-top: solid 1px $gray
+
+    &:first-child
+      border-top: none
+
+
+    >span.day
+      float: left
+      width: calc(100%/7)
+      .border-box
+      border-left: solid 1px $gray
+      font-size: 0.75em
+      text-align: center
+      background: white
+      cursor: pointer
+      +vertical-centre(50px)
+
+      &:first-child
+        border-left: none
+
+      &.today
+        background: lighten($main-dark, 70)
+
+      &.different-month
+        color: $gray
+
+      &.selected
+        background: lighten($green, 30)
+
+    &.names>span
+      color: $main-dark
+      font-weight: bold
+
+
+
