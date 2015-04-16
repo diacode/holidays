@@ -4,17 +4,15 @@
   display: inline-block
   vertical-align: middle
 
-$border-colour: #CCC
 .calendar
   +fill-parent
   float: left
   display: block
   background: white
   width: 300px
-  border: solid 1px $border-colour
+  border: solid 1px $gray
   margin-bottom: 10px
 
-  $secondary-colour: #2875C7
   $spacing: 10px
   $icon-width: 40px
   $header-height: 40px
@@ -22,7 +20,7 @@ $border-colour: #CCC
   > div.header
     float: left
     width: 100%
-    background: $secondary-colour
+    background: $main-dark
     height: $header-height
     color: white
     vertical-align: middle
@@ -68,7 +66,7 @@ $border-colour: #CCC
   >div.week
     float: left
     width: 100%
-    border-top: solid 1px $border-colour
+    border-top: solid 1px $gray
 
     &:first-child
       border-top: none
@@ -78,29 +76,28 @@ $border-colour: #CCC
       float: left
       width: calc(100%/7)
       .border-box
-      border-left: solid 1px $border-colour
+      border-left: solid 1px $gray
       font-size: 0.75em
       text-align: center
       background: white
       cursor: pointer
-      color: black
       +vertical-centre(30px)
 
       &:first-child
         border-left: none
 
       &.today
-        background: #E3F2FF
+        background: lighten($main-dark, 70)
 
       &.different-month
-        color: #C0C0C0
+        color: $gray
 
       &.selected
-        background: $secondary-colour
+        background: $main-dark
         color: white
 
     &.names>span
-      color: $secondary-colour
+      color: $main-dark
       font-weight: bold
 
 
