@@ -1,7 +1,10 @@
 classnames = require 'classnames'
+Day = require './day'
 
 module.exports = React.createClass
   displayName: 'Week'
+
+  _onDateSelected: (date) ->
 
   render: () ->
     days = []
@@ -16,15 +19,9 @@ module.exports = React.createClass
         isToday: date.isSame new Date(), "day"
         date: date
 
-      dayClasses = classnames
-        day: true
-        today: day.isToday
-        'different-month': not day.isCurrentMonth
-
-      days.push(<span key={day.date.toString()} className={dayClasses} onClick={@props.select.bind(null, day)}>{day.number}</span>)
+      days.push <Day day={day} dateSelected={@_onDateSelected}/>
       date = date.clone()
       date.add(1, "d")
-
 
     <div className="week" key={days[0].toString()}>
       {days}
