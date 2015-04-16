@@ -2,8 +2,10 @@ DayNames = require './day_names'
 Week = require './week'
 
 module.exports = React.createClass
+  displayName: 'Calendar'
+
   getInitialState: () ->
-      month: @props.selected.clone()
+    month: @props.selected.clone()
 
   previous: () ->
     month = @state.month

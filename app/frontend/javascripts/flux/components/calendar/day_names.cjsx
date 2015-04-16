@@ -1,4 +1,6 @@
 module.exports = React.createClass
+  displayName: 'DayNames'
+
   render: () ->
     <div className="week names">
       <span className="day">Mon</span>

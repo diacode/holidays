@@ -1,6 +1,8 @@
 classnames = require 'classnames'
 
 module.exports = React.createClass
+  displayName: 'Week'
+
   render: () ->
     days = []
     date = @props.date
