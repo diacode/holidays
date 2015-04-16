@@ -81,7 +81,7 @@
       text-align: center
       background: white
       cursor: pointer
-      +vertical-centre(30px)
+      +vertical-centre(50px)
 
       &:first-child
         border-left: none
@@ -93,8 +93,7 @@
         color: $gray
 
       &.selected
-        background: $main-dark
-        color: white
+        background: lighten($green, 30)
 
     &.names>span
       color: $main-dark

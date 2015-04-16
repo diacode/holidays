@@ -5,10 +5,17 @@
     margin-bottom: 2em
 
   .holidays-data-wrapper, .calendar-wrapper
-    +span-columns(6)
+    +clearfix
+    display: block
+    clear: both
+    margin-bottom: 2em
 
-  .calendar-wrapper
-    +omega
+  .calendar
+    +fill-parent
+
+  textarea
+    +fill-parent
+    width: 100%
 
   .actions
     text-align: center
