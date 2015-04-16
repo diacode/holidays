@@ -1,48 +1,26 @@
 DayNames = require './day_names'
 Week = require './week'
+CalendarStore = require '../../stores/calendar_store'
+CalendarActionCreators = require '../../action_creators/calendar_action_creators'
 
-module.exports = React.createClass
+Calendar = React.createClass
   displayName: 'Calendar'
 
-  getInitialState: () ->
-    month: @props.selected.clone()
+  _previous: () ->
+    CalendarActionCreators.nextMonth()
 
-  previous: () ->
-    month = @state.month
-    month.add(-1, "M")
-    @setState
-      month: month
+  _next: () ->
+    CalendarActionCreators.previousMonth()
 
-  next: () ->
-    month = @state.month
-    month.add(1, "M")
-    @setState
-      month: month
-
-  select: (day) ->
-    @props.selected = day.date
-    @forceUpdate()
-
-  render: () ->
-    <div className="calendar">
-      <div className="header">
-        <i className="fa fa-angle-left" onClick={@previous}></i>
-        {@renderMonthLabel()}
-        <i className="fa fa-angle-right" onClick={@next}></i>
-      </div>
-      <DayNames />
-      {@renderWeeks()}
-    </div>
-
-  renderWeeks: () ->
+  _renderWeeks: () ->
     weeks = []
     done = false
-    date = @state.month.clone().startOf("month").add("w" -1).day("Monday")
+    date = @props.month.clone().startOf("month").add("w" -1).day("Monday")
     monthIndex = date.month()
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} select={@select} selected={@props.selected} />
+      weeks.push <Week key={date.toString()} date={date.clone()} month={@props.month} />
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
@@ -50,5 +28,28 @@ module.exports = React.createClass
 
     weeks
 
-  renderMonthLabel: () ->
-    <span>{@state.month.format("MMMM, YYYY")}</span>
+  _renderMonthLabel: () ->
+    <span>{@props.month.format("MMMM, YYYY")}</span>
+
+  render: () ->
+    <div className="calendar">
+      <div className="header">
+        <i className="fa fa-angle-left" onClick={@_previous}></i>
+        {@_renderMonthLabel()}
+        <i className="fa fa-angle-right" onClick={@_next}></i>
+      </div>
+      <DayNames />
+      {@_renderWeeks()}
+    </div>
+
+module.exports = Marty.createContainer Calendar,
+  listenTo: CalendarStore
+
+  fetch:
+    month: ->
+      CalendarStore.state.month
+
+  failed: (errors) ->
+    console.log 'Failed rendering Calendar'
+    console.log errors
+
