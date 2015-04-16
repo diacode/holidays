@@ -7,10 +7,10 @@ Calendar = React.createClass
   displayName: 'Calendar'
 
   _previous: () ->
-    CalendarActionCreators.nextMonth()
+    CalendarActionCreators.previousMonth()
 
   _next: () ->
-    CalendarActionCreators.previousMonth()
+    CalendarActionCreators.nextMonth()
 
   _renderWeeks: () ->
     weeks = []
