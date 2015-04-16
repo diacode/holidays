@@ -9,12 +9,6 @@
     left: 2em
     top: 50%
 
-  a:not(.btn)
-    line-height: 4.5em
-    display: inline-block
-    img
-      vertical-align: middle
-
   nav
     float: right
 
@@ -22,7 +16,11 @@
       +inline-list
       > li
         position: relative
-        > a
+        > a:not(.btn)
+          line-height: 4.5em
+          display: inline-block
+          img
+            vertical-align: middle
 
         .dropdown
           +transition
