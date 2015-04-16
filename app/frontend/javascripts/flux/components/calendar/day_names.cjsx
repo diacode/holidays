@@ -1,13 +1,15 @@
 module.exports = React.createClass
   displayName: 'DayNames'
 
+  mixins: [
+    React.addons.PureRenderMixin
+  ]
+
+  _renderNames: ->
+    ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map (day) ->
+      <span className="day">{day}</span>
+
   render: () ->
     <div className="week names">
-      <span className="day">Mon</span>
-      <span className="day">Tue</span>
-      <span className="day">Wed</span>
-      <span className="day">Thu</span>
-      <span className="day">Fri</span>
-      <span className="day">Sat</span>
-      <span className="day">Sun</span>
+      {@_renderNames()}
     </div>
