@@ -17,4 +17,5 @@ class VacationRequest < ActiveRecord::Base
   # Relations
   belongs_to :user
   has_many :requested_days, dependent: :destroy
+  accepts_nested_attributes_for :requested_days, allow_destroy: true, reject_if: :all_blank
 end
