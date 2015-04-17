@@ -17,7 +17,7 @@ module.exports = React.createClass
         isToday: date.isSame new Date(), "day"
         date: date
 
-      days.push <Day key={i} day={day} />
+      days.push <Day key={i} day={day} selectedDates={@props.selectedDates}/>
       date = date.clone()
       date.add(1, "d")
 

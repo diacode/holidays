@@ -20,7 +20,7 @@ Calendar = React.createClass
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@props.month} />
+      weeks.push <Week key={date.toString()} date={date.clone()} month={@props.month} selectedDates={@props.selectedDates}/>
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
