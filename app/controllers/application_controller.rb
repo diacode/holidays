@@ -4,4 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :authenticate_user!
+
+  private
+
+  def authenticate_admin!
+    render head: :forbidden, text: 'Forbidden' unless current_user && current_user.admin?
+  end
 end
