@@ -14,8 +14,8 @@
       .body
         .days-counter.available
           %h5 Days available
-          %h4 28
+          %h4= user.days_available
 
         .days-counter.spent
           %h5 Days spent
-          %h4 15
+          %h4= user.current_year_days_spent
