@@ -1,0 +1,22 @@
+class Api::V1::VacationsRequestsController < ApplicationController
+  def create
+    vacation_request = user.vacation_requests.build vacation_request_params
+
+    if vacation_request.save
+      render json: vacation_request, status: :ok
+    else
+      render json: vacation_request.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def vacation_request_params
+    request.require(:vacation_request).permit(
+      :message,
+      requested_days_attributes: [
+        :day
+      ]
+    )
+  end
+end
