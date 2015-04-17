@@ -55,7 +55,7 @@ RequestForm = React.createClass
 
     <div className="holidays-data-wrapper">
       <h5>Want to add a comment?</h5>
-      <textarea cols="30" name="" placeholder="Comments..." rows="10"></textarea>
+      <textarea ref="message" cols="30" name="" placeholder="Comments..." rows="10"></textarea>
       <br/>
       <a href="#" onClick={@_showCalendar}><i className="fa fa-arrow-left"/> Change dates</a>
     </div>
@@ -68,8 +68,22 @@ RequestForm = React.createClass
       </button>
     </div>
 
-  _onSubmit: ->
+  _onSubmit: (e)->
+    e.preventDefault()
 
+    return unless @props.selectedDates.length > 0
+
+    message = if @refs.message != undefined then @refs.message.getDOMNode().value.trim() else ''
+
+    requestedDaysAttributes = @props.selectedDates.map (date) ->
+      day: date.format 'YYYY-MM-DD'
+
+
+    vacationRequest =
+      message: message
+      requested_days_attributes: requestedDaysAttributes
+
+    RequestFormActionCreators.create vacationRequest
 
   render: ->
     <div className="holidays-modal">
