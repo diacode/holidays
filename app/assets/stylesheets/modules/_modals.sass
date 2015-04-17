@@ -31,7 +31,7 @@
     .md-content
       $width: 550px
       +transition(all .5s)
-      +pad(3em)
+      +pad($modal-padding)
       border-radius: 0 0 $base-border-radius $base-border-radius
       background: #fff
       opacity: 0
@@ -41,6 +41,7 @@
       top: -1000px
       left: 50%
       margin-left: -$width/2
+      overflow: hidden
 
       > header
         margin-bottom: 2em
