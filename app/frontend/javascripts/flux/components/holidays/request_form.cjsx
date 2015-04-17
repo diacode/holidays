@@ -2,6 +2,7 @@ Calendar = require '../calendar/calendar'
 CalendarStore = require '../../stores/calendar_store'
 RequestFormStore = require '../../stores/request_form_store'
 RequestFormActionCreators = require '../../action_creators/request_form_action_creators'
+ModalActionCreators = require '../../action_creators/modal_action_creators'
 
 RequestForm = React.createClass
   displayName: 'RequestForm'
@@ -26,12 +27,18 @@ RequestForm = React.createClass
     return if @props.datesValidated
     <div>
       <Calendar />
-      <a className="btn confirm" href="#" onClick={@_validateSelectedDates}>Continue <i className="fa fa-arrow-right"/></a>
+      <div className="right">
+        <a href="#" onClick={@_validateSelectedDates}>Add a comment <i className="fa fa-arrow-right"/></a>
+      </div>
     </div>
 
   _validateSelectedDates: (e) ->
     e.preventDefault()
     RequestFormActionCreators.setDatesValidated @props.selectedDates.length > 0
+
+  _hideModal: (e) ->
+    e.preventDefault()
+    ModalActionCreators.hide()
 
   _renderFormInputs: ->
     return unless @props.datesValidated
@@ -42,9 +49,8 @@ RequestForm = React.createClass
     </div>
 
   _renderActions: ->
-    return unless @props.datesValidated
-
     <div className="actions">
+      <a href="#" onClick={@_hideModal}>Cancel</a>
       <button className="btn" type="submit">
         Create request
       </button>
