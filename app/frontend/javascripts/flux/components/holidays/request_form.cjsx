@@ -17,7 +17,7 @@ RequestForm = React.createClass
       <li key={i}>
         <header>{date.format("MMM")}</header>
         <div className="day">
-          <strong>{date.format("D")}</strong>
+          <strong>{date.format("DD")}</strong>
         </div>
       </li>
 
@@ -68,9 +68,12 @@ RequestForm = React.createClass
       </button>
     </div>
 
+  _onSubmit: ->
+
+
   render: ->
     <div className="holidays-modal">
-      <form action="">
+      <form onSubmit={@_onSubmit}>
         <header>
           <h3>Request holidays</h3>
         </header>
