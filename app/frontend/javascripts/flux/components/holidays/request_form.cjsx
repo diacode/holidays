@@ -10,22 +10,32 @@ RequestForm = React.createClass
   _renderSelectedDates: ->
     return unless @props.datesValidated
 
-    dates = @props.selectedDates.map (date, i) ->
-      <li key={i}>{date.format("dddd, MMMM Do YYYY")}</li>
+    sortedDates = _.sortBy @props.selectedDates, (n) ->
+      n
 
-    <ul className="selected-dates">
-      {dates}
-      <li>
-        <a href="#" onClick={@_showCalendar}>Change dates</a>
+    dates = sortedDates.map (date, i) ->
+      <li key={i}>
+        <header>{date.format("MMM")}</header>
+        <div className="day">
+          <strong>{date.format("D")}</strong>
+        </div>
       </li>
-    </ul>
+
+    <div>
+      <h5>Selected dates:</h5>
+      <ul className="selected-dates">
+        {dates}
+      </ul>
+    </div>
 
   _showCalendar: ->
     RequestFormActionCreators.setDatesValidated(false)
 
   _renderCalendar: ->
     return if @props.datesValidated
-    <div>
+
+    <div key="calendar">
+      <h5>Select desired dates:</h5>
       <Calendar />
       <div className="right">
         <a href="#" onClick={@_validateSelectedDates}>Add a comment <i className="fa fa-arrow-right"/></a>
@@ -46,6 +56,8 @@ RequestForm = React.createClass
     <div className="holidays-data-wrapper">
       <h5>Want to add a comment?</h5>
       <textarea cols="30" name="" placeholder="Comments..." rows="10"></textarea>
+      <br/>
+      <a href="#" onClick={@_showCalendar}><i className="fa fa-arrow-left"/> Change dates</a>
     </div>
 
   _renderActions: ->
@@ -64,7 +76,6 @@ RequestForm = React.createClass
         </header>
         <div className="data-wrapper">
           <div className="calendar-wrapper">
-            <h5>Select desired dates:</h5>
             {@_renderCalendar()}
             {@_renderSelectedDates()}
           </div>
