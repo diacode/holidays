@@ -1,6 +1,6 @@
-class Api::V1::VacationsRequestsController < ApplicationController
+class Api::V1::VacationRequestsController < ApplicationController
   def create
-    vacation_request = user.vacation_requests.build vacation_request_params
+    vacation_request = current_user.vacation_requests.build vacation_request_params
 
     if vacation_request.save
       render json: vacation_request, status: :ok
@@ -12,7 +12,7 @@ class Api::V1::VacationsRequestsController < ApplicationController
   private
 
   def vacation_request_params
-    request.require(:vacation_request).permit(
+    params.require(:vacation_request).permit(
       :message,
       requested_days_attributes: [
         :day

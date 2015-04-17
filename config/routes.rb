@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'dashboard#index'
 
-  namespace :ap1 do
+  namespace :api do
     namespace :v1 do
       resource :vacation_requests, only: [:index, :create, :update, :destroy]
     end
