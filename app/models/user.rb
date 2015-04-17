@@ -32,4 +32,11 @@ class User < ActiveRecord::Base
   # Relations
   has_many :vacation_requests
   has_many :requested_days, through: :vacation_requests
+
+  # Scopes
+  default_scope { order('first_name ASC') }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
