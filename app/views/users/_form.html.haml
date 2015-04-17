@@ -6,5 +6,9 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.email_field :email, placeholder: 'Email'
+  = f.text_field :first_name, placeholder: 'First name'
+  = f.text_field :last_name, placeholder: 'Last name'
+
   .actions
     = f.submit 'Save'
