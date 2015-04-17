@@ -15,6 +15,9 @@ module.exports = React.createClass
     else
       CalendarActionCreators.removeDate @props.day.date
 
+  componentWillReceiveProps: (nextProps) ->
+    @state.selected = @_belongsToSelectedDates nextProps.selectedDates
+
   _onClick: (e)->
     e.preventDefault()
     selected = !@state.selected
@@ -22,10 +25,10 @@ module.exports = React.createClass
     @setState
       selected: selected
 
-  _belongsToSelectedDates: ->
-    return unless @props.selectedDates.length > 0
+  _belongsToSelectedDates: (selectedDates = @props.selectedDates) ->
+    return unless selectedDates.length > 0
 
-    index = _.findIndex @props.selectedDates, (date) =>
+    index = _.findIndex selectedDates, (date) =>
       @props.day.date.isSame date
 
     index >= 0
