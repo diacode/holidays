@@ -85,12 +85,20 @@ RequestForm = React.createClass
 
     RequestFormActionCreators.create vacationRequest
 
+  _renderError: ->
+    return unless @props.error
+
+    <div className="message error-message">
+      {@props.error}
+    </div>
+
   render: ->
     <div className="holidays-modal">
       <form onSubmit={@_onSubmit}>
         <header>
           <h3>Request holidays</h3>
         </header>
+        {@_renderError()}
         <div className="data-wrapper">
           <div className="calendar-wrapper">
             {@_renderCalendar()}
@@ -113,6 +121,8 @@ module.exports = Marty.createContainer RequestForm,
       CalendarStore.state.selectedDates
     datesValidated: ->
       RequestFormStore.state.datesValidated
+    error: ->
+      RequestFormStore.state.error
 
   failed: (errors) ->
     console.log 'Failed rendering Calendar'

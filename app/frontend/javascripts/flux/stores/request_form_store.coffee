@@ -6,6 +6,7 @@ module.exports = Marty.createStore
   handlers:
     setDatesValidated: Constants.requestForm.SET_DATES_VALIDATED
     reset: Constants.modal.HIDE
+    setError: Constants.requestForm.SET_ERROR
 
   getInitialState: ->
     datesValidated: false
@@ -17,6 +18,11 @@ module.exports = Marty.createStore
   reset: ->
     @setState
       datesValidated: false
+      error: null
+
+  setError: (error) ->
+    @setState
+      error: error
 
 
 

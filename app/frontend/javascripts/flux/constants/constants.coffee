@@ -15,5 +15,5 @@ module.exports = Marty.createConstants
   requestForm: [
     'SET_DATES_VALIDATED'
     'VACATION_REQUEST_CREATED'
-    'SET_VALIDATION_ERRORS'
+    'SET_ERROR'
   ]
