@@ -2,7 +2,7 @@
   %nav
     %ul
       %li
-        %a{href: ""}
+        = link_to users_path, class: ('current' if controller_name == 'users') do 
           = fa_icon 'users'
           Team
       %li

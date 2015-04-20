@@ -32,4 +32,20 @@ class User < ActiveRecord::Base
   # Relations
   has_many :vacation_requests
   has_many :requested_days, through: :vacation_requests
+
+  # Scopes
+  default_scope { order('first_name ASC') }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def days_available
+    all_time_vacations = AVAILABLE_VACATIONS.map { |k,v| v }.sum
+    all_time_vacations-requested_days.approved.count
+  end
+
+  def current_year_days_spent
+    requested_days.approved.current_year.count
+  end
 end

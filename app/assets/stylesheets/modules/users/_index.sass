@@ -1,0 +1,56 @@
+body.users
+
+  .wrapper
+    width: 95%
+    margin: 0 auto
+
+  .user-list    
+    +display(flex)
+    +flex-wrap(wrap)
+    +flex-flow(row wrap)
+    +justify-content(center)
+    margin-top: 1em
+
+    .user
+      width: 30%
+      max-width: 250px
+      background: $white
+      text-align: center
+      border-radius: $base-border-radius
+      margin: 1%
+      line-height: 1.75em
+
+      &:hover
+        background: darken($white, 5%)
+
+      header
+        padding: 2em
+        border-bottom: 1px solid $gray
+
+        img.avatar
+          border: 1px solid $gray
+          border-radius: 50%
+          margin-bottom: 1em
+
+        h3
+          margin: 0
+
+      .body
+        +display(flex)
+        +flex-flow(wrap)
+
+        .days-counter
+          width: 50%
+          padding: 5px 0
+
+          h4, h5
+            margin: 7px 0
+
+          h4
+            font-size: 2em
+
+          h5
+            font-size: 1em
+
+          &:first-child
+            border-right: 1px solid $gray
