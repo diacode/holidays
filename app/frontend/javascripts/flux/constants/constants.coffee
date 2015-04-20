@@ -7,7 +7,7 @@ module.exports = Marty.createConstants
   calendar: [
     'NEXT_MONTH'
     'PREVIOUS_MONTH'
-    'SET_MONHT'
+    'SET_MONTH'
     'ADD_DATE'
     'REMOVE_DATE'
   ]

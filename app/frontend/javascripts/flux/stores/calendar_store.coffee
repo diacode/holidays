@@ -5,7 +5,7 @@ module.exports = Marty.createStore
   id: 'CalendarStore'
 
   handlers:
-    setMonth: Constants.calendar.SET_MONHT
+    setMonth: Constants.calendar.SET_MONTH
     nextMonth: Constants.calendar.NEXT_MONTH
     previousMonth: Constants.calendar.PREVIOUS_MONTH
     addDate: Constants.calendar.ADD_DATE

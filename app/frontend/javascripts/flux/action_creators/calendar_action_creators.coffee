@@ -10,7 +10,7 @@ module.exports = Marty.createActionCreators
     @dispatch Constants.calendar.PREVIOUS_MONTH
 
   setMonth: (month) ->
-    @dispatch Constants.calendar.SET_MONHT, month
+    @dispatch Constants.calendar.SET_MONTH, month
 
   addDate: (date) ->
     @dispatch Constants.calendar.ADD_DATE, date
