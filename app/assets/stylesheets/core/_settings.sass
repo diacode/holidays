@@ -51,3 +51,12 @@ $primary-color: darken($dark-gray, 20)
 $base-font-family:    'Open Sans', sans-serif
 
 // - - grid
+
+// - - animations
++keyframes(fadeIn)
+  from
+    +transform(scale(0))
+    opacity: 0
+  to
+    +transform(scale(1))
+    opacity: 1
