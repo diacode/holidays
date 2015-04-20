@@ -20,10 +20,15 @@ class VacationRequest < ActiveRecord::Base
   accepts_nested_attributes_for :requested_days, allow_destroy: true, reject_if: :all_blank
 
   validate :at_least_one_requested_day
+  validate :valid_dates
 
   private
 
   def at_least_one_requested_day
-    errors[:base] << 'At least one requested day is required' if requested_days.length == 0
+    errors[:base] << 'At least one requested day is required' if requested_days.empty?
+  end
+
+  def valid_dates
+    errors[:base] << 'Cant\'t select a date in the past' if requested_days.select{ |request_date| request_date.day.past? }.any?
   end
 end
