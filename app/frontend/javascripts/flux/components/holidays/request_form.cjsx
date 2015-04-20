@@ -38,7 +38,7 @@ RequestForm = React.createClass
       <h5>Select desired dates:</h5>
       <Calendar />
       <div className="right">
-        <a href="#" onClick={@_validateSelectedDates}>Add a comment <i className="fa fa-arrow-right"/></a>
+        <a href="#" onClick={@_validateSelectedDates} disabled={@props.selectedDates.length == 0}>Add a comment <i className="fa fa-arrow-right"/></a>
       </div>
     </div>
 
@@ -63,7 +63,7 @@ RequestForm = React.createClass
   _renderActions: ->
     <div className="actions">
       <a href="#" onClick={@_hideModal}>Cancel</a>
-      <button className="btn" type="submit">
+      <button className="btn" type="submit" disabled={@props.selectedDates.length == 0}>
         Create request
       </button>
     </div>
