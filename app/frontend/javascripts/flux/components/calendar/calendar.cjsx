@@ -7,10 +7,10 @@ Calendar = React.createClass
   displayName: 'Calendar'
 
   _previous: () ->
-    CalendarActionCreators.nextMonth()
+    CalendarActionCreators.previousMonth()
 
   _next: () ->
-    CalendarActionCreators.previousMonth()
+    CalendarActionCreators.nextMonth()
 
   _renderWeeks: () ->
     weeks = []
@@ -20,7 +20,7 @@ Calendar = React.createClass
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@props.month} />
+      weeks.push <Week key={date.toString()} date={date.clone()} month={@props.month} selectedDates={@props.selectedDates}/>
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
@@ -48,6 +48,8 @@ module.exports = Marty.createContainer Calendar,
   fetch:
     month: ->
       CalendarStore.state.month
+    selectedDates: ->
+      CalendarStore.state.selectedDates
 
   failed: (errors) ->
     console.log 'Failed rendering Calendar'

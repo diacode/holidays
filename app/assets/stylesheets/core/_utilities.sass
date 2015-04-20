@@ -38,7 +38,7 @@
 
 =inline-list
   +unstyled-list
-  li
+  > li
     display: inline-block
 
     &:not(:last-of-type)
@@ -63,6 +63,9 @@
   &:active
     background: darken($primary-color,10)
 
+  &:disabled
+    opacity: .5
+
 =link($primary-color: #fff, $secondary-color: darken($primary-color, 10), $font-size: 1em, $line-height: 1em)
   +transition
   font-size: $font-size
@@ -73,6 +76,12 @@
 
   &:hover
     color: $secondary-color
+
+  &[disabled]
+    opacity: .5
+
+    &:hover
+      color: $primary-color
 
 // - - attention
 // adds accessibility pseudo selectors to hover states.
