@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= form_for @user, html: {class: 'user-form'} do |f|
   - if @user.errors.any?
     #error_explanation.alert.error
       %p= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
