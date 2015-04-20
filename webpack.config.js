@@ -28,7 +28,8 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       'React': 'react/addons',
-      'Marty': 'marty'
+      'Marty': 'marty',
+      '_': 'lodash'
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/])
   ]

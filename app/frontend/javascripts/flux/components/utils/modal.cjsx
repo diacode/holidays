@@ -9,10 +9,6 @@ Modal = React.createClass
     React.addons.PureRenderMixin
   ]
 
-  _onCloseClick: (e)->
-    e.preventDefault()
-    ModalActionCreators.hide()
-
   _onOverlayClick: (e)->
     $target = $(e.target)
     if $target.hasClass 'md-overlay'
@@ -30,7 +26,6 @@ Modal = React.createClass
     <div className={overlayStyleClasses} onClick={@_onOverlayClick}>
       <div className={modalStyleClasses}>
         <div className="md-content">
-          <a href="#" className="close" onClick={@_onCloseClick}><i className="fa fa-times"></i></a>
           {@props.children}
         </div>
       </div>

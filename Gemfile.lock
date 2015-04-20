@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: git://github.com/railsware/js-routes.git
-  revision: 12a60d56545e7f885f5ec8395d87073ae59e304e
+  revision: 42fc4863a398902d86867f3fbf1f58d2838a35d3
   specs:
-    js-routes (1.0.0)
+    js-routes (1.0.1)
       railties (>= 3.2)
       sprockets-rails
 
@@ -320,7 +320,7 @@ GEM
     spring (1.3.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (3.0.0)
+    sprockets (3.0.1)
       rack (~> 1.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)

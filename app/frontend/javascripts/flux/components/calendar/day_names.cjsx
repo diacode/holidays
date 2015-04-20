@@ -7,7 +7,7 @@ module.exports = React.createClass
 
   _renderNames: ->
     ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map (day) ->
-      <span className="day">{day}</span>
+      <span key={day} className="day">{day}</span>
 
   render: () ->
     <div className="week names">
