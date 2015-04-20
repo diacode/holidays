@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
     if @user.save
       @user.send_reset_password_instructions
-      redirect_to users_url, notice: 'User was successfully created.'
+      redirect_to users_url, notice: 'User was successfully created. He will receive an email asking him to set his own password before login.'
     else
       render :new
     end
