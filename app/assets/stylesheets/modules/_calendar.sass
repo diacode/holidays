@@ -99,3 +99,27 @@
       color: $main-dark
       font-weight: bold
 
+.selected-dates
+  +unstyled-list
+  +clearfix
+  +display(flex)
+  text-align: center
+  li
+    width: 5em
+    margin: 3px
+
+    header
+      background: $red
+      border: 1px solid $red
+      color: #fff
+      text-transform: uppercase
+      margin-bottom: 0
+      font-size: .8em
+      padding: .3em 0
+
+    .day
+      position: relative
+      border: 1px solid $gray
+      border-top: 0
+      line-height: 2em
+      font-size: 2.5em

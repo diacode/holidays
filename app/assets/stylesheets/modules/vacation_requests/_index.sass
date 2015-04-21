@@ -1,0 +1,37 @@
+.vacation_requests.index
+
+  #vacation_requests_wrapper
+    > ul
+      +unstyled-list
+
+      > li
+        +display(flex)
+        background: #fff
+        padding: .5em
+        margin-bottom: 1px
+
+        .avatar
+          width: 50px
+          height: 50px
+
+        .avatar-wrapper
+          width: 75px
+        .user-data-wrapper
+          +flex(2)
+        .requested-days-wrapper
+          +flex(8)
+
+          .selected-dates
+            font-size: .8em
+        .actions
+          +display(flex)
+          +flex(1)
+          +align-items(center)
+          text-align: left
+          ul
+            +unstyled-list
+
+            a.approve
+              +link($green)
+
+
