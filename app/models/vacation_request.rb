@@ -7,6 +7,7 @@
 #  message    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  status     :integer          default(0)
 #
 # Indexes
 #
@@ -14,11 +15,17 @@
 #
 
 class VacationRequest < ActiveRecord::Base
+  enum status: [:pending, :processed]
+
   # Relations
   belongs_to :user
-  has_many :requested_days, dependent: :destroy, inverse_of: :vacation_request
+  has_many :requested_days, -> { order :day }, dependent: :destroy, inverse_of: :vacation_request
   accepts_nested_attributes_for :requested_days, allow_destroy: true, reject_if: :all_blank
 
+  # Scopes
+  scope :ordered, -> { order created_at: :desc }
+
+  # Validations
   validate :at_least_one_requested_day
   validate :valid_dates
 
