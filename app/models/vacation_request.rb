@@ -28,6 +28,7 @@ class VacationRequest < ActiveRecord::Base
   # Validations
   validate :at_least_one_requested_day
   validate :valid_dates
+  validate :valid_number_of_days
 
   private
 
@@ -36,6 +37,12 @@ class VacationRequest < ActiveRecord::Base
   end
 
   def valid_dates
-    errors[:base] << 'Cant\'t select a date in the past' if requested_days.select{ |request_date| request_date.day.past? }.any?
+    errors[:base] << 'Can\'t select a date in the past' if requested_days.select{ |request_date| request_date.day.past? }.any?
+  end
+
+  def valid_number_of_days
+    available_days = user.available_days
+
+    errors[:base] << "You only have #{available_days} available days" if available_days < requested_days.length
   end
 end

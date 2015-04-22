@@ -88,8 +88,13 @@ RequestForm = React.createClass
   _renderError: ->
     return unless @props.error
 
+    errors = @props.error.base.map (error, i) ->
+      <li key={i}>{error}</li>
+
     <div className="message error-message">
-      {@props.error}
+      <ul>
+        {errors}
+      </ul>
     </div>
 
   render: ->
