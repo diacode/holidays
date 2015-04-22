@@ -1,6 +1,6 @@
 class Api::V1::VacationRequestsController < ApplicationController
   def index
-    vacation_requests = VacationRequest.ordered
+    vacation_requests = VacationRequest.pending.ordered
 
     render json: vacation_requests, root: :vacation_requests
   end
@@ -25,6 +25,15 @@ class Api::V1::VacationRequestsController < ApplicationController
     else
       render json: vacation_request.errors, status: :unprocessable_entity
     end
+  end
+
+  def approve
+    render json: false, status: 503 and return unless current_user.admin
+
+    vacation_request = VacationRequest.find params[:id]
+    vacation_request.approve!
+
+    render json: vacation_request, status: :ok
   end
 
   private
