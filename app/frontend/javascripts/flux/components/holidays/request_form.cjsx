@@ -125,5 +125,5 @@ module.exports = Marty.createContainer RequestForm,
       RequestFormStore.state.error
 
   failed: (errors) ->
-    console.log 'Failed rendering Calendar'
+    console.log 'Failed rendering RequestForm'
     console.log errors
