@@ -1,4 +1,10 @@
 class Api::V1::VacationRequestsController < ApplicationController
+  def index
+    vacation_requests = VacationRequest.ordered
+
+    render json: vacation_requests, root: :vacation_requests
+  end
+
   def create
     vacation_request = current_user.vacation_requests.build vacation_request_params
 
