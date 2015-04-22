@@ -1,3 +1,6 @@
+== Diacode's Holidays
+The goal of the app is to scratch one of our personal itches as a remote team: handling our holidays.
+
 === Stack
 * Rails 4.2
 * React.js
