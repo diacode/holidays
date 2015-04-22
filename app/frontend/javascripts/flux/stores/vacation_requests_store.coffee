@@ -6,6 +6,7 @@ module.exports = Marty.createStore
 
   handlers:
     addVacationRequests: Constants.vacationRequests.ADD_VACATION_REQUESTS
+    removeVacationRequest: Constants.vacationRequests.VACATION_REQUEST_APPROVED
 
   getInitialState: ->
 
@@ -20,6 +21,16 @@ module.exports = Marty.createStore
   addVacationRequests: (vacationRequests) ->
     @setState
       vacationRequests: vacationRequests
+
+  removeVacationRequest: (vacationRequest) ->
+    vacationRequests = @state.vacationRequests
+
+    _.remove @state.vacationRequests, (n) ->
+      n.id == vacationRequest.id
+
+    @setState
+      vacationRequests: vacationRequests
+
 
 
 

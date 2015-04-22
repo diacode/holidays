@@ -1,5 +1,6 @@
 moment = require 'moment'
 SelectedDay = require './selected_day'
+VacationRequestsActionCreators = require '../../action_creators/vacation_requests_action_creators'
 
 module.exports = React.createClass
   displayName: 'VacationRequestListItem'
@@ -7,6 +8,12 @@ module.exports = React.createClass
   _renderDays: ->
     @props.requested_days.map (day) ->
       <SelectedDay key={day.id} {...day}/>
+
+  _onApproveClick: (e) ->
+    e.preventDefault()
+
+    if confirm('Are you sure you want to approve this vacation request?')
+      VacationRequestsActionCreators.approve @props.id
 
   render: ->
     <li>
@@ -26,7 +33,7 @@ module.exports = React.createClass
       <div className="actions">
         <ul>
           <li>
-            <a className="approve" href="#">
+            <a className="approve" href="#" onClick={@_onApproveClick}>
               <i className="fa fa-check-circle"></i>
               Approve
             </a>
