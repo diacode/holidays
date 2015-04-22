@@ -14,6 +14,6 @@ The goal of the app is to scratch one of our personal itches as a remote team: h
     $ bundle install
     $ npm install -g webpack
     $ npm install
-    $ db:setup
+    $ rake db:setup
     $ foreman start -f Procfile.dev
 
