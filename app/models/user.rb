@@ -43,7 +43,6 @@ class User < ActiveRecord::Base
   def available_days
     all_time_vacations = AVAILABLE_VACATIONS.map { |k,v| v }.sum
     all_time_vacations-requested_days.approved.count
-    2
   end
 
   def current_year_days_spent
