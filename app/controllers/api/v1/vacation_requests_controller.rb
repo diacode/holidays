@@ -15,14 +15,37 @@ class Api::V1::VacationRequestsController < ApplicationController
     end
   end
 
+  def update
+    vacation_request = VacationRequest.find params[:id]
+
+    vacation_request.attributes = vacation_request_params
+
+    if vacation_request.save
+      render json: vacation_request, status: :ok
+    else
+      render json: vacation_request.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def vacation_request_params
-    params.require(:vacation_request).permit(
-      :message,
-      requested_days_attributes: [
-        :day
-      ]
-    )
+    if current_user.admin
+      params.require(:vacation_request).permit(
+        :message,
+        :status,
+        requested_days_attributes: [
+          :day,
+          :status
+        ]
+      )
+    else
+      params.require(:vacation_request).permit(
+        :message,
+        requested_days_attributes: [
+          :day
+        ]
+      )
+    end
   end
 end
