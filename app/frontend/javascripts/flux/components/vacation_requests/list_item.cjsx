@@ -6,7 +6,7 @@ module.exports = React.createClass
 
   _renderDays: ->
     @props.requested_days.map (day) ->
-      <SelectedDay {...day}/>
+      <SelectedDay key={day.id} {...day}/>
 
   render: ->
     <li>

@@ -6,7 +6,7 @@ VacationRequestsList = React.createClass
 
   _renderItems: ->
     @props.vacationRequests.map (vacationRequest) ->
-      <VacationRequestListItem {...vacationRequest} />
+      <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
 
   render: ->
     <ul>
