@@ -8,18 +8,18 @@
   - if notice
     .alert.success
       %p= notice
-      
+
   .user-list
     - @users.each do |user|
-      = link_to user, class: 'user' do 
+      = link_to user, class: 'user' do
         %header
           = image_tag gravatar_url(user.email, 100), class: 'avatar'
           %h3= user.full_name
-        
+
         .body
           .days-counter.available
             %h5 Days available
-            %h4= user.days_available
+            %h4= user.available_days
 
           .days-counter.spent
             %h5 Days spent
