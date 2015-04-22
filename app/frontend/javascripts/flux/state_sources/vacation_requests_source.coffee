@@ -10,3 +10,6 @@ module.exports = Marty.createStateSource
     @post
       url: Routes.api_v1_vacation_requests_path(),
       body: body
+
+  findAll: ->
+    @get  Routes.api_v1_vacation_requests_path()
