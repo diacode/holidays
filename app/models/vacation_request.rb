@@ -30,6 +30,11 @@ class VacationRequest < ActiveRecord::Base
   validate :valid_dates
   validate :valid_number_of_days
 
+  def approve!
+    processed!
+    approve_requested_days!
+  end
+
   private
 
   def at_least_one_requested_day
@@ -44,5 +49,9 @@ class VacationRequest < ActiveRecord::Base
     available_days = user.available_days
 
     errors[:base] << "You only have #{available_days} available days" if available_days < requested_days.length
+  end
+
+  def approve_requested_days!
+    requested_days.all.each{ |requested_day| requested_day.approved! }
   end
 end
