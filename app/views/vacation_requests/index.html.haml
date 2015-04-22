@@ -3,32 +3,4 @@
     %header
       %h2 Pending vacation requests
     #vacation_requests_wrapper
-      %ul
-        - @vacation_requests.each do |vacation_request|
-          %li
-            .avatar-wrapper
-              = image_tag gravatar_url(vacation_request.user.email), class: 'avatar'
-            .user-data-wrapper
-              %strong= vacation_request.user.full_name
-              %br/
-              %small= time_ago_in_words vacation_request.created_at
-            .requested-days-wrapper
-              %ul.selected-dates
-                - vacation_request.requested_days.each do |requested_day|
-                  %li
-                    %header
-                      = requested_day.day.strftime '%b'
-                    .day
-                      %strong= requested_day.day.strftime '%d'
-            .actions
-              %ul
-                %li
-                  %a.approve{href: '#'}
-                    = fa_icon 'check-circle'
-                    Approve
-                %li
-                  %a{href: '#'}
-                    = fa_icon 'edit'
-                    Edit
-
 
