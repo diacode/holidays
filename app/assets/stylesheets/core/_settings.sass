@@ -61,3 +61,13 @@ $base-font-family:    'Open Sans', sans-serif
   to
     +transform(scale(1))
     opacity: 1
+
++keyframes(slideOutLeft)
+  from
+    opacity: 1
+    +transform(translate3d(0,0,0))
+  to
+    visibility: hidden
+    opacity: 0
+    +transform(translate3d(-100%,0,0))
+

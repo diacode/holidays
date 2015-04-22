@@ -1,5 +1,6 @@
 VacationRequestListItem = require './list_item'
 VacationRequestsStore = require '../../stores/vacation_requests_store'
+ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 VacationRequestsList = React.createClass
   displayName: 'VacationRequestsList'
@@ -10,7 +11,9 @@ VacationRequestsList = React.createClass
 
   render: ->
     <ul>
-      {@_renderItems()}
+      <ReactCSSTransitionGroup transitionName="vacation-request">
+        {@_renderItems()}
+      </ReactCSSTransitionGroup>
     </ul>
 
 module.exports = Marty.createContainer VacationRequestsList,
