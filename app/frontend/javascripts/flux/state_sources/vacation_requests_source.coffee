@@ -10,7 +10,7 @@ module.exports = Marty.createStateSource
       vacation_request: vacationRequest
 
     @post
-      url: Routes.api_v1_vacation_requests_path(),
+      url: Routes.api_v1_vacation_requests_path()
       body: body
 
   update: (id, vacationRequest) ->
@@ -19,15 +19,16 @@ module.exports = Marty.createStateSource
       vacation_request: vacationRequest
 
     @put
-      url: Routes.api_v1_vacation_request_path(id),
+      url: Routes.api_v1_vacation_request_path(id)
       body: body
 
   approve: (id) ->
-    vacationRequest =
-      vacation_request:
-        status: Globals.vacationRequestStatuses.processed
+    body =
+      authenticity_token: Globals.authenticityToken
 
-    @update id, vacationRequest
+    @put
+      url: Routes.approve_api_v1_vacation_request_path(id)
+      body: body
 
 
   findAll: ->
