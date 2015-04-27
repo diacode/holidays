@@ -36,6 +36,15 @@ class Api::V1::VacationRequestsController < ApplicationController
     render json: vacation_request, status: :ok
   end
 
+  def reject
+    render json: false, status: 503 and return unless current_user.admin
+
+    vacation_request = VacationRequest.find params[:id]
+    vacation_request.reject!
+
+    render json: vacation_request, status: :ok
+  end
+
   private
 
   def vacation_request_params

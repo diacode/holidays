@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :vacation_requests, only: [:index, :create, :update, :destroy] do
         member do
           put :approve
+          put :reject
         end
       end
     end
