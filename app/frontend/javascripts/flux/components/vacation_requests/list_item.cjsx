@@ -30,6 +30,7 @@ module.exports = React.createClass
         <strong>{@props.user_name}</strong>
         <br/>
         <small>{moment(@props.created_at).fromNow()}</small>
+        <p>{@props.message}</p>
       </div>
       <div className="requested-days-wrapper">
         <ul className="selected-dates">
