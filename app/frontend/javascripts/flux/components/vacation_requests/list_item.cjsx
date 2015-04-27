@@ -15,6 +15,12 @@ module.exports = React.createClass
     if confirm('Are you sure you want to approve this vacation request?')
       VacationRequestsActionCreators.approve @props.id
 
+  _onRejectClick: (e) ->
+    e.preventDefault()
+
+    if confirm('Are you sure you want to reject this vacation request?')
+      VacationRequestsActionCreators.reject @props.id
+
   render: ->
     <li>
       <div className="avatar-wrapper">
@@ -34,14 +40,17 @@ module.exports = React.createClass
         <ul>
           <li>
             <a className="approve" href="#" onClick={@_onApproveClick}>
-              <i className="fa fa-check-circle"></i>
-              Approve
+              <i className="fa fa-check-circle"></i> Approve
+            </a>
+          </li>
+          <li>
+            <a className="reject" href="#" onClick={@_onRejectClick}>
+              <i className="fa fa-times-circle"></i> Reject
             </a>
           </li>
           <li>
             <a href="#">
-              <i className="fa fa-edit"></i>
-              Edit
+              <i className="fa fa-edit"></i> Edit
             </a>
           </li>
         </ul>

@@ -30,6 +30,14 @@ module.exports = Marty.createStateSource
       url: Routes.approve_api_v1_vacation_request_path(id)
       body: body
 
+  reject: (id) ->
+    body =
+      authenticity_token: Globals.authenticityToken
+
+    @put
+      url: Routes.reject_api_v1_vacation_request_path(id)
+      body: body
+
 
   findAll: ->
     @get  Routes.api_v1_vacation_requests_path()

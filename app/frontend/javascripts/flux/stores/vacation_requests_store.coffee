@@ -7,6 +7,7 @@ module.exports = Marty.createStore
   handlers:
     addVacationRequests: Constants.vacationRequests.ADD_VACATION_REQUESTS
     removeVacationRequest: Constants.vacationRequests.VACATION_REQUEST_APPROVED
+    removeVacationRequest: Constants.vacationRequests.VACATION_REQUEST_REJECTED
 
   getInitialState: ->
 
