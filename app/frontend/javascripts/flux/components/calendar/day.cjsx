@@ -20,6 +20,8 @@ module.exports = React.createClass
 
   _onClick: (e)->
     e.preventDefault()
+    return if @props.day.inThePast
+
     selected = !@state.selected
 
     @setState
@@ -38,6 +40,7 @@ module.exports = React.createClass
       day: true
       today: @props.day.isToday
       'different-month': not @props.day.isCurrentMonth
+      'past': @props.day.inThePast
       selected: @state.selected || @_belongsToSelectedDates()
 
     <span key={@props.day.date.toString()} className={dayClasses} onClick={@_onClick}>{@props.day.number}</span>

@@ -26,7 +26,7 @@
 #
 
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, 
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable,
     :validatable
 
   # Relations
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def days_available
+  def available_days
     all_time_vacations = AVAILABLE_VACATIONS.map { |k,v| v }.sum
     all_time_vacations-requested_days.approved.count
   end

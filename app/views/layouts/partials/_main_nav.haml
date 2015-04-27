@@ -2,7 +2,7 @@
   %nav
     %ul
       %li
-        = link_to users_path, class: ('current' if controller_name == 'users') do 
+        = link_to users_path, class: ('current' if controller_name == 'users') do
           = fa_icon 'users'
           Team
       %li
@@ -10,7 +10,7 @@
           = fa_icon 'calendar'
           Global
       %li
-        %a{href: ""}
+        = link_to vacation_requests_path, class: ('current' if controller_name == 'vacation_requests') do
           = fa_icon 'envelope-o'
           Inbox
       %li

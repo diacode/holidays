@@ -17,3 +17,9 @@ module.exports = Marty.createConstants
     'VACATION_REQUEST_CREATED'
     'SET_ERROR'
   ]
+
+  vacationRequests: [
+    'ADD_VACATION_REQUESTS'
+    'VACATION_REQUEST_APPROVED'
+    'VACATION_REQUEST_REJECTED'
+  ]

@@ -1,0 +1,47 @@
+.vacation_requests.index
+
+  #vacation_requests_wrapper
+    overflow: hidden
+    > ul
+      +unstyled-list
+
+      span > li
+        +display(flex)
+        background: #fff
+        padding: .5em
+        margin-bottom: 1px
+
+        .avatar
+          width: 50px
+          height: 50px
+
+        .avatar-wrapper
+          width: 75px
+        .user-data-wrapper
+          +flex(3)
+          +pad(0 1em 0 0)
+        .requested-days-wrapper
+          +flex(6)
+          +pad(0 1em 0 0)
+
+          .selected-dates
+            font-size: .8em
+        .actions
+          +display(flex)
+          +flex(1)
+          +align-items(center)
+          text-align: left
+          ul
+            +unstyled-list
+
+            a.approve
+              +link($green)
+            a.reject
+              +link($red)
+
+  .vacation-request-leave
+    &.vacation-request-leave-active
+      +animation(slideOutLeft .3s)
+
+
+

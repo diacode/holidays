@@ -1,3 +1,4 @@
+window.Marty = Marty
 ViewMounter = require './app/view_mounter'
 
 $ ->

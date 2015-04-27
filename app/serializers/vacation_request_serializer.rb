@@ -7,6 +7,7 @@
 #  message    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  status     :integer          default(0)
 #
 # Indexes
 #
@@ -14,7 +15,14 @@
 #
 
 class VacationRequestSerializer < ActiveModel::Serializer
-  attributes :id, :message
+  attributes  :id,
+              :message,
+              :user_name,
+              :created_at
 
   has_many :requested_days
+
+  def user_name
+    object.user.first_name
+  end
 end
