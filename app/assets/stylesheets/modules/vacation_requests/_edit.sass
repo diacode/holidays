@@ -1,0 +1,33 @@
+.vacation_requests.edit
+  #vacation_request_editor
+    .wrapper
+      +clearfix
+      .calendar
+        +span-columns(6)
+      .quested-dates-wrapper
+        +span-columns(6)
+
+  .selected-days-list
+    +unstyled-list
+    li
+      +clearfix
+      background: #fff
+      padding: .5em
+      margin-bottom: 1px
+
+      .selected-dates
+        +span-columns(2)
+      .actions
+        +span-columns(10)
+        text-align: right
+        a
+          margin-left: 1em
+
+  .batch-actions
+    line-height: 3em
+    text-align: right
+
+    a
+      margin-left: 1em
+
+
