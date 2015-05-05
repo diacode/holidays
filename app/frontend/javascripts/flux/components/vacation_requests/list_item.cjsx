@@ -50,7 +50,7 @@ module.exports = React.createClass
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href={Routes.edit_vacation_request_path(@props.id)}>
               <i className="fa fa-edit"></i> Edit
             </a>
           </li>

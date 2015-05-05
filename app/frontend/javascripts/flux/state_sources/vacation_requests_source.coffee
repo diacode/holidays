@@ -41,3 +41,6 @@ module.exports = Marty.createStateSource
 
   findAll: ->
     @get  Routes.api_v1_vacation_requests_path()
+
+  find: (id) ->
+    @get Routes.api_v1_vacation_request_path(id)
