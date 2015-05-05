@@ -5,6 +5,12 @@ class Api::V1::VacationRequestsController < ApplicationController
     render json: vacation_requests, root: :vacation_requests
   end
 
+  def show
+    vacation_request = VacationRequest.find params[:id]
+
+    render json: vacation_request
+  end
+
   def create
     vacation_request = current_user.vacation_requests.build vacation_request_params
 
