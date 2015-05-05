@@ -1,5 +1,4 @@
 Calendar = require '../calendar/calendar'
-CalendarStore = require '../../stores/calendar_store'
 RequestFormStore = require '../../stores/request_form_store'
 RequestFormActionCreators = require '../../action_creators/request_form_action_creators'
 ModalActionCreators = require '../../action_creators/modal_action_creators'
@@ -36,11 +35,14 @@ RequestForm = React.createClass
 
     <div key="calendar">
       <h5>Select desired dates:</h5>
-      <Calendar />
+      <Calendar selectedDates={@props.selectedDates} datesChanged={@_handleDatesChanged}/>
       <div className="right">
         <a href="#" onClick={@_validateSelectedDates} disabled={@props.selectedDates.length == 0}>Add a comment <i className="fa fa-arrow-right"/></a>
       </div>
     </div>
+
+  _handleDatesChanged: (dates) ->
+    RequestFormActionCreators.setSelectedDates dates
 
   _validateSelectedDates: (e) ->
     e.preventDefault()
@@ -117,13 +119,12 @@ RequestForm = React.createClass
 
 module.exports = Marty.createContainer RequestForm,
   listenTo: [
-    CalendarStore
     RequestFormStore
   ]
 
   fetch:
     selectedDates: ->
-      CalendarStore.state.selectedDates
+      RequestFormStore.state.selectedDates
     datesValidated: ->
       RequestFormStore.state.datesValidated
     error: ->
