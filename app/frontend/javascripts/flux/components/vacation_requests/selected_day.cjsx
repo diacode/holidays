@@ -1,10 +1,11 @@
 moment = require 'moment'
+classnames = require 'classnames'
 
 module.exports = React.createClass
   displayName: 'SelectedDay'
 
   render: ->
-    <li>
+    <li className={@props.status}>
       <header>
         {moment(@props.day).format('MMM')}
       </header>
