@@ -36,7 +36,7 @@ VacationRequestEditor = React.createClass
 
   _renderRequestedDays: ->
     days = @props.vacationRequest.requested_days.map (day) =>
-      <SelectedDayListItem vacationRequestId={@props.vacationRequest.id} {...day} />
+      <SelectedDayListItem key={day.id} vacationRequestId={@props.vacationRequest.id} {...day} />
 
     <ul className="selected-days-list">
       {days}
