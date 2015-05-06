@@ -7,9 +7,13 @@
 
       span > li
         +display(flex)
+        +transition
         background: #fff
         padding: .5em
         margin-bottom: 1px
+
+        &:not(.editable)
+          opacity: .5
 
         .avatar
           width: 50px
