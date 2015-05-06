@@ -1,6 +1,7 @@
 moment = require 'moment'
 SelectedDay = require './selected_day'
 VacationRequestsActionCreators = require '../../action_creators/vacation_requests_action_creators'
+classnames = require 'classnames'
 
 module.exports = React.createClass
   displayName: 'VacationRequestListItem'
@@ -21,8 +22,32 @@ module.exports = React.createClass
     if confirm('Are you sure you want to reject this vacation request?')
       VacationRequestsActionCreators.reject @props.id
 
+  _renderActions: ->
+    return unless @props.editable
+
+    <ul>
+      <li>
+        <a className="approve" href="#" onClick={@_onApproveClick}>
+          <i className="fa fa-check-circle"></i> Approve
+        </a>
+      </li>
+      <li>
+        <a className="reject" href="#" onClick={@_onRejectClick}>
+          <i className="fa fa-times-circle"></i> Reject
+        </a>
+      </li>
+      <li>
+        <a href={Routes.edit_vacation_request_path(@props.id)}>
+          <i className="fa fa-edit"></i> Edit
+        </a>
+      </li>
+    </ul>
+
   render: ->
-    <li>
+    className = classnames
+      editable: @props.editable
+
+    <li className={className}>
       <div className="avatar-wrapper">
         <img className="avatar" src="http://gravatar.com/avatar/09310ea22b648a029b9803cfecea1eca.png?s=80" alt="09310ea22b648a029b9803cfecea1eca"/>
       </div>
@@ -38,22 +63,6 @@ module.exports = React.createClass
         </ul>
       </div>
       <div className="actions">
-        <ul>
-          <li>
-            <a className="approve" href="#" onClick={@_onApproveClick}>
-              <i className="fa fa-check-circle"></i> Approve
-            </a>
-          </li>
-          <li>
-            <a className="reject" href="#" onClick={@_onRejectClick}>
-              <i className="fa fa-times-circle"></i> Reject
-            </a>
-          </li>
-          <li>
-            <a href={Routes.edit_vacation_request_path(@props.id)}>
-              <i className="fa fa-edit"></i> Edit
-            </a>
-          </li>
-        </ul>
+        {@_renderActions()}
       </div>
     </li>
