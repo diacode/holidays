@@ -1,6 +1,6 @@
 class Api::V1::VacationRequestsController < ApplicationController
   def index
-    vacation_requests = VacationRequest.pending.ordered
+    vacation_requests = VacationRequest.ordered
 
     render json: vacation_requests, root: :vacation_requests
   end

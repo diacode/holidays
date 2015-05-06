@@ -7,7 +7,6 @@
 #  message    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :integer          default(0)
 #
 # Indexes
 #
@@ -15,8 +14,6 @@
 #
 
 class VacationRequest < ActiveRecord::Base
-  enum status: [:pending, :processed]
-
   # Relations
   belongs_to :user
   has_many :requested_days, -> { order :day }, dependent: :destroy, inverse_of: :vacation_request
@@ -30,13 +27,11 @@ class VacationRequest < ActiveRecord::Base
   validate :valid_number_of_days
 
   def approve!
-    approve_requested_days!
-    processed!
+    requested_days.all.each{ |requested_day| requested_day.approved! }
   end
 
   def reject!
-    reject_requested_days!
-    processed!
+    requested_days.all.each{ |requested_day| requested_day.rejected! }
   end
 
   private
@@ -50,13 +45,5 @@ class VacationRequest < ActiveRecord::Base
     available_days = user.available_days
 
     errors[:base] << "You only have #{available_days} available days" if available_days < requested_days.length
-  end
-
-  def approve_requested_days!
-    requested_days.all.each{ |requested_day| requested_day.approved! }
-  end
-
-  def reject_requested_days!
-    requested_days.all.each{ |requested_day| requested_day.rejected! }
   end
 end
