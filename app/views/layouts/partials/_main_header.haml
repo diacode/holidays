@@ -1,16 +1,15 @@
-%header#main_header
+%nav#main_nav
   = link_to root_path, class: 'logo-link' do
     = image_tag 'logo-white.png', width: 100, class: 'logo'
-  %nav
-    %ul.nav
-      %li
-        #request_holidays_button_wrapper
-      %li#user_nav_toggle
-        %a{href: '#'}
-          = image_tag gravatar_url(current_user.email), class: 'avatar'
-        %ul.dropdown
-          %li
-            = link_to destroy_user_session_path, method: :delete do
-              = fa_icon 'sign-out'
-              Sign out
+  %ul.nav
+    %li
+      #request_holidays_button_wrapper
+    %li
+      %a{href: '#'}
+        = image_tag gravatar_url(current_user.email), class: 'avatar', id: 'user_nav_toggle'
+      %ul.dropdown
+        %li
+          = link_to destroy_user_session_path, method: :delete do
+            = fa_icon 'sign-out'
+            Sign out
 
