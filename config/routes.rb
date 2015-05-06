@@ -13,6 +13,13 @@ Rails.application.routes.draw do
           put :approve
           put :reject
         end
+
+        resources :requested_days, only: [:create, :destroy] do
+          member do
+            put :approve
+            put :reject
+          end
+        end
       end
     end
   end
