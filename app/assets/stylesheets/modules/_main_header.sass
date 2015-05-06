@@ -1,4 +1,4 @@
-#main_header
+#main_nav
   background: #222
   padding: 0 2em
   position: relative
@@ -9,44 +9,41 @@
     left: 2em
     top: 50%
 
-  nav
+  .nav
     float: right
+    +inline-list
+    > li
+      position: relative
 
-    > .nav
-      +inline-list
-      > li
-        position: relative
-        > a:not(.btn)
-          line-height: 4.5em
-          display: inline-block
-          img
-            vertical-align: middle
+      img
+        vertical-align: middle
+        margin: .7em 0
 
+      .dropdown
+        +transition
+        +unstyled-list
+        position: absolute
+        top: 100%
+        right: 0
+        list-style: none
+        max-height: 0
+        overflow: hidden
+        width: 12em
+        z-index: 999
+
+        li
+          background: #222
+          +fill-parent
+
+          a
+            +link($light-gray, #fff, 1em, 3em)
+            display: block
+            text-decoration: none
+            padding: 0 1em
+
+      &.active
         .dropdown
-          +transition
-          +unstyled-list
-          position: absolute
-          top: 100%
-          right: 0
-          list-style: none
-          max-height: 0
-          overflow: hidden
-          width: 12em
-          z-index: 999
-
-          li
-            background: #222
-            +fill-parent
-
-            a
-              +link($light-gray, #fff, 1em, 3em)
-              display: block
-              text-decoration: none
-              padding: 0 1em
-
-        &.active
-          .dropdown
-            max-height: 400px
+          max-height: 400px
 
   .avatar
     border-radius: 50%
