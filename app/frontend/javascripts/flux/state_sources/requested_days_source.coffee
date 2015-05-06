@@ -20,3 +20,19 @@ module.exports = Marty.createStateSource
     @delete
       url: Routes.api_v1_vacation_request_requested_day_path(vacationRequestId, requestedDay.id)
       body: body
+
+  approve: (vacationRequestId, requestedDayId) ->
+    body =
+      authenticity_token: Globals.authenticityToken
+
+    @put
+      url: Routes.approve_api_v1_vacation_request_requested_day_path(vacationRequestId, requestedDayId)
+      body: body
+
+  reject: (vacationRequestId, requestedDayId) ->
+    body =
+      authenticity_token: Globals.authenticityToken
+
+    @put
+      url: Routes.reject_api_v1_vacation_request_requested_day_path(vacationRequestId, requestedDayId)
+      body: body

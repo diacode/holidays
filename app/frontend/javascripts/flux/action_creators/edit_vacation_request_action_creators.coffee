@@ -27,3 +27,23 @@ module.exports = Marty.createActionCreators
       console.log 'Error creating requested day'
       console.log err
 
+  approveDay: (vacationRequestId, requestedDayId) ->
+    RequestedDaysAPI.approve(vacationRequestId, requestedDayId)
+    .then (res) =>
+      switch res.status
+        when 200
+          @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res.body
+    .catch (err) =>
+      console.log 'Error approving requested day'
+      console.log err
+
+  rejectDay: (vacationRequestId, requestedDayId) ->
+    RequestedDaysAPI.reject(vacationRequestId, requestedDayId)
+    .then (res) =>
+      switch res.status
+        when 200
+          @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res.body
+    .catch (err) =>
+      console.log 'Error approving requested day'
+      console.log err
+

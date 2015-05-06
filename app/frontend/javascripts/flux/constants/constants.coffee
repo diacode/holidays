@@ -22,4 +22,5 @@ module.exports = Marty.createConstants
     'SET_EDIT_SELECTED_DATES'
     'ADD_REQUESTED_DAY'
     'REMOVE_REQUESTED_DAY'
+    'REPLACE_REQUESTED_DAY'
   ]

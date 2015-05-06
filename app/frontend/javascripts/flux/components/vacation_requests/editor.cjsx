@@ -1,9 +1,9 @@
 Calendar = require '../calendar/calendar'
 EditVacationRequestStore = require '../../stores/edit_vacation_request_store'
-SelectedDay = require './selected_day'
 moment = require 'moment'
 EditVacationRequestActionCreators = require '../../action_creators/edit_vacation_request_action_creators'
 VacationRequestsActionCreators = require '../../action_creators/vacation_requests_action_creators'
+SelectedDayListItem = sys = require '../selected_days/list_item'
 
 VacationRequestEditor = React.createClass
   displayName: 'VacationRequestEditor'
@@ -36,33 +36,11 @@ VacationRequestEditor = React.createClass
 
   _renderRequestedDays: ->
     days = @props.vacationRequest.requested_days.map (day) =>
-      <li key={day.id}>
-        <ul className="selected-dates">
-          <SelectedDay {...day} />
-        </ul>
-        <div className="actions">
-          {@_renderDayActions(day)}
-        </div>
-      </li>
+      <SelectedDayListItem vacationRequestId={@props.vacationRequest.id} {...day} />
 
     <ul className="selected-days-list">
       {days}
     </ul>
-
-  _renderDayActions: (day) ->
-    actions = []
-
-    if day.status != 'approved'
-      actions.push <a className="approve" href="#x" onClick={@_onApproveClick}>
-        <i className="fa fa-check-circle"></i> Approve
-      </a>
-
-    if day.status != 'rejected'
-      actions.push <a className="reject" href="#" onClick={@_onRejectClick}>
-        <i className="fa fa-times-circle"></i> Reject
-      </a>
-
-    actions
 
   _renderCalendar: ->
     dates = @props.vacationRequest.requested_days.map (day) ->

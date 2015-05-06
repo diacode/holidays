@@ -12,6 +12,7 @@ module.exports = Marty.createStore
     ]
     addRequestedDay: Constants.editVacationRequest.ADD_REQUESTED_DAY
     removeRequestedDay: Constants.editVacationRequest.REMOVE_REQUESTED_DAY
+    replaceRequestedDay: Constants.editVacationRequest.REPLACE_REQUESTED_DAY
 
   getInitialState: ->
 
@@ -39,6 +40,15 @@ module.exports = Marty.createStore
     _.remove @state.vacationRequest.requested_days, (day) ->
       day.id == requestedDay.id
 
+    @hasChanged()
+
+  replaceRequestedDay: (requestedDay) ->
+    requestedDays = @state.vacationRequest.requested_days
+
+    index = _.findIndex requestedDays, (day) ->
+      day.id == requestedDay.id
+
+    @state.vacationRequest.requested_days[index] = requestedDay
     @hasChanged()
 
 
