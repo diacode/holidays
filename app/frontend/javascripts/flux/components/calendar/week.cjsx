@@ -5,6 +5,12 @@ moment = require 'moment'
 module.exports = React.createClass
   displayName: 'Week'
 
+  _handleAddDate: (date) ->
+    @props.addDate date
+
+  _handleRemoveDate: (date) ->
+    @props.removeDate date
+
   render: () ->
     days = []
     date = @props.date
@@ -21,7 +27,7 @@ module.exports = React.createClass
         date: date
         inThePast: date.isBefore now
 
-      days.push <Day key={i} day={day} selectedDates={@props.selectedDates}/>
+      days.push <Day key={i} day={day} selectedDates={@props.selectedDates} addDate={@_handleAddDate} removeDate={@_handleRemoveDate}/>
       date = date.clone()
       date.add(1, "d")
 

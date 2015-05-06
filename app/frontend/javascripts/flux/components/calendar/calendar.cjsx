@@ -1,26 +1,58 @@
 DayNames = require './day_names'
 Week = require './week'
-CalendarStore = require '../../stores/calendar_store'
-CalendarActionCreators = require '../../action_creators/calendar_action_creators'
+moment = require 'moment'
 
-Calendar = React.createClass
+module.exports = React.createClass
   displayName: 'Calendar'
 
+  getInitialState: ->
+    month: moment().startOf("day")
+    selectedDates: []
+
+  componentDidMount: ->
+    @setState
+      selectedDates: @props.selectedDates
+
+  componentWillReceiveProps: (nextProps) ->
+    @setState
+      selectedDates: nextProps.selectedDates
+
   _previous: () ->
-    CalendarActionCreators.previousMonth()
+    @setState
+      month: @state.month.add(-1,'M')
 
   _next: () ->
-    CalendarActionCreators.nextMonth()
+    @setState
+      month: @state.month.add(1,'M')
+
+  _handleAddDate: (date) ->
+    dates = @state.selectedDates
+    dates.push date
+
+    @setState (previousState, currentProps) ->
+      selectedDates: dates
+
+    @props.datesChanged @state.selectedDates
+
+  _handleRemoveDate: (date) ->
+    dates = @state.selectedDates
+    _.remove dates, (n) ->
+      date.isSame n
+
+    @setState (previousState, currentProps) ->
+      selectedDates: dates
+
+    @props.datesChanged @state.selectedDates
 
   _renderWeeks: () ->
     weeks = []
     done = false
-    date = @props.month.clone().startOf("month").add("w" -1).day("Monday")
+    date = @state.month.clone().startOf("month").add("w" -1).day("Monday")
     monthIndex = date.month()
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@props.month} selectedDates={@props.selectedDates}/>
+      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} selectedDates={@state.selectedDates} addDate={@_handleAddDate} removeDate={@_handleRemoveDate}/>
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
@@ -29,7 +61,7 @@ Calendar = React.createClass
     weeks
 
   _renderMonthLabel: () ->
-    <span>{@props.month.format("MMMM, YYYY")}</span>
+    <span>{@state.month.format("MMMM, YYYY")}</span>
 
   render: () ->
     <div className="calendar">
@@ -41,17 +73,4 @@ Calendar = React.createClass
       <DayNames />
       {@_renderWeeks()}
     </div>
-
-module.exports = Marty.createContainer Calendar,
-  listenTo: CalendarStore
-
-  fetch:
-    month: ->
-      CalendarStore.state.month
-    selectedDates: ->
-      CalendarStore.state.selectedDates
-
-  failed: (errors) ->
-    console.log 'Failed rendering Calendar'
-    console.log errors
 

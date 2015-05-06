@@ -24,10 +24,10 @@ class RequestedDay < ActiveRecord::Base
   belongs_to :vacation_request
   belongs_to :validator, class_name: 'User'
 
-  # Scope  
+  # Scope
   scope :current_year, -> { from_year(Date.today.year) }
-  scope :from_year, -> (year) { 
+  scope :from_year, -> (year) {
     date_obj = Date.strptime(year.to_s, '%Y')
-    where(day: (date_obj.beginning_of_year..date_obj.end_of_year)) 
+    where(day: (date_obj.beginning_of_year..date_obj.end_of_year))
   }
 end

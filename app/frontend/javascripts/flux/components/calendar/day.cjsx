@@ -1,5 +1,4 @@
 classnames = require 'classnames'
-CalendarActionCreators = require '../../action_creators/calendar_action_creators'
 
 module.exports = React.createClass
   displayName: 'Day'
@@ -11,9 +10,9 @@ module.exports = React.createClass
     return unless nextState.selected != @state.selected
 
     if nextState.selected
-      CalendarActionCreators.addDate @props.day.date
+      @props.addDate @props.day.date
     else
-      CalendarActionCreators.removeDate @props.day.date
+      @props.removeDate @props.day.date
 
   componentWillReceiveProps: (nextProps) ->
     @state.selected = @_belongsToSelectedDates nextProps.selectedDates

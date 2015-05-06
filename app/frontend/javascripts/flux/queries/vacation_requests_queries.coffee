@@ -11,3 +11,11 @@ module.exports = Marty.createQueries
           @dispatch Constants.vacationRequests.ADD_VACATION_REQUESTS, res.body.vacation_requests
     .catch (err) ->
       console.log err
+
+  find: (id) ->
+    VacationRequestsApi.find(id).then (res)=>
+      switch res.status
+        when 200
+          @dispatch Constants.vacationRequests.SET_VACATION_REQUEST, res.body
+    .catch (err) ->
+      console.log err

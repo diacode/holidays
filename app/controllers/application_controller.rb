@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   def set_gon_globals
     gon.authenticity_token = form_authenticity_token
     gon.locale = I18n.locale
-    gon.vacation_request_statuses = VacationRequest.statuses
+    gon.requested_day_statuses = RequestedDay.statuses
   end
 end

@@ -1,15 +1,21 @@
 class Api::V1::VacationRequestsController < ApplicationController
   def index
-    vacation_requests = VacationRequest.pending.ordered
+    vacation_requests = VacationRequest.ordered
 
     render json: vacation_requests, root: :vacation_requests
+  end
+
+  def show
+    vacation_request = VacationRequest.find params[:id]
+
+    render json: vacation_request
   end
 
   def create
     vacation_request = current_user.vacation_requests.build vacation_request_params
 
     if vacation_request.save
-      render json: vacation_request, status: :ok
+      render json: vacation_request.reload, status: :ok
     else
       render json: vacation_request.errors, status: :unprocessable_entity
     end

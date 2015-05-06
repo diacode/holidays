@@ -7,6 +7,9 @@ module.exports = Marty.createActionCreators
   setDatesValidated: (areValid) ->
     @dispatch Constants.requestForm.SET_DATES_VALIDATED, areValid
 
+  setSelectedDates: (dates) ->
+    @dispatch Constants.requestForm.SET_SELECTED_DATES, dates
+
   create: (vacationRequest) ->
     VacationRequestsAPI.create(vacationRequest)
     .then (res) =>

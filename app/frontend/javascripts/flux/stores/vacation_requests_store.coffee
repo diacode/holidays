@@ -6,8 +6,11 @@ module.exports = Marty.createStore
 
   handlers:
     addVacationRequests: Constants.vacationRequests.ADD_VACATION_REQUESTS
-    removeVacationRequest: Constants.vacationRequests.VACATION_REQUEST_APPROVED
-    removeVacationRequest: Constants.vacationRequests.VACATION_REQUEST_REJECTED
+    replaceVacationRequest: [
+      Constants.vacationRequests.VACATION_REQUEST_APPROVED
+      Constants.vacationRequests.VACATION_REQUEST_REJECTED
+    ]
+    addVacationRequest: Constants.requestForm.VACATION_REQUEST_CREATED
 
   getInitialState: ->
 
@@ -23,15 +26,19 @@ module.exports = Marty.createStore
     @setState
       vacationRequests: vacationRequests
 
-  removeVacationRequest: (vacationRequest) ->
+  replaceVacationRequest: (vacationRequest) ->
     vacationRequests = @state.vacationRequests
 
-    _.remove @state.vacationRequests, (n) ->
-      n.id == vacationRequest.id
+    index = _.findIndex vacationRequests, (request) ->
+      request.id == vacationRequest.id
 
+    @state.vacationRequests[index] = vacationRequest
+    @hasChanged()
+
+  addVacationRequest: (vacationRequest) ->
+    vacationRequests = @state.vacationRequests
     @setState
-      vacationRequests: vacationRequests
-
+      vacationRequests: [vacationRequest].concat(vacationRequests)
 
 
 

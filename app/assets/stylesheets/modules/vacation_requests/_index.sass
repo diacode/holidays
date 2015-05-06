@@ -7,9 +7,13 @@
 
       span > li
         +display(flex)
+        +transition
         background: #fff
         padding: .5em
         margin-bottom: 1px
+
+        &:not(.editable)
+          opacity: .5
 
         .avatar
           width: 50px
@@ -33,11 +37,6 @@
           text-align: left
           ul
             +unstyled-list
-
-            a.approve
-              +link($green)
-            a.reject
-              +link($red)
 
   .vacation-request-leave
     &.vacation-request-leave-active

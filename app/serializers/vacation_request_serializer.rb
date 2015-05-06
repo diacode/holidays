@@ -7,7 +7,6 @@
 #  message    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :integer          default(0)
 #
 # Indexes
 #
@@ -18,11 +17,22 @@ class VacationRequestSerializer < ActiveModel::Serializer
   attributes  :id,
               :message,
               :user_name,
-              :created_at
+              :user_avatar,
+              :created_at,
+              :editable
 
   has_many :requested_days
 
   def user_name
     object.user.first_name
+  end
+
+  def user_avatar
+    gravatar_id = Digest::MD5::hexdigest(object.user.email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=80"
+  end
+
+  def editable
+    object.editable?
   end
 end
