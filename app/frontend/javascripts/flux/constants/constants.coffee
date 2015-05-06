@@ -20,4 +20,6 @@ module.exports = Marty.createConstants
 
   editVacationRequest: [
     'SET_EDIT_SELECTED_DATES'
+    'ADD_REQUESTED_DAY'
+    'REMOVE_REQUESTED_DAY'
   ]

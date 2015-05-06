@@ -9,7 +9,30 @@ VacationRequestEditor = React.createClass
   displayName: 'VacationRequestEditor'
 
   _handleDatesChanged: (dates) ->
-    EditVacationRequestActionCreators.setRequestedDays dates
+    if dates.length > @props.vacationRequest.requested_days.length then @_createDay(dates) else @_removeDay(dates)
+
+  _createDay: (dates) ->
+    for date in dates
+      formatedDate = date.format('YYYY-MM-DD')
+
+      index = _.findIndex @props.vacationRequest.requested_days, (requestedDay) ->
+        formatedDate == requestedDay.day
+
+      if index == -1
+        day =
+          id: null
+          day: formatedDate
+          status: 'approved'
+
+        EditVacationRequestActionCreators.createDay @props.vacationRequest.id, day
+
+  _removeDay: (dates) ->
+    for requestedDay in @props.vacationRequest.requested_days
+      index = _.findIndex dates, (date) ->
+        formatedDate = date.format('YYYY-MM-DD')
+        formatedDate == requestedDay.day
+
+      if index == -1 then EditVacationRequestActionCreators.destroyDay @props.vacationRequest.id, requestedDay
 
   _renderRequestedDays: ->
     days = @props.vacationRequest.requested_days.map (day) =>

@@ -10,7 +10,8 @@ module.exports = Marty.createStore
       Constants.vacationRequests.VACATION_REQUEST_APPROVED
       Constants.vacationRequests.VACATION_REQUEST_REJECTED
     ]
-    setRequestedDays: Constants.editVacationRequest.SET_EDIT_SELECTED_DATES
+    addRequestedDay: Constants.editVacationRequest.ADD_REQUESTED_DAY
+    removeRequestedDay: Constants.editVacationRequest.REMOVE_REQUESTED_DAY
 
   getInitialState: ->
 
@@ -26,27 +27,19 @@ module.exports = Marty.createStore
     @setState
       vacationRequest: vacationRequest
 
-  setRequestedDays: (dates) ->
-    requestedDays = []
-
-    for date in dates
-      formatedDate = date.format('YYYY-MM-DD')
-
-      index = _.findIndex @state.vacationRequest.requested_days, (requestedDay) ->
-        formatedDate == requestedDay.day
-
-      if index == -1
-        requestedDays.push
-          id: null
-          day: formatedDate
-          status: 'approved'
-      else
-        requestedDays.push @state.vacationRequest.requested_days[index]
+  addRequestedDay: (requestedDay) ->
+    @state.vacationRequest.requested_days.push requestedDay
+    requestedDays = _.sortBy @state.vacationRequest.requested_days, (n) ->
+      n.day
 
     @state.vacationRequest.requested_days = requestedDays
     @hasChanged()
 
+  removeRequestedDay: (requestedDay) ->
+    _.remove @state.vacationRequest.requested_days, (day) ->
+      day.id == requestedDay.id
 
+    @hasChanged()
 
 
 
