@@ -18,6 +18,24 @@ class Api::V1::RequestedDaysController < ApplicationController
     render json: requested_day, status: :ok
   end
 
+  def approve
+    render json: false, status: 503 and return unless current_user.admin
+
+    requested_day = @vacation_request.requested_days.find params[:id]
+    requested_day.approved!
+
+    render json: requested_day, status: :ok
+  end
+
+  def reject
+    render json: false, status: 503 and return unless current_user.admin
+
+    requested_day = @vacation_request.requested_days.find params[:id]
+    requested_day.rejected!
+
+    render json: requested_day, status: :ok
+  end
+
   private
 
   def set_vacation_request
