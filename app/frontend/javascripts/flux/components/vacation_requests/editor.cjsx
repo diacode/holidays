@@ -62,8 +62,10 @@ VacationRequestEditor = React.createClass
 
   render: ->
     <div className="wrapper">
-      {@_renderCalendar()}
-      <div className="quested-dates-wrapper">
+      <header className="header">
+        <img src={@props.vacationRequest.user_avatar} className="avatar" />
+        <h4>{@props.vacationRequest.user_name}</h4>
+        <p>{@props.vacationRequest.message}</p>
         <div className="batch-actions">
           <a className="approve" href="#" onClick={@_onApproveAllClick}>
             <i className="fa fa-check-circle"></i> Approve all
@@ -72,6 +74,9 @@ VacationRequestEditor = React.createClass
             <i className="fa fa-times-circle"></i> Reject all
           </a>
         </div>
+      </header>
+      {@_renderCalendar()}
+      <div className="quested-dates-wrapper">
         {@_renderRequestedDays()}
       </div>
     </div>
