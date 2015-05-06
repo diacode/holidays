@@ -6,8 +6,14 @@ module.exports = React.createClass
   displayName: 'Calendar'
 
   getInitialState: ->
-    month: moment().startOf("day")
+    month: @_getInitialMonth()
     selectedDates: []
+
+  _getInitialMonth: ->
+    if @props.initialMonth != undefined
+      @props.initialMonth
+    else
+      moment().startOf("day")
 
   componentDidMount: ->
     @setState

@@ -46,7 +46,9 @@ VacationRequestEditor = React.createClass
     dates = @props.vacationRequest.requested_days.map (day) ->
       moment(day.day)
 
-    <Calendar selectedDates={dates} datesChanged={@_handleDatesChanged}/>
+    initialMonth = moment(@props.vacationRequest.requested_days[0].day).startOf("day")
+
+    <Calendar initialMonth={initialMonth} selectedDates={dates} datesChanged={@_handleDatesChanged}/>
 
   _onApproveAllClick: (e) ->
     e.preventDefault()
