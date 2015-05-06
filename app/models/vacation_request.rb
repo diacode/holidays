@@ -34,6 +34,10 @@ class VacationRequest < ActiveRecord::Base
     requested_days.all.each{ |requested_day| requested_day.rejected! }
   end
 
+  def editable?
+    requested_days.requested.any?
+  end
+
   private
 
   def at_least_one_requested_day

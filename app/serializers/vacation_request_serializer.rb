@@ -17,11 +17,16 @@ class VacationRequestSerializer < ActiveModel::Serializer
   attributes  :id,
               :message,
               :user_name,
-              :created_at
+              :created_at,
+              :editable
 
   has_many :requested_days
 
   def user_name
     object.user.first_name
+  end
+
+  def editable
+    object.editable?
   end
 end
