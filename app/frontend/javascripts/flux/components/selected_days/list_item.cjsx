@@ -21,12 +21,14 @@ module.exports = React.createClass
 
   _onApproveClick: (e) ->
     e.preventDefault()
-    EditVacationRequestActionCreators.approveDay @props.vacationRequestId, @props.id
+    if confirm('Are you sure you want to approve this day?')
+      EditVacationRequestActionCreators.approveDay @props.vacationRequestId, @props.id
 
 
   _onRejectClick: (e) ->
     e.preventDefault()
-    EditVacationRequestActionCreators.rejectDay @props.vacationRequestId, @props.id
+    if confirm('Are you sure you want to reject this day?')
+      EditVacationRequestActionCreators.rejectDay @props.vacationRequestId, @props.id
 
   render: ->
     <li>
