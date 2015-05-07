@@ -1,4 +1,5 @@
 class Api::V1::RequestedDaysController < ApplicationController
+  before_action :check_admin_user, only: [:approve, :reject]
   before_action :set_vacation_request
 
   def create
@@ -19,8 +20,6 @@ class Api::V1::RequestedDaysController < ApplicationController
   end
 
   def approve
-    render json: false, status: 503 and return unless current_user.admin
-
     requested_day = @vacation_request.requested_days.find params[:id]
     requested_day.approved!
 
@@ -28,8 +27,6 @@ class Api::V1::RequestedDaysController < ApplicationController
   end
 
   def reject
-    render json: false, status: 503 and return unless current_user.admin
-
     requested_day = @vacation_request.requested_days.find params[:id]
     requested_day.rejected!
 
@@ -37,6 +34,10 @@ class Api::V1::RequestedDaysController < ApplicationController
   end
 
   private
+
+  def check_admin_user
+    render json: false, status: :forbidden and return unless current_user.admin
+  end
 
   def set_vacation_request
     @vacation_request = VacationRequest.find params[:vacation_request_id]
