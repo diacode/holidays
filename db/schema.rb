@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506071435) do
+ActiveRecord::Schema.define(version: 20150507092017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "public_holidays", force: :cascade do |t|
+    t.string   "name"
+    t.date     "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "public_holidays", ["day"], name: "index_public_holidays_on_day", using: :btree
 
   create_table "requested_days", force: :cascade do |t|
     t.date     "day",                             null: false
