@@ -5,6 +5,18 @@
     .calendar
       width: 100%
 
-      > div.week > span.day
-        height: 100px
+      > div.week
+        > .day
+          height: 100px
+          position: relative
+
+          .day-number
+            position: absolute
+            top: 2em
+            right: 2em
+            line-height: 1em
+        &.names
+          > .day
+            height: 50px
+
 
