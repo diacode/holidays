@@ -36,3 +36,6 @@ module.exports = Marty.createStateSource
     @put
       url: Routes.reject_api_v1_vacation_request_requested_day_path(vacationRequestId, requestedDayId)
       body: body
+
+  findForMonth: (date) ->
+    @get Routes.api_v1_requested_days_path(date: date)
