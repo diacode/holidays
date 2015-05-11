@@ -18,5 +18,13 @@
 #
 
 class RequestedDaySerializer < ActiveModel::Serializer
-  attributes :id, :status, :day
+  attributes  :id,
+              :status,
+              :day,
+              :user_avatar
+
+  def user_avatar
+    gravatar_id = Digest::MD5::hexdigest(object.vacation_request.user.email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=80"
+  end
 end
