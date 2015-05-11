@@ -1,6 +1,12 @@
 class Api::V1::RequestedDaysController < ApplicationController
   before_action :check_admin_user, only: [:approve, :reject]
-  before_action :set_vacation_request
+  before_action :set_vacation_request, except: :index
+
+  def index
+    requested_days = load_requested_days
+
+    render json: requested_days, root: :requested_days
+  end
 
   def create
     requested_day = @vacation_request.requested_days.build requested_day_params
@@ -34,6 +40,12 @@ class Api::V1::RequestedDaysController < ApplicationController
   end
 
   private
+
+  def load_requested_days
+    return RequestedDay.approved unless params[:date].present?
+
+    RequestedDay.by_month(Date.parse(params[:date])).approved
+  end
 
   def check_admin_user
     render json: false, status: :forbidden and return unless current_user.admin

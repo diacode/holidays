@@ -23,7 +23,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :public_holidays, only: [:index]
+      resources :requested_days, only: :index
+      resources :public_holidays, only: :index
     end
   end
 end
