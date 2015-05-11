@@ -30,4 +30,5 @@ class RequestedDay < ActiveRecord::Base
     date_obj = Date.strptime(year.to_s, '%Y')
     where(day: (date_obj.beginning_of_year..date_obj.end_of_year))
   }
+  scope :by_month, -> (date) { where day: date.beginning_of_month..date.end_of_month}
 end
