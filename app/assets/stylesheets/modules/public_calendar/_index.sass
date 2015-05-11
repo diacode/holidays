@@ -12,11 +12,21 @@
 
           .day-number
             position: absolute
-            top: 2em
-            right: 2em
+            top: 1em
+            right: 1em
             line-height: 1em
         &.names
           > .day
             height: 50px
+
+        .public-holiday
+          +transform(translateY(-50%))
+          position: absolute
+          top: 50%
+          left: 1em
+          color: $red
+          line-height: 1.2em
+          text-align: left
+
 
 
