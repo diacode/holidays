@@ -24,12 +24,18 @@ module.exports = React.createClass
       selectedDates: nextProps.selectedDates
 
   _previous: () ->
+    month = @state.month.add(-1,'M')
     @setState
-      month: @state.month.add(-1,'M')
+      month: month
+
+    @props.monthChanged month
 
   _next: () ->
+    month = @state.month.add(1,'M')
     @setState
-      month: @state.month.add(1,'M')
+      month: month
+
+    @props.monthChanged month
 
   _handleAddDate: (date) ->
     dates = @state.selectedDates
