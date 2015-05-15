@@ -35,6 +35,8 @@ module.exports = React.createClass
     index >= 0
 
   render: ->
+    day = @props.day.date.format("YYYY-MM-DD")
+
     dayClasses = classnames
       day: true
       today: @props.day.isToday
@@ -42,4 +44,6 @@ module.exports = React.createClass
       'past': @props.day.inThePast
       selected: @state.selected || @_belongsToSelectedDates()
 
-    <span key={@props.day.date.toString()} className={dayClasses} onClick={@_onClick}>{@props.day.number}</span>
+    <div id={day} key={day} className={dayClasses} onClick={@_onClick}>
+      <span className="day-number">{@props.day.number}</span>
+    </div>

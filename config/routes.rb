@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, path: 'team'
 
   resources :vacation_requests, only: [:index, :edit]
+  get 'public_calendar', to: 'public_calendar#index'
 
   namespace :api do
     namespace :v1 do
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      resources :requested_days, only: :index
+      resources :public_holidays, only: :index
     end
   end
 end

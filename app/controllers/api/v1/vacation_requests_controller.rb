@@ -1,4 +1,6 @@
 class Api::V1::VacationRequestsController < ApplicationController
+  before_action :check_admin_user, only: [:approve, :reject]
+
   def index
     vacation_requests = VacationRequest.ordered
 
@@ -34,8 +36,6 @@ class Api::V1::VacationRequestsController < ApplicationController
   end
 
   def approve
-    render json: false, status: 503 and return unless current_user.admin
-
     vacation_request = VacationRequest.find params[:id]
     vacation_request.approve!
 
@@ -43,8 +43,6 @@ class Api::V1::VacationRequestsController < ApplicationController
   end
 
   def reject
-    render json: false, status: 503 and return unless current_user.admin
-
     vacation_request = VacationRequest.find params[:id]
     vacation_request.reject!
 
@@ -52,6 +50,10 @@ class Api::V1::VacationRequestsController < ApplicationController
   end
 
   private
+
+  def check_admin_user
+    render json: false, status: :forbidden and return unless current_user.admin
+  end
 
   def vacation_request_params
     if current_user.admin

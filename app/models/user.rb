@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     :validatable
 
   # Relations
-  has_many :vacation_requests
+  has_many :vacation_requests, dependent: :destroy
   has_many :requested_days, through: :vacation_requests
 
   # Scopes
