@@ -28,4 +28,7 @@ module.exports = Marty.createConstants
   publicHolidays: [
     'SET_MONTH_PUBLIC_HOLIDAYS'
     'SET_MONTH_REQUESTED_DAYS'
+    'ADD_NEW_PUBLIC_HOLIDAY'
+    'SET_PUBLIC_HOLIDAY_VALUES'
+    'REMOVE_PUBLIC_HOLIDAY'
   ]
