@@ -29,7 +29,7 @@ class VacationRequestSerializer < ActiveModel::Serializer
 
   def user_avatar
     gravatar_id = Digest::MD5::hexdigest(object.user.email).downcase
-    "//gravatar.com/avatar/#{gravatar_id}.png?s=80"
+    "https://gravatar.com/avatar/#{gravatar_id}.png?s=80"
   end
 
   def editable
