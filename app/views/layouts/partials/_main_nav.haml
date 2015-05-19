@@ -9,11 +9,12 @@
         = link_to public_calendar_path, class: ('current' if controller_name == 'public_calendar') do
           = fa_icon 'calendar'
           Public
+      - if current_user.admin
+        %li
+          = link_to vacation_requests_path, class: ('current' if controller_name == 'vacation_requests') do
+            = fa_icon 'envelope-o'
+            Inbox
       %li
-        = link_to vacation_requests_path, class: ('current' if controller_name == 'vacation_requests') do
-          = fa_icon 'envelope-o'
-          Inbox
-      %li
-        %a{href: ""}
+        = link_to settings_path, class: ('current' if controller_name == 'settings') do
           = fa_icon 'cog'
           Settings
