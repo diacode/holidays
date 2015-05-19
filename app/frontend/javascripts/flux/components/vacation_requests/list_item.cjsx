@@ -49,7 +49,7 @@ module.exports = React.createClass
 
     <li className={className}>
       <div className="avatar-wrapper">
-        <img className="avatar" src="http://gravatar.com/avatar/09310ea22b648a029b9803cfecea1eca.png?s=80" alt="09310ea22b648a029b9803cfecea1eca"/>
+        <img className="avatar" src={@props.user_avatar} />
       </div>
       <div className="user-data-wrapper">
         <strong>{@props.user_name}</strong>
