@@ -6,9 +6,9 @@
           = fa_icon 'users'
           Team
       %li
-        %a{href: ""}
+        = link_to public_calendar_path, class: ('current' if controller_name == 'public_calendar') do
           = fa_icon 'calendar'
-          Global
+          Public
       %li
         = link_to vacation_requests_path, class: ('current' if controller_name == 'vacation_requests') do
           = fa_icon 'envelope-o'
