@@ -1,7 +1,7 @@
 module ApplicationHelper
   def gravatar_url(email, size = 80)
     gravatar_id = Digest::MD5::hexdigest(email).downcase
-    url = "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    url = "https://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
   def google_fonts
