@@ -30,7 +30,11 @@ Rails.application.routes.draw do
       end
 
       resources :requested_days, only: :index
-      resources :public_holidays, only: :index
+      resources :public_holidays, only: :index do
+        collection do
+          post :batch_create
+        end
+      end
     end
   end
 end
