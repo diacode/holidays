@@ -13,6 +13,43 @@ PublicHolidaysEditor = React.createClass
     e.preventDefault()
     PublicHolidayActionCreators.addNew()
 
+  _renderSaveButton: ->
+    return if @props.publicHolidays.length is 0
+
+    <a href="#" className="btn" onClick={@_handleOnSaveClick}>Save holidays</a>
+
+  _handleOnSaveClick: (e) ->
+    e.preventDefault()
+
+    if @_validHolidays() then @_saveHolidays() else @_setValidationError()
+
+  _saveHolidays: ->
+    PublicHolidayActionCreators.save @props.publicHolidays
+
+  _setValidationError: ->
+    PublicHolidayActionCreators.invalidateHolidays()
+
+  _validHolidays: ->
+    valid = true
+
+    for holiday in @props.publicHolidays
+      if holiday.date == '' or holiday.name == ''
+        valid = false
+        break
+
+    valid
+
+  _renderValidationError: ->
+    return if @props.validationSucceed is true
+
+    <div className="error">Please fill correctly all days</div>
+
+  _renderSuccessMessage: ->
+    return if @props.successMessage is undefined
+
+    <div className="success">{@props.successMessage}</div>
+
+
   render: ->
     <div>
       <div className="actions">
@@ -29,7 +66,8 @@ PublicHolidaysEditor = React.createClass
           Import from CSV
         </a>
       </div>
-
+      {@_renderValidationError()}
+      {@_renderSuccessMessage()}
       <table>
         <thead>
           <tr>
@@ -42,6 +80,7 @@ PublicHolidaysEditor = React.createClass
           {@_renderPublicHolidays()}
         </tbody>
       </table>
+      {@_renderSaveButton()}
     </div>
 
 
@@ -53,6 +92,10 @@ module.exports = Marty.createContainer PublicHolidaysEditor,
   fetch:
     publicHolidays: ->
       PublicHolidaysEditorStore.getState().publicHolidays
+    validationSucceed: ->
+      PublicHolidaysEditorStore.getState().validationSucceed
+    successMessage: ->
+      PublicHolidaysEditorStore.getState().successMessage
 
   failed: (errors) ->
     console.log 'Failed rendering Public Holidays'
