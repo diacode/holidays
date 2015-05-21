@@ -15,9 +15,9 @@ class Api::V1::PublicHolidaysController < ApplicationController
   private
 
   def load_public_holidays
-    return PublicHoliday.all unless params[:date].present?
-
-    PublicHoliday.by_month Date.parse(params[:date])
+    return PublicHoliday.by_year Date.parse(params[:year]) if params[:year].present?
+    return PublicHoliday.by_month Date.parse(params[:date]) if params[:date].present?
+    return PublicHoliday.all
   end
 
   def batch_params
