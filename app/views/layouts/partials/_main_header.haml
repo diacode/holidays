@@ -4,6 +4,10 @@
   %ul.nav
     %li
       #request_holidays_button_wrapper
+    %li.days-left-wrapper
+      .days-left
+        %strong= current_user.available_days
+        %small days <br/> left
     %li
       %a{href: '#'}
         = image_tag gravatar_url(current_user.email), class: 'avatar', id: 'user_nav_toggle'

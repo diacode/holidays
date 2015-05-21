@@ -1,6 +1,6 @@
 #main_nav
   background: #222
-  padding: 0 2em
+  padding: .3em 2em
   position: relative
 
   .logo-link
@@ -10,10 +10,16 @@
     top: 50%
 
   .nav
+    +display(table)
     float: right
     +inline-list
     > li
+      +display(table-cell)
+      vertical-align: middle
       position: relative
+
+      &:not(:first-of-type)
+        padding-left: 2em
 
       img
         vertical-align: middle
@@ -50,3 +56,22 @@
     height: 40px
     width: 40px
     vertical-align: middle
+
+  .days-left-wrapper
+    text-align: center
+    min-width: 5em
+
+    .days-left
+      color: #fff
+      line-height: 1em
+      vertical-align: middle
+
+      strong
+        font-size: 2.5em
+        display: inline-block
+
+      small
+        font-size: .8rem
+        display: inline-block
+        line-height: 1.2em
+        text-align: left
