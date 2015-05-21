@@ -1,4 +1,4 @@
-class PublicHolidaysController < ApplicationController
+class PublicHolidaysController < AdminController
   def index
   end
 end
