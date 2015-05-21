@@ -14,7 +14,7 @@
           = link_to vacation_requests_path, class: ('current' if controller_name == 'vacation_requests') do
             = fa_icon 'envelope-o'
             Inbox
-      %li
-        = link_to settings_path, class: ('current' if controller_name == 'settings') do
-          = fa_icon 'cog'
-          Settings
+        %li
+          = link_to settings_path, class: ('current' if %w(settings public_holidays).include?(controller_name)) do
+            = fa_icon 'cog'
+            Settings
