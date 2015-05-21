@@ -69,10 +69,6 @@ PublicHolidaysEditor = React.createClass
           <i className="fa fa-plus"></i>
           Add new public holiday
         </a>
-        <a className="btn" href="#">
-          <i className="fa fa-upload"></i>
-          Import from CSV
-        </a>
       </div>
       {@_renderValidationError()}
       {@_renderSuccessMessage()}
