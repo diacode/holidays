@@ -1,4 +1,5 @@
 Constants = require '../constants/constants'
+moment = require 'moment'
 
 module.exports = Marty.createStore
   id: 'PublicHolidaysEditorStore'
@@ -9,14 +10,14 @@ module.exports = Marty.createStore
     removeHoliday: Constants.publicHolidays.REMOVE_PUBLIC_HOLIDAY
     invalidateHolidays: Constants.publicHolidays.INVALIDATE_PUBLIC_HOLIDAYS
     setSuccessMessage: Constants.publicHolidays.PUBLIC_HOLIDAYS_CREATION_SUCCESS
+    setRetrievedYearPublicHolidays: Constants.publicHolidays.RETRIEVED_YEAR_PUBLIC_HOLIDAYS
 
   getInitialState: ->
     publicHolidays: []
     validationSucceed: true
 
   addNew: ->
-    @state.publicHolidays.push
-      id: @_getNewId()
+    @_add
       name: ''
       date: ''
 
@@ -41,6 +42,20 @@ module.exports = Marty.createStore
       publicHolidays: []
       validationSucceed: true
       successMessage: 'Public holidays created with success'
+
+  setRetrievedYearPublicHolidays: (holidays) ->
+    @state.publicHolidays = []
+
+    for holiday in holidays
+      @_add
+        name: holiday.name
+        date: moment(holiday.day).add(1, 'year').format('YYYY-MM-DD')
+
+    @hasChanged()
+
+  _add: (attributes) ->
+    attributes.id =  @_getNewId()
+    @state.publicHolidays.push attributes
 
   _getNewId: ->
     return 1 if @state.publicHolidays.length == 0

@@ -18,10 +18,10 @@ module.exports = React.createClass
   render: ->
     <tr>
       <td>
-        <input ref="date" type="date" onChange={@_handleOnChange}/>
+        <input ref="date" type="date" onChange={@_handleOnChange} value={@props.date} />
       </td>
       <td>
-        <input ref="name" type="text" onChange={@_handleOnChange}/>
+        <input ref="name" type="text" onChange={@_handleOnChange} value={@props.name} />
       </td>
       <td>
         <a href="#" onClick={@_handleOnRemoveClick}>

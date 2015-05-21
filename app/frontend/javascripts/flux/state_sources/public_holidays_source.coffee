@@ -7,6 +7,9 @@ module.exports = Marty.createStateSource
   findForMonth: (date) ->
     @get Routes.api_v1_public_holidays_path(date: date)
 
+  findForYear: (year) ->
+    @get Routes.api_v1_public_holidays_path(year: year)
+
   batchCreate: (publicHolidays) ->
     publicHolidaysParams = publicHolidays.map (holiday) ->
       name: holiday.name

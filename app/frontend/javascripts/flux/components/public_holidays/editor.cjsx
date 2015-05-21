@@ -1,6 +1,9 @@
 PublicHoliday = require './holiday'
 PublicHolidaysEditorStore = require '../../stores/public_holidays_editor_store'
 PublicHolidayActionCreators = require '../../action_creators/public_holiday_action_creators'
+PublicHolidaysQueries = require '../../queries/public_holidays_queries'
+
+moment = require 'moment'
 
 PublicHolidaysEditor = React.createClass
   displayName: 'PublicHolidaysEditor'
@@ -12,6 +15,11 @@ PublicHolidaysEditor = React.createClass
   _onAddClick: (e) ->
     e.preventDefault()
     PublicHolidayActionCreators.addNew()
+
+  _onDuplicateClick: (e) ->
+    e.preventDefault()
+    if @props.publicHolidays.length is 0 or confirm('Duplicating last year will clear current items. Do you want to continue?')
+      PublicHolidaysQueries.findForYear(moment().subtract(1, 'year').format())
 
   _renderSaveButton: ->
     return if @props.publicHolidays.length is 0
@@ -53,7 +61,7 @@ PublicHolidaysEditor = React.createClass
   render: ->
     <div>
       <div className="actions">
-        <a className="btn" href="#">
+        <a className="btn" href="#" onClick={@_onDuplicateClick}>
           <i className="fa fa-copy"></i>
           Duplicate last year
         </a>
