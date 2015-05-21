@@ -12,6 +12,8 @@ module.exports = React.createClass
   getDefaultProps: ->
     publicHolidays: []
     approvedDays: []
+    monthChanged: () -> {}
+
 
   _getInitialMonth: ->
     if @props.initialMonth != undefined
