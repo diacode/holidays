@@ -44,7 +44,7 @@ class Api::V1::RequestedDaysController < ApplicationController
   def load_requested_days
     return RequestedDay.approved unless params[:date].present?
 
-    RequestedDay.by_month(Date.parse(params[:date])).approved
+    RequestedDay.by_month(Date.parse(params[:date]), 5).approved
   end
 
   def check_admin_user
