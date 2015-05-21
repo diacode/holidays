@@ -34,6 +34,23 @@ module.exports = React.createClass
 
     index >= 0
 
+  _isPublicHoliday: ->
+    return unless @props.publicHolidays.length > 0
+
+    index = _.findIndex @props.publicHolidays, (date) =>
+      @props.day.date.isSame date.day
+
+    index >= 0
+
+  _handleApprovedDay: ->
+    avatars = []
+
+    for approvedDay in @props.approvedDays
+      if @props.day.date.isSame approvedDay.day
+        avatars.push <img className="avatar" src={approvedDay.user_avatar}/>
+
+    avatars
+
   render: ->
     day = @props.day.date.format("YYYY-MM-DD")
 
@@ -43,7 +60,9 @@ module.exports = React.createClass
       'different-month': not @props.day.isCurrentMonth
       'past': @props.day.inThePast
       selected: @state.selected || @_belongsToSelectedDates()
+      'public-holiday': @_isPublicHoliday()
 
     <div id={day} key={day} className={dayClasses} onClick={@_onClick}>
       <span className="day-number">{@props.day.number}</span>
+      {@_handleApprovedDay()}
     </div>

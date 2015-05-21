@@ -14,3 +14,9 @@ module.exports = Marty.createQueries
     .catch (err) ->
       console.log err
 
+  findForYear: (year) ->
+    PublicHolidaysAPI.findForYear(year)
+    .then (res) =>
+      switch res.status
+        when 200
+          @dispatch Constants.publicHolidays.RETRIEVED_YEAR_PUBLIC_HOLIDAYS, res.body.public_holidays

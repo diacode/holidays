@@ -15,4 +15,6 @@
 
 class PublicHoliday < ActiveRecord::Base
   scope :by_month, -> (date) { where day: date.beginning_of_month..date.end_of_month}
+  scope :by_year, -> (date) { where day: date.beginning_of_year..date.end_of_year }
+  validates :day, uniqueness: true
 end

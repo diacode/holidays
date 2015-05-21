@@ -9,6 +9,10 @@ module.exports = React.createClass
     month: @_getInitialMonth()
     selectedDates: []
 
+  getDefaultProps: ->
+    publicHolidays: []
+    approvedDays: []
+
   _getInitialMonth: ->
     if @props.initialMonth != undefined
       @props.initialMonth
@@ -64,7 +68,7 @@ module.exports = React.createClass
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} selectedDates={@state.selectedDates} addDate={@_handleAddDate} removeDate={@_handleRemoveDate}/>
+      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} selectedDates={@state.selectedDates} addDate={@_handleAddDate} removeDate={@_handleRemoveDate} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedDays}/>
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
