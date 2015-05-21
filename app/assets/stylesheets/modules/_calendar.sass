@@ -98,7 +98,9 @@
       &.public-holiday
         background: repeating-linear-gradient(45deg, rgba($gray, .3), rgba($gray, .3) 5px, rgba($light-gray, .3) 5px, rgba($light-gray, .3) 10px)
 
-    &.names>div
+    &.names>div.day
+      +vertical-centre(20px)
+      background: $light-gray
       color: $main-dark
       font-weight: bold
 
