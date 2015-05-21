@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
     gon.authenticity_token = form_authenticity_token
     gon.locale = I18n.locale
     gon.requested_day_statuses = RequestedDay.statuses
-    gon.current_user = current_user
+    gon.current_user = UserSerializer.new(current_user).attributes
   end
 end

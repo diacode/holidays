@@ -48,17 +48,4 @@ class User < ActiveRecord::Base
   def current_year_days_spent
     requested_days.approved.current_year.count
   end
-
-  def as_json(options={})
-    super(
-      only: [
-        :id,
-        :email,
-        :admin
-      ],
-      methods: [
-        :full_name
-      ]
-    )
-  end
 end
