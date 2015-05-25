@@ -35,6 +35,13 @@ class User < ActiveRecord::Base
 
   # Scopes
   default_scope { order('first_name ASC') }
+  scope :admin, -> {where admin: true}
+
+  class << self
+    def admin_emails
+      admin.pluck(:email)
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"
