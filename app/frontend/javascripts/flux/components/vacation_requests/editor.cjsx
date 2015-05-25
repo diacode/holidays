@@ -42,7 +42,7 @@ VacationRequestEditor = React.createClass
       {days}
     </ul>
 
-  _renderCalendar: ->
+  _renderCalendar: ->º
     dates = @props.vacationRequest.requested_days.map (day) ->
       moment(day.day)
 
@@ -77,7 +77,9 @@ VacationRequestEditor = React.createClass
           </a>
         </div>
       </header>
-      {@_renderCalendar()}
+      <div className="calendar-wrapper">
+        {@_renderCalendar()}
+      </div>
       <div className="quested-dates-wrapper">
         {@_renderRequestedDays()}
       </div>

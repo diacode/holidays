@@ -83,11 +83,11 @@ module.exports = React.createClass
 
   render: () ->
     <div className="calendar">
-      <div className="header">
+      <header>
         <i className="fa fa-angle-left" onClick={@_previous}></i>
         {@_renderMonthLabel()}
         <i className="fa fa-angle-right" onClick={@_next}></i>
-      </div>
+      </header>
       <DayNames />
       {@_renderWeeks()}
     </div>

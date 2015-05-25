@@ -49,7 +49,7 @@ module.exports = React.createClass
       if @props.day.date.isSame approvedDay.day
         avatars.push <img className="avatar" src={approvedDay.user_avatar}/>
 
-    avatars
+    <div className="avatars-wrapper">{avatars}</div>
 
   render: ->
     day = @props.day.date.format("YYYY-MM-DD")
