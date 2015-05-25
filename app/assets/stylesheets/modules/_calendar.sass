@@ -1,28 +1,21 @@
-=vertical-centre ($height)
-  height: $height
-  line-height: $height !important
-  display: inline-block
-  vertical-align: middle
+$spacing: 10px
+$icon-width: 40px
+$header-height: 40px
 
 .calendar
-  +fill-parent
-  float: left
-  display: block
-  background: white
-  width: 300px
-  border: solid 1px $gray
-  margin-bottom: 10px
+  +display(flex)
+  +flex(1)
+  +flex-direction(column)
+  border: 1px solid $dark-gray
+  min-height: 500px
 
-  $spacing: 10px
-  $icon-width: 40px
-  $header-height: 40px
+  header
+    background: $dark-gray
+    +display(flex)
+    justify-content: center
+    align-items: center
+    height: 3em
 
-  > div.header
-    float: left
-    width: 100%
-    background: $main-dark
-    height: $header-height
-    color: white
     vertical-align: middle
 
     > *
@@ -63,28 +56,32 @@
       color: inherit
 
 
-  >div.week
-    float: left
-    width: 100%
-    border-top: solid 1px $gray
 
-    &:first-child
-      border-top: none
+  .week-day-names
+    +display(flex)
+    height: 3em
+    background: $light-gray
 
-
-    >div.day
-      float: left
-      width: calc(100%/7)
-      .border-box
-      border-left: solid 1px $gray
-      font-size: 0.75em
-      text-align: center
-      background: white
-      cursor: pointer
-      +vertical-centre(50px)
-
-      &:first-child
-        border-left: none
+    .day
+      +flex(1)
+      +display(flex)
+      justify-content: center
+      align-items: center
+      background: $light-gray
+      color: $main-dark
+      font-weight: bold
+  .week
+    +flex(1)
+    +display(flex)
+    &:not(:last-of-type)
+      .day
+        border-bottom: 1px solid $light-gray
+    .day
+      +flex(1)
+      background: #fff
+      position: relative
+      &:not(:last-of-type)
+        border-right: 1px solid $light-gray
 
       &.today
         background: lighten($main-dark, 70)
@@ -98,11 +95,16 @@
       &.public-holiday
         background: repeating-linear-gradient(45deg, rgba($gray, .3), rgba($gray, .3) 5px, rgba($light-gray, .3) 5px, rgba($light-gray, .3) 10px)
 
-    &.names>div.day
-      +vertical-centre(20px)
-      background: $light-gray
-      color: $main-dark
-      font-weight: bold
+      .day-number
+        position: absolute
+        right: 1em
+        top: 1em
+      .avatars-wrapper
+        position: absolute
+        left: 1em
+        top: 4em
+        .avatar
+          +square(40px)
 
 .selected-dates
   +unstyled-list
@@ -138,6 +140,3 @@
         header
           background: $color
           border: 1px solid $color
-
-
-
