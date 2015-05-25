@@ -19,8 +19,7 @@ module.exports = React.createClass
 
   _onClick: (e)->
     e.preventDefault()
-    return if @props.day.inThePast
-    return false unless @props.clickable is true
+    return if @props.day.inThePast or @props.clickable is false
 
     selected = !@state.selected
 
