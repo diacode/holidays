@@ -2,9 +2,19 @@ Calendar = require '../calendar/calendar'
 RequestFormStore = require '../../stores/request_form_store'
 RequestFormActionCreators = require '../../action_creators/request_form_action_creators'
 ModalActionCreators = require '../../action_creators/modal_action_creators'
+PublicCalendarStore = require '../../stores/public_calendar_store'
+PublicHolidaysQueries = require '../../queries/public_holidays_queries'
+moment = require 'moment'
 
 RequestForm = React.createClass
   displayName: 'RequestForm'
+
+  componentDidMount: ->
+    date = moment().startOf("day").format 'YYYY-MM-DD'
+    PublicHolidaysQueries.findForMonth date
+
+  _handleMonthChanged: (month) ->
+    PublicHolidaysQueries.findForMonth month.format 'YYYY-MM-DD'
 
   _renderSelectedDates: ->
     return unless @props.datesValidated
@@ -33,9 +43,15 @@ RequestForm = React.createClass
   _renderCalendar: ->
     return if @props.datesValidated
 
+    calendarProps =
+      selectedDates: @props.selectedDates
+      datesChanged: @_handleDatesChanged
+      publicHolidays: @props.publicHolidays
+      monthChanged: @_handleMonthChanged
+
     <div key="calendar">
       <h5>Select desired dates:</h5>
-      <Calendar selectedDates={@props.selectedDates} datesChanged={@_handleDatesChanged}/>
+      <Calendar {...calendarProps}/>
       <div className="right">
         <a href="#" onClick={@_validateSelectedDates} disabled={@props.selectedDates.length == 0}>Add a comment <i className="fa fa-arrow-right"/></a>
       </div>
@@ -120,6 +136,7 @@ RequestForm = React.createClass
 module.exports = Marty.createContainer RequestForm,
   listenTo: [
     RequestFormStore
+    PublicCalendarStore
   ]
 
   fetch:
@@ -129,6 +146,8 @@ module.exports = Marty.createContainer RequestForm,
       RequestFormStore.state.datesValidated
     error: ->
       RequestFormStore.state.error
+    publicHolidays: ->
+      PublicCalendarStore.getState().publicHolidays
 
   failed: (errors) ->
     console.log 'Failed rendering RequestForm'

@@ -4,9 +4,18 @@ moment = require 'moment'
 EditVacationRequestActionCreators = require '../../action_creators/edit_vacation_request_action_creators'
 VacationRequestsActionCreators = require '../../action_creators/vacation_requests_action_creators'
 SelectedDayListItem = sys = require '../selected_days/list_item'
+PublicCalendarStore = require '../../stores/public_calendar_store'
+PublicHolidaysQueries = require '../../queries/public_holidays_queries'
 
 VacationRequestEditor = React.createClass
   displayName: 'VacationRequestEditor'
+
+  componentDidMount: ->
+    date = moment().startOf("day").format 'YYYY-MM-DD'
+    PublicHolidaysQueries.findForMonth date
+
+  _handleMonthChanged: (month) ->
+    PublicHolidaysQueries.findForMonth month.format 'YYYY-MM-DD'
 
   _handleDatesChanged: (dates) ->
     if dates.length > @props.vacationRequest.requested_days.length then @_createDay(dates) else @_removeDay(dates)
@@ -48,7 +57,14 @@ VacationRequestEditor = React.createClass
 
     initialMonth = moment(@props.vacationRequest.requested_days[0].day).startOf("day")
 
-    <Calendar initialMonth={initialMonth} selectedDates={dates} datesChanged={@_handleDatesChanged}/>
+    calendarProps =
+      initialMonth: initialMonth
+      selectedDates: dates
+      datesChanged: @_handleDatesChanged
+      publicHolidays: @props.publicHolidays
+      monthChanged: @_handleMonthChanged
+
+    <Calendar {...calendarProps}/>
 
   _onApproveAllClick: (e) ->
     e.preventDefault()
@@ -86,11 +102,16 @@ VacationRequestEditor = React.createClass
     </div>
 
 module.exports = Marty.createContainer VacationRequestEditor,
-  listenTo: EditVacationRequestStore
+  listenTo: [
+    EditVacationRequestStore
+    PublicCalendarStore
+  ]
 
   fetch:
     vacationRequest: ->
       EditVacationRequestStore.fetchVacationRequest @props.vacationRequestId
+    publicHolidays: ->
+      PublicCalendarStore.getState().publicHolidays
 
   failed: (errors) ->
     console.log 'Failed rendering VacationRequestsList'
