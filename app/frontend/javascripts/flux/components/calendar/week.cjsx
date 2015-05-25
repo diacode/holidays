@@ -27,7 +27,17 @@ module.exports = React.createClass
         date: date
         inThePast: date.isBefore now
 
-      days.push <Day key={i} day={day} selectedDates={@props.selectedDates} addDate={@_handleAddDate} removeDate={@_handleRemoveDate} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedDays}/>
+      dayProps =
+        key: i
+        day: day
+        selectedDates: @props.selectedDates
+        addDate: @_handleAddDate
+        removeDate: @_handleRemoveDate
+        publicHolidays: @props.publicHolidays
+        approvedDays: @props.approvedDays
+        clickable: @props.clickable
+
+      days.push <Day {...dayProps}/>
       date = date.clone()
       date.add(1, "d")
 

@@ -10,9 +10,11 @@ module.exports = React.createClass
     selectedDates: []
 
   getDefaultProps: ->
+    clickable: true
     publicHolidays: []
     approvedDays: []
     monthChanged: () -> {}
+    datesChanged: () ->{}
 
 
   _getInitialMonth: ->
@@ -82,7 +84,18 @@ module.exports = React.createClass
     count = 0
 
     while not done
-      weeks.push <Week key={date.toString()} date={date.clone()} month={@state.month} selectedDates={@state.selectedDates} addDate={@_handleAddDate} removeDate={@_handleRemoveDate} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedDays}/>
+      weekProps =
+        key: date.toString()
+        date: date.clone()
+        month: @state.month
+        selectedDates: @state.selectedDates
+        addDate: @_handleAddDate
+        removeDate: @_handleRemoveDate
+        publicHolidays: @props.publicHolidays
+        approvedDays: @props.approvedDays
+        clickable: @props.clickable
+
+      weeks.push <Week {...weekProps}/>
 
       date.add(1, "w")
       done = count++ > 2 && monthIndex != date.month()
