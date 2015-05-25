@@ -17,6 +17,8 @@ class Api::V1::VacationRequestsController < ApplicationController
     vacation_request = current_user.vacation_requests.build vacation_request_params
 
     if vacation_request.save
+      VacationRequestsMailer.admin_notification(vacation_request).deliver_now
+
       render json: vacation_request.reload, status: :ok
     else
       render json: vacation_request.errors, status: :unprocessable_entity
