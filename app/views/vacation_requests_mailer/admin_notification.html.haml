@@ -1,0 +1,12 @@
+%h2 New vacation request from #{@user.full_name}
+
+%h3 Dates
+%ul
+- @vacation_request.requested_days.each do |requested_day|
+  %li= requested_day.day
+
+- unless @vacation_request.message.blank?
+  %h3 Message
+  %p= @vacation_request.message
+
+= link_to 'Go to vacation request', edit_vacation_request_url(@vacation_request)
