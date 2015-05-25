@@ -25,18 +25,30 @@ module.exports = React.createClass
     @setState
       selectedDates: @props.selectedDates
 
+    @_bindKeydown()
+
+  _bindKeydown: ->
+    document.onkeydown = (e) =>
+      e = e || window.event
+
+      switch e.keyCode
+        when 37
+          @_handlePreviousMonthClick()
+        when 39
+          @_handleNextMonthClick()
+
   componentWillReceiveProps: (nextProps) ->
     @setState
       selectedDates: nextProps.selectedDates
 
-  _previous: () ->
+  _handlePreviousMonthClick: () ->
     month = @state.month.add(-1,'M')
     @setState
       month: month
 
     @props.monthChanged month
 
-  _next: () ->
+  _handleNextMonthClick: () ->
     month = @state.month.add(1,'M')
     @setState
       month: month
@@ -84,9 +96,9 @@ module.exports = React.createClass
   render: () ->
     <div className="calendar">
       <header>
-        <i className="fa fa-angle-left" onClick={@_previous}></i>
+        <i className="fa fa-angle-left" onClick={@_handlePreviousMonthClick}></i>
         {@_renderMonthLabel()}
-        <i className="fa fa-angle-right" onClick={@_next}></i>
+        <i className="fa fa-angle-right" onClick={@_handleNextMonthClick}></i>
       </header>
       <DayNames />
       {@_renderWeeks()}
