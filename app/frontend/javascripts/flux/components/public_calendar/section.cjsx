@@ -18,7 +18,7 @@ PublicCalendarSection = React.createClass
 
   render: ->
     <div>
-      <Calendar selectedDates={[]} datesChanged={false} monthChanged={@_handleMonthChanged} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedRequestedDays}/>
+      <Calendar selectedDates={[]} datesChanged={false} monthChanged={@_handleMonthChanged} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedRequestedDays} clickable={false}/>
     </div>
 
 module.exports = Marty.createContainer PublicCalendarSection,
