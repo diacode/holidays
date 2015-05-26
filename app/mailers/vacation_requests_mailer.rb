@@ -12,4 +12,11 @@ class VacationRequestsMailer < ApplicationMailer
 
     mail to: user.email, subject: "Approved vacation days"
   end
+
+  def rejected_days(user, days)
+    @days = Array days
+    @user = user
+
+    mail to: user.email, subject: "Rejected vacation days"
+  end
 end
