@@ -39,18 +39,18 @@ class Api::V1::VacationRequestsController < ApplicationController
 
   def approve
     vacation_request = VacationRequest.find params[:id]
-    vacation_request.approve!
+    vacation_request_manager = VacationRequestManager.new vacation_request
 
-    VacationRequestsMailer.approved_days(vacation_request.user, vacation_request.requested_days.approved).deliver_now
+    vacation_request_manager.approve
 
     render json: vacation_request, status: :ok
   end
 
   def reject
     vacation_request = VacationRequest.find params[:id]
-    vacation_request.reject!
+    vacation_request_manager = VacationRequestManager.new vacation_request
 
-    VacationRequestsMailer.rejected_days(vacation_request.user, vacation_request.requested_days.rejected).deliver_now
+    vacation_request_manager.reject
 
     render json: vacation_request, status: :ok
   end
