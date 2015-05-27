@@ -1,0 +1,10 @@
+%h2 Hi #{@user.first_name}
+
+%p The following requested days have been approved:
+
+%ul
+- @days.each do |approved_day|
+  %li= approved_day.day
+
+
+%p Enjoy!

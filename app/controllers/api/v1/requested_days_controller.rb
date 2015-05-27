@@ -27,14 +27,18 @@ class Api::V1::RequestedDaysController < ApplicationController
 
   def approve
     requested_day = @vacation_request.requested_days.find params[:id]
-    requested_day.approved!
+    vacation_request_manager = VacationRequestManager.new @vacation_request
+
+    vacation_request_manager.approve_requested_day requested_day
 
     render json: requested_day, status: :ok
   end
 
   def reject
     requested_day = @vacation_request.requested_days.find params[:id]
-    requested_day.rejected!
+    vacation_request_manager = VacationRequestManager.new @vacation_request
+
+    vacation_request_manager.reject_requested_day requested_day
 
     render json: requested_day, status: :ok
   end

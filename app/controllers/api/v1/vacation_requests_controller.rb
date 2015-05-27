@@ -17,6 +17,8 @@ class Api::V1::VacationRequestsController < ApplicationController
     vacation_request = current_user.vacation_requests.build vacation_request_params
 
     if vacation_request.save
+      VacationRequestsMailer.admin_notification(vacation_request).deliver_now
+
       render json: vacation_request.reload, status: :ok
     else
       render json: vacation_request.errors, status: :unprocessable_entity
@@ -37,14 +39,18 @@ class Api::V1::VacationRequestsController < ApplicationController
 
   def approve
     vacation_request = VacationRequest.find params[:id]
-    vacation_request.approve!
+    vacation_request_manager = VacationRequestManager.new vacation_request
+
+    vacation_request_manager.approve
 
     render json: vacation_request, status: :ok
   end
 
   def reject
     vacation_request = VacationRequest.find params[:id]
-    vacation_request.reject!
+    vacation_request_manager = VacationRequestManager.new vacation_request
+
+    vacation_request_manager.reject
 
     render json: vacation_request, status: :ok
   end

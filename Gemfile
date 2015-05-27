@@ -60,6 +60,7 @@ group :development do
   gem 'quiet_assets'
   gem 'guard-livereload', require: false
   gem 'foreman'
+  gem 'letter_opener'
 end
 
 group :test do

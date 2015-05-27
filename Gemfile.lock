@@ -203,6 +203,8 @@ GEM
     json (1.8.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (2.10.0)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
@@ -384,6 +386,7 @@ DEPENDENCIES
   jquery-rails
   js-routes!
   launchy
+  letter_opener
   neat
   pg
   poltergeist
