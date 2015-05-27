@@ -34,6 +34,7 @@ gem "i18n-js", ">= 3.0.0.rc8"
 
 gem 'bourbon'
 gem 'neat'
+gem 'slack-notifier'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
