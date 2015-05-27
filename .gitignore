@@ -19,3 +19,4 @@ database.yml
 node_modules
 application_bundle.js
 devise_bundle.js
+.env
