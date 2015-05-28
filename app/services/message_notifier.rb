@@ -7,22 +7,26 @@ class MessageNotifier
   end
 
   def notify_new_vacation_request(vacation_request)
+    @vacation_request = vacation_request
+
     message = [
       "> New vacation request from *#{vacation_request.user.full_name}*:",
-      request_message(vacation_request),
-      requested_days_list(vacation_request),
-      days_left(vacation_request)
+      request_message,
+      requested_days_list,
+      days_left
     ]
 
     rescue_and_log_error { @notifier.ping formatted_message(message) }
   end
 
   def notify_requested_days_status(vacation_request)
+    @vacation_request = vacation_request
+
     message = [
       "> *#{vacation_request.user.full_name}* here's your vacation request new status:",
-      request_message(vacation_request),
-      requested_days_status_list(vacation_request),
-      days_left(vacation_request)
+      request_message,
+      requested_days_status_list,
+      days_left
     ]
 
     rescue_and_log_error { @notifier.ping formatted_message(message) }
@@ -37,22 +41,22 @@ class MessageNotifier
     Rails.logger.warn e
   end
 
-  def request_message(vacation_request)
-    return if vacation_request.message.blank?
+  def request_message
+    return if @vacation_request.message.blank?
 
-    "> _#{vacation_request.message}_"
+    "> _#{@vacation_request.message}_"
   end
 
-  def requested_days_list(vacation_request)
-    vacation_request.requested_days.map { |requested_day|  ">     :calendar: #{requested_day.day.to_formatted_s(:long)}" }.join "\n"
+  def requested_days_list
+    @vacation_request.requested_days.map { |requested_day|  ">     :calendar: #{requested_day.day.to_formatted_s(:long)}" }.join "\n"
   end
 
-  def requested_days_status_list(vacation_request)
-    vacation_request.requested_days.map { |requested_day|  ">     #{status_icon(requested_day)} #{requested_day.day.to_formatted_s(:long)}" }.join "\n"
+  def requested_days_status_list
+    @vacation_request.requested_days.map { |requested_day|  ">     #{status_icon(requested_day)} #{requested_day.day.to_formatted_s(:long)}" }.join "\n"
   end
 
-  def days_left(vacation_request)
-    user = vacation_request.user
+  def days_left
+    user = @vacation_request.user
     available_days = user.available_days
 
     "> You still have *#{available_days}* #{'day'.pluralize(available_days)} left."
