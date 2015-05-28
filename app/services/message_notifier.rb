@@ -1,9 +1,6 @@
 class MessageNotifier
   def initialize(args = {})
-    @notifier = Slack::Notifier.new Rails.application.secrets.slack_webhook_url
-  rescue Exception => e
-    Rails.logger.warn 'Error trying to initialize Slack Notifier'
-    Rails.logger.warn e
+    rescue_and_log_error { @notifier = Slack::Notifier.new Rails.application.secrets.slack_webhook_url }
   end
 
   def notify_new_vacation_request(vacation_request)
