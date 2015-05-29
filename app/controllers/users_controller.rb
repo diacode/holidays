@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_admin!, except: [:index, :show]
+  decorates_assigned :users
 
   # GET /users
   def index
