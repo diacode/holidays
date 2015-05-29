@@ -55,4 +55,8 @@ class User < ActiveRecord::Base
   def current_year_days_spent
     requested_days.approved.current_year.count
   end
+
+  def on_holidays?
+    requested_days.approved.where(day: Date.today).any?
+  end
 end
