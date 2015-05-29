@@ -35,3 +35,7 @@ module.exports = Marty.createConstants
     'PUBLIC_HOLIDAYS_CREATION_SUCCESS'
     'RETRIEVED_YEAR_PUBLIC_HOLIDAYS'
   ]
+
+  users: [
+    'SET_USERS'
+  ]
