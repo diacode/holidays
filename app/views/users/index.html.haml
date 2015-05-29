@@ -2,7 +2,7 @@
   .toolbar
     = link_to new_user_path, class: 'btn' do
       = fa_icon 'plus'
-      Add user
+      Add new team member
 
 .wrapper
   - if notice
@@ -10,17 +10,5 @@
       %p= notice
 
   .user-list
-    - @users.each do |user|
-      = link_to user, class: 'user' do
-        %header
-          = image_tag gravatar_url(user.email, 100), class: 'avatar'
-          %h3= user.full_name
+    = render users
 
-        .body
-          .days-counter.available
-            %h5 Days available
-            %h4= user.available_days
-
-          .days-counter.spent
-            %h5 Days spent
-            %h4= user.current_year_days_spent
