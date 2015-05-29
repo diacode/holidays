@@ -1,14 +1,2 @@
-- if current_user.admin?
-  .toolbar
-    = link_to new_user_path, class: 'btn' do
-      = fa_icon 'plus'
-      Add new team member
-
-.wrapper
-  - if notice
-    .alert.success
-      %p= notice
-
-  .user-list
-    = render users
+#users_section
 
