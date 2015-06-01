@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   has_many :requested_days, through: :vacation_requests
 
   # Scopes
-  default_scope { order('first_name ASC') }
-  scope :admin, -> {where admin: true}
+  scope :sorted, -> { order id: :desc }
+  scope :admin, -> { where admin: true }
 
   # Validations
   validates :first_name, :last_name, presence: true

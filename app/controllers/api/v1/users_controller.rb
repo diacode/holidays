@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   before_action :check_admin_user, except: [:index]
 
   def index
-    users = User.all
+    users = User.sorted
 
     render json: users, root: :users
   end
