@@ -8,7 +8,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = current_user.users.build user_params
+    user = User.new user_params
+    user.password = Devise.friendly_token.first(8)
 
     if user.save
       render json: user.reload, status: :ok
