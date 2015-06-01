@@ -31,8 +31,8 @@ module.exports =
   _errorsFor: (ref)->
     return unless @_fieldHasErrors(ref)
 
-    @props.errors[ref].map (error) ->
-      <div className="error">{error}</div>
+    @props.errors[ref].map (error, i) ->
+      <div key={"#{ref}-error-#{i}"} className="error">{error}</div>
 
   _onSubmitClick: (e) ->
     e.preventDefault()

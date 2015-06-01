@@ -30,7 +30,7 @@ UserForm = React.createClass
 
   _renderAvatar: ->
     <div className="avatar-wrapper">
-      <Gravatar email={@props.item.email} size="100" default="mm" />
+      <Gravatar email={@props.item.email} size={100} default="mm" />
     </div>
 
   render: ->
