@@ -1,4 +1,4 @@
-class VacationRequestsController < ApplicationController
+class VacationRequestsController < AdminController
   def index
   end
 
