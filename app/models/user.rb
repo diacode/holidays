@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
   default_scope { order('first_name ASC') }
   scope :admin, -> {where admin: true}
 
+  # Validations
+  validates :first_name, :last_name, presence: true
+
   class << self
     def admin_emails
       admin.pluck(:email)
