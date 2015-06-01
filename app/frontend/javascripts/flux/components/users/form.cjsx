@@ -2,7 +2,7 @@ Modal = require '../utils/new_modal'
 UserFormStore = require '../../stores/user_form_store'
 UserFormActionCreators = require '../../action_creators/user_form_action_creators'
 FormMixin = require '../../mixins/form_mixin'
-
+Gravatar = require 'react-gravatar'
 
 UserForm = React.createClass
   displayName: 'UserForm'
@@ -28,6 +28,11 @@ UserForm = React.createClass
     e.preventDefault()
     UserFormActionCreators.hideForm()
 
+  _renderAvatar: ->
+    <div className="avatar-wrapper">
+      <Gravatar email={@props.item.email} size="100" default="mm" />
+    </div>
+
   render: ->
     <Modal show={@props.showModal} hide={@_handleHideModal}>
       <div className="modal">
@@ -36,9 +41,8 @@ UserForm = React.createClass
             <h3>New team member</h3>
           </header>
           <div className="data-wrapper">
-            <h5>Email</h5>
+            {@_renderAvatar()}
             {@_renderInput('email', 'Email', 'email')}
-            <h5>Full name</h5>
             {@_renderInput('first_name', 'First name')}
             {@_renderInput('last_name', 'Last name')}
           </div>
