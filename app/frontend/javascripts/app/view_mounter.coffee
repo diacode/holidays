@@ -7,6 +7,7 @@ module.exports = ->
       View = viewsContext viewPath
       new View()
     catch error
+      console.log error
       new MainView()
 
     view.mount()

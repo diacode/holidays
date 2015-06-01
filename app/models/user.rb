@@ -34,8 +34,11 @@ class User < ActiveRecord::Base
   has_many :requested_days, through: :vacation_requests
 
   # Scopes
-  default_scope { order('first_name ASC') }
-  scope :admin, -> {where admin: true}
+  scope :sorted, -> { order id: :desc }
+  scope :admin, -> { where admin: true }
+
+  # Validations
+  validates :first_name, :last_name, presence: true
 
   class << self
     def admin_emails
@@ -54,5 +57,9 @@ class User < ActiveRecord::Base
 
   def current_year_days_spent
     requested_days.approved.current_year.count
+  end
+
+  def on_holidays?
+    requested_days.approved.where(day: Date.today).any?
   end
 end

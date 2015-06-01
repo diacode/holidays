@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_gon_globals
+    return unless current_user.present?
+
     gon.authenticity_token = form_authenticity_token
     gon.locale = I18n.locale
     gon.requested_day_statuses = RequestedDay.statuses

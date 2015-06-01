@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:registrations]
 
   root to: 'dashboard#index'
-  resources :users, path: 'team'
+  resources :users, path: 'team', only: [:index, :show]
 
   resources :vacation_requests, only: [:index, :edit]
   get 'public_calendar', to: 'public_calendar#index'
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :users, only: [:index, :create]
+
       resources :vacation_requests, only: [:index, :show, :create, :update, :destroy] do
         member do
           put :approve

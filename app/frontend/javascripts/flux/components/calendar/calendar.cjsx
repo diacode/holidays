@@ -64,7 +64,7 @@ module.exports = React.createClass
     @setState (previousState, currentProps) ->
       selectedDates: dates
 
-    @props.datesChanged @state.selectedDates
+    @props.datesChanged dates
 
   _handleRemoveDate: (date) ->
     dates = @state.selectedDates
@@ -74,7 +74,7 @@ module.exports = React.createClass
     @setState (previousState, currentProps) ->
       selectedDates: dates
 
-    @props.datesChanged @state.selectedDates
+    @props.datesChanged dates
 
   _renderWeeks: () ->
     weeks = []
