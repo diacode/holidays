@@ -38,4 +38,9 @@ module.exports = Marty.createConstants
 
   users: [
     'SET_USERS'
+    'SET_SHOW_USER_FORM'
+    'SET_USER_FORM_ITEM'
+    'ADD_USER_FORM_ERRORS'
+    'ADD_USER'
+    'REPLACE_USER'
   ]

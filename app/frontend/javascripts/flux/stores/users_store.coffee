@@ -6,6 +6,8 @@ module.exports = Marty.createStore
 
   handlers:
     setUsers: Constants.users.SET_USERS
+    addUser: Constants.users.ADD_USER
+    replaceUser: Constants.users.REPLACE_USER
 
   findAll: ->
     @fetch
@@ -18,3 +20,12 @@ module.exports = Marty.createStore
   setUsers: (users) ->
     @setState
       users: users
+
+  addUser: (user) ->
+    @state.users.push user
+    @hasChanged()
+
+  replaceUser: (user) ->
+    index =  _.indexOf @state.users, _.findWhere(@state.users, id: id)
+    @state.users[index] = user
+    @hasChanged()

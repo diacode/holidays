@@ -116,7 +116,7 @@ RequestForm = React.createClass
     </div>
 
   render: ->
-    <div className="holidays-modal">
+    <div className="modal">
       <form onSubmit={@_onSubmit}>
         <header>
           <h3>Request holidays</h3>

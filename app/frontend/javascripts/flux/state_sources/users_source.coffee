@@ -1,4 +1,4 @@
-Globals = require '../../utils/globals'
+globals = require '../../utils/globals'
 
 module.exports = Marty.createStateSource
   type: 'http'
@@ -7,3 +7,12 @@ module.exports = Marty.createStateSource
   findAll: ->
     @get  Routes.api_v1_users_path()
 
+
+  create: (user) ->
+    body =
+      authenticity_token: globals.authenticityToken
+      user: user
+
+    @post
+      url: Routes.api_v1_users_path()
+      body: body
