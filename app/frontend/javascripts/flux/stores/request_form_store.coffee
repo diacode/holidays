@@ -4,12 +4,14 @@ module.exports = Marty.createStore
   id: 'RequestFormStore'
 
   handlers:
+    setShowForm: Constants.requestForm.SET_SHOW_REQUEST_FORM
     setDatesValidated: Constants.requestForm.SET_DATES_VALIDATED
-    reset: Constants.modal.HIDE
     setError: Constants.requestForm.SET_ERROR
     setSelectedDates: Constants.requestForm.SET_SELECTED_DATES
+    hideForm: Constants.requestForm.VACATION_REQUEST_CREATED
 
   getInitialState: ->
+    showForm: false
     datesValidated: false
     selectedDates: []
 
@@ -21,11 +23,18 @@ module.exports = Marty.createStore
     @setState
       datesValidated: areValid
 
-  reset: ->
-    @setState
-      datesValidated: false
-      error: null
-      selectedDates: []
+  setShowForm: (show) ->
+    @state.showForm = show
+
+    if show is false
+      @state.datesValidated = false
+      @state.error = null
+      @state.selectedDates = []
+
+    @hasChanged()
+
+  hideForm: ->
+    @setShowForm false
 
   setError: (error) ->
     @setState

@@ -1,8 +1,6 @@
 classnames = require 'classnames'
-ModalActionCreators = require '../../action_creators/modal_action_creators'
-ModalStore = require '../../stores/modal_store'
 
-Modal = React.createClass
+module.exports = React.createClass
   displayName: 'Modal'
 
   mixins: [
@@ -12,7 +10,7 @@ Modal = React.createClass
   _onOverlayClick: (e)->
     $target = $(e.target)
     if $target.hasClass 'md-overlay'
-      ModalActionCreators.hide()
+      @props.hide()
 
   render: ->
     overlayStyleClasses = classnames
@@ -31,13 +29,3 @@ Modal = React.createClass
       </div>
     </div>
 
-module.exports = Marty.createContainer Modal,
-  listenTo: ModalStore
-
-  fetch:
-    show: () ->
-      ModalStore.state.show
-
-  failed: (errors) ->
-    console.log "Failed rendering modal"
-    console.log errors

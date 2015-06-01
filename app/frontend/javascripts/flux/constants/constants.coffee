@@ -1,14 +1,10 @@
 module.exports = Marty.createConstants
-  modal: [
-    'SHOW'
-    'HIDE'
-  ]
-
   requestForm: [
     'SET_DATES_VALIDATED'
     'VACATION_REQUEST_CREATED'
     'SET_ERROR'
     'SET_SELECTED_DATES'
+    'SET_SHOW_REQUEST_FORM'
   ]
 
   vacationRequests: [

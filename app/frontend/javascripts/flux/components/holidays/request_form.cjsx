@@ -1,10 +1,10 @@
 Calendar = require '../calendar/calendar'
 RequestFormStore = require '../../stores/request_form_store'
 RequestFormActionCreators = require '../../action_creators/request_form_action_creators'
-ModalActionCreators = require '../../action_creators/modal_action_creators'
 PublicCalendarStore = require '../../stores/public_calendar_store'
 PublicHolidaysQueries = require '../../queries/public_holidays_queries'
 moment = require 'moment'
+Modal = require '../utils/modal'
 
 RequestForm = React.createClass
   displayName: 'RequestForm'
@@ -64,9 +64,12 @@ RequestForm = React.createClass
     e.preventDefault()
     RequestFormActionCreators.setDatesValidated @props.selectedDates.length > 0
 
-  _hideModal: (e) ->
+  _handleCancelClick: (e) ->
     e.preventDefault()
-    ModalActionCreators.hide()
+    @_hideForm()
+
+  _hideForm: ->
+    RequestFormActionCreators.hideForm()
 
   _renderFormInputs: ->
     return unless @props.datesValidated
@@ -80,7 +83,7 @@ RequestForm = React.createClass
 
   _renderActions: ->
     <div className="actions">
-      <a href="#" onClick={@_hideModal}>Cancel</a>
+      <a href="#" onClick={@_handleCancelClick}>Cancel</a>
       <button className="btn" type="submit" disabled={@props.selectedDates.length == 0}>
         Create request
       </button>
@@ -115,22 +118,31 @@ RequestForm = React.createClass
       </ul>
     </div>
 
+  _handleOnShowClick: (e) ->
+    e.preventDefault()
+    RequestFormActionCreators.showForm()
+
   render: ->
-    <div className="modal">
-      <form onSubmit={@_onSubmit}>
-        <header>
-          <h3>Request holidays</h3>
-        </header>
-        {@_renderError()}
-        <div className="data-wrapper">
-          <div className="calendar-wrapper">
-            {@_renderCalendar()}
-            {@_renderSelectedDates()}
-          </div>
-          {@_renderFormInputs()}
+    <div>
+      <a onClick={@_handleOnShowClick} className="btn" href="#">Request holidays</a>
+      <Modal show={@props.showForm} hide={@_hideForm}>
+        <div className="modal">
+          <form onSubmit={@_onSubmit}>
+            <header>
+              <h3>Request holidays</h3>
+            </header>
+            {@_renderError()}
+            <div className="data-wrapper">
+              <div className="calendar-wrapper">
+                {@_renderCalendar()}
+                {@_renderSelectedDates()}
+              </div>
+              {@_renderFormInputs()}
+            </div>
+            {@_renderActions()}
+          </form>
         </div>
-        {@_renderActions()}
-      </form>
+      </Modal>
     </div>
 
 module.exports = Marty.createContainer RequestForm,
@@ -140,6 +152,8 @@ module.exports = Marty.createContainer RequestForm,
   ]
 
   fetch:
+    showForm: ->
+      RequestFormStore.state.showForm
     selectedDates: ->
       RequestFormStore.state.selectedDates
     datesValidated: ->

@@ -1,4 +1,4 @@
-Modal = require '../utils/new_modal'
+Modal = require '../utils/modal'
 UserFormStore = require '../../stores/user_form_store'
 UserFormActionCreators = require '../../action_creators/user_form_action_creators'
 FormMixin = require '../../mixins/form_mixin'
