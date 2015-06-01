@@ -34,6 +34,31 @@ body.users
           .status
             color: $green
 
+      &.add-new
+        +display(flex)
+        +align-items(center)
+        +box-align(center)
+        +justify-content(center)
+        color: $light-gray
+        background: transparent
+        box-shadow: none
+        cursor: pointer
+        border: 1px dashed $light-gray
+        min-height: 340px
+
+        .fa
+          display: block
+          font-size: 6em
+          margin-bottom: .3em
+          color: inherit
+        h5
+          color: inherit
+
+        &:hover
+          border-color: $light-blue
+          color: $light-blue
+
+
       header
         padding: 2em
         border-bottom: 1px solid $light-gray
