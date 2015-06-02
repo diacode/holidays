@@ -10,7 +10,7 @@ module.exports = Marty.createStore
     removeHoliday: Constants.publicHolidays.REMOVE_PUBLIC_HOLIDAY
     invalidateHolidays: Constants.publicHolidays.INVALIDATE_PUBLIC_HOLIDAYS
     setSuccessMessage: Constants.publicHolidays.PUBLIC_HOLIDAYS_CREATION_SUCCESS
-    setRetrievedYearPublicHolidays: Constants.publicHolidays.RETRIEVED_YEAR_PUBLIC_HOLIDAYS
+    setRetrievedYearPublicHolidays: Constants.publicHolidays.DUPLICATE_YEAR_PUBLIC_HOLIDAYS
 
   getInitialState: ->
     publicHolidays: []

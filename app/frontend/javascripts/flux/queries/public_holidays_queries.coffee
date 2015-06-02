@@ -20,3 +20,10 @@ module.exports = Marty.createQueries
       switch res.status
         when 200
           @dispatch Constants.publicHolidays.RETRIEVED_YEAR_PUBLIC_HOLIDAYS, res.body.public_holidays
+
+  duplicateForYear: (year) ->
+    PublicHolidaysAPI.findForYear(year)
+    .then (res) =>
+      switch res.status
+        when 200
+          @dispatch Constants.publicHolidays.DUPLICATE_YEAR_PUBLIC_HOLIDAYS, res.body.public_holidays

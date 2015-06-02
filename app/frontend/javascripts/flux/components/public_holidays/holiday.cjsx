@@ -23,7 +23,7 @@ module.exports = React.createClass
       <td>
         <input ref="name" type="text" onChange={@_handleOnChange} value={@props.name} />
       </td>
-      <td>
+      <td className="actions">
         <a href="#" onClick={@_handleOnRemoveClick}>
           <i className="fa fa-trash"></i>
         </a>

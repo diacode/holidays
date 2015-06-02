@@ -19,7 +19,7 @@ PublicHolidaysEditor = React.createClass
   _onDuplicateClick: (e) ->
     e.preventDefault()
     if @props.publicHolidays.length is 0 or confirm('Duplicating last year will clear current items. Do you want to continue?')
-      PublicHolidaysQueries.findForYear(moment().subtract(1, 'year').format())
+      PublicHolidaysQueries.duplicateForYear(moment().subtract(1, 'year').format())
 
   _renderSaveButton: ->
     return if @props.publicHolidays.length is 0
@@ -60,6 +60,9 @@ PublicHolidaysEditor = React.createClass
 
   render: ->
     <div>
+      <header>
+        <h4>Editor</h4>
+      </header>
       <div className="actions">
         <a className="btn" href="#" onClick={@_onDuplicateClick}>
           <i className="fa fa-copy"></i>
@@ -72,7 +75,7 @@ PublicHolidaysEditor = React.createClass
       </div>
       {@_renderValidationError()}
       {@_renderSuccessMessage()}
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Day</th>
@@ -80,7 +83,7 @@ PublicHolidaysEditor = React.createClass
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="form">
           {@_renderPublicHolidays()}
         </tbody>
       </table>
