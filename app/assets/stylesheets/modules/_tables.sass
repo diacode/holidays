@@ -1,0 +1,22 @@
+.table
+  +fill-parent
+
+  td, th
+    text-align: left
+    padding: 1em
+
+  th
+    border-bottom: 2px solid $gray
+
+  td.actions
+    +transition
+    text-align: right
+    opacity: 0
+
+  tr:not(:last-of-type)
+    td
+      border-bottom: 1px solid $light-gray
+
+  tr:hover
+    .actions
+      opacity: 1
