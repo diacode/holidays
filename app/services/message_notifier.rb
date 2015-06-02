@@ -9,8 +9,7 @@ class MessageNotifier
     message = [
       "> New vacation request from *#{vacation_request.user.full_name}*:",
       request_message,
-      requested_days_list,
-      days_left
+      requested_days_list
     ]
 
     rescue_and_log_error { @notifier.ping formatted_message(message) }
