@@ -9,34 +9,67 @@
         +display(flex)
         +transition
         background: #fff
-        padding: .5em
-        margin-bottom: 1px
 
         &:not(.editable)
-          opacity: .5
+          opacity: .75
 
-        .avatar
-          width: 50px
-          height: 50px
+        > *
+          padding: 1em 0
+
+
+        .requested-date-wrapper
+          +flex(1)
+          text-align: right
+          padding: 1.8em 0 2em 0
+          color: $dark-gray
+
 
         .avatar-wrapper
-          width: 75px
+          width: 100px
+          position: relative
+
+          &:after
+            position: absolute
+            display: block
+            width: 4px
+            top: 0
+            left: 50%
+            bottom: 0
+            content: ""
+            background-color: $light-gray
+            z-index: 1
+            margin-left: -2px
+            bottom: 0
+
+          .avatar
+            position: absolute
+            width: 50px
+            height: 50px
+            left: 50%
+            margin-left: -25px
+            z-index: 9
+
         .user-data-wrapper
           +flex(3)
-          +pad(0 1em 0 0)
-        .requested-days-wrapper
-          +flex(6)
-          +pad(0 1em 0 0)
 
           .selected-dates
             font-size: .8em
+
         .actions
           +display(flex)
           +flex(1)
           +align-items(center)
           text-align: left
           ul
+            +transition
             +unstyled-list
+            opacity: 0
+
+        &:hover
+          .actions
+            ul
+              opacity: 1
+
 
   .vacation-request-leave
     &.vacation-request-leave-active

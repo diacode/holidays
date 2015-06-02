@@ -48,16 +48,16 @@ module.exports = React.createClass
       editable: @props.editable
 
     <li className={className}>
+      <div className="requested-date-wrapper">
+        {moment(@props.created_at).fromNow()}
+      </div>
       <div className="avatar-wrapper">
         <img className="avatar" src={@props.user_avatar} />
       </div>
       <div className="user-data-wrapper">
-        <strong>{@props.user_name}</strong>
+        <strong>{@props.user_name}</strong> requested {@props.requested_days.length} days
         <br/>
-        <small>{moment(@props.created_at).fromNow()}</small>
-        <p>{@props.message}</p>
-      </div>
-      <div className="requested-days-wrapper">
+        <p><em>{@props.message}</em></p>
         <ul className="selected-dates">
           {@_renderDays()}
         </ul>
