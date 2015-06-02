@@ -1,3 +1,5 @@
+$card-color: darken($light-gray, 5)
+
 .cards-list
   +display(flex)
   +flex-wrap(wrap)
@@ -15,8 +17,8 @@
     border-radius: $base-border-radius
     margin: 1%
     line-height: 1.75em
-    border: 1px solid $light-gray
-    box-shadow: 0 2px 0 0 $light-gray
+    border: 1px solid $card-color
+    box-shadow: 0 2px 0 0 $card-color
     min-height: 20em
 
     .body
@@ -49,11 +51,11 @@
       +align-items(center)
       +box-align(center)
       +justify-content(center)
-      color: $light-gray
+      color: darken($card-color, 10)
       background: transparent
       box-shadow: none
       cursor: pointer
-      border: 1px dashed $light-gray
+      border: 1px dashed darken($card-color, 10)
       min-height: 340px
 
       &:hover
