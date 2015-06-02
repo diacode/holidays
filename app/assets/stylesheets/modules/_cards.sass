@@ -1,0 +1,61 @@
+.cards-list
+  +display(flex)
+  +flex-wrap(wrap)
+  +flex-flow(row wrap)
+  +justify-content(center)
+  margin-top: 1em
+
+  .card
+    +transition
+    will-change: scale
+    width: 33.33333%
+    max-width: 300px
+    background: $white
+    text-align: center
+    border-radius: $base-border-radius
+    margin: 1%
+    line-height: 1.75em
+    border: 1px solid $light-gray
+    box-shadow: 0 2px 0 0 $light-gray
+    min-height: 20em
+
+    .body
+      +display(flex)
+
+    .fa
+      display: block
+      font-size: 6em
+      margin-bottom: .3em
+      color: inherit
+
+    h5
+      color: inherit
+
+    &:hover
+      +transform(scale(1.1))
+
+    &.button
+      +display(flex)
+      +align-items(center)
+      +box-align(center)
+      +justify-content(center)
+      color: $gray
+
+      &:hover
+        color: $light-blue
+
+    &.add-new
+      +display(flex)
+      +align-items(center)
+      +box-align(center)
+      +justify-content(center)
+      color: $light-gray
+      background: transparent
+      box-shadow: none
+      cursor: pointer
+      border: 1px dashed $light-gray
+      min-height: 340px
+
+      &:hover
+        border-color: $light-blue
+        color: $light-blue

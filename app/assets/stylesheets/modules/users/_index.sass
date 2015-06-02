@@ -1,64 +1,12 @@
-body.users
+$avatar-height: 100px
 
+body.users
   .wrapper
     width: 95%
     margin: 0 auto
 
-  .user-list
-    +display(flex)
-    +flex-wrap(wrap)
-    +flex-flow(row wrap)
-    +justify-content(center)
-    margin-top: 1em
-
-    .user
-      +transition
-      will-change: scale
-      width: 33.33333%
-      max-width: 300px
-      background: $white
-      text-align: center
-      border-radius: $base-border-radius
-      margin: 1%
-      line-height: 1.75em
-      border: 1px solid $light-gray
-      box-shadow: 0 2px 0 0 $light-gray
-
-      &:hover
-        +transform(scale(1.1))
-
-      &.working
-        header
-          background: lighten($light-green, 30)
-
-          .status
-            color: $green
-
-      &.add-new
-        +display(flex)
-        +align-items(center)
-        +box-align(center)
-        +justify-content(center)
-        color: $light-gray
-        background: transparent
-        box-shadow: none
-        cursor: pointer
-        border: 1px dashed $light-gray
-        min-height: 340px
-
-        .fa
-          display: block
-          font-size: 6em
-          margin-bottom: .3em
-          color: inherit
-        h5
-          color: inherit
-
-        &:hover
-          border-color: $light-blue
-          color: $light-blue
-
-
+  .cards-list
+    .card
       header
         padding: 2em
         border-bottom: 1px solid $light-gray
@@ -67,12 +15,10 @@ body.users
         h3
           margin: 0 0 .5em 0
 
-
+        .avatar
+          height: $avatar-height
 
       .body
-        +display(flex)
-        +flex-flow(wrap)
-
         .days-counter
           +flex(1)
           padding: 1em
@@ -90,12 +36,19 @@ body.users
           &:first-child
             border-right: 1px solid $light-gray
 
+      &.working
+        header
+          background: lighten($light-green, 30)
+
+          .status
+            color: $green
+
   .avatar-wrapper
     text-align: center
   .react-gravatar
     border-radius: 50%
     margin-bottom: 1em
-    height: 100px
+    height: $avatar-height
 
   .modal
     header

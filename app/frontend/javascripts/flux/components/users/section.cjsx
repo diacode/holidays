@@ -12,7 +12,7 @@ UsersSection = React.createClass
     usersCards = @props.users.map (user) ->
       <UserCard key={user.id} {...user}/>
 
-    <div className="user-list">
+    <div className="cards-list">
       {usersCards}
       {@_renderAddNew()}
     </div>
@@ -20,7 +20,7 @@ UsersSection = React.createClass
   _renderAddNew: ->
     return unless globals.currentUser.admin
 
-    <div className="user add-new" onClick={@_handleOnNewClick}>
+    <div className="card add-new" onClick={@_handleOnNewClick}>
       <div>
         <i className="fa fa-plus-circle" />
         <h5>Add new team member</h5>

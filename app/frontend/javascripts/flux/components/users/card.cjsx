@@ -13,7 +13,7 @@ module.exports = React.createClass
 
   render: ->
     userClassnames = classnames
-      user: true
+      card: true
       'on-holidays': @props.on_holidays == true
       working: @props.on_holidays == false
 

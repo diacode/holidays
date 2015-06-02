@@ -1,7 +1,8 @@
 .wrapper
-  .settings-list
-    = link_to public_holidays_settings_path do
-      = fa_icon 'calendar'
-      Add public holidays
+  .cards-list
+    = link_to public_holidays_settings_path, class: 'card button' do
+      %div
+        = fa_icon 'calendar'
+        %h5 Public holidays
 
 
