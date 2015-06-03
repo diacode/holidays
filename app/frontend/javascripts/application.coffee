@@ -1,3 +1,4 @@
+require('marty').HttpStateSource.removeHook('parseJSON')
 window.Marty = Marty
 ViewMounter = require './app/view_mounter'
 
