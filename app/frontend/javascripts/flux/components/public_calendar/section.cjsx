@@ -1,36 +1,33 @@
 Calendar = require '../calendar/calendar'
-PublicHolidaysQueries = require '../../queries/public_holidays_queries'
-RequestedDaysQueries = require '../../queries/requested_days_queries'
 moment = require 'moment'
-PublicCalendarStore = require '../../stores/public_calendar_store'
 
 PublicCalendarSection = React.createClass
   displayName: 'PublicCalendarSection'
 
   componentDidMount: ->
     date = moment().startOf("day").format 'YYYY-MM-DD'
-    PublicHolidaysQueries.findForMonth date
-    RequestedDaysQueries.findForMonth date
+    @app.queries.publicHolidays.findForMonth date
+    @app.queries.requestedDays.findForMonth date
 
   _handleMonthChanged: (month) ->
-    PublicHolidaysQueries.findForMonth month.format 'YYYY-MM-DD'
-    RequestedDaysQueries.findForMonth month.format 'YYYY-MM-DD'
+    @app.queries.publicHolidays.findForMonth month.format 'YYYY-MM-DD'
+    @app.queries.requestedDays.findForMonth month.format 'YYYY-MM-DD'
 
   render: ->
-    <div>
+    <div id="public_calendar_wrapper">
       <Calendar selectedDates={[]} datesChanged={false} monthChanged={@_handleMonthChanged} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedRequestedDays} clickable={false}/>
     </div>
 
 module.exports = Marty.createContainer PublicCalendarSection,
   listenTo: [
-    PublicCalendarStore
+    'publicCalendarStore'
   ]
 
   fetch:
     publicHolidays: ->
-      PublicCalendarStore.getState().publicHolidays
+      @app.publicCalendarStore.getState().publicHolidays
     approvedRequestedDays: ->
-      PublicCalendarStore.getState().approvedRequestedDays
+      @app.publicCalendarStore.getState().approvedRequestedDays
 
   failed: (errors) ->
     console.log 'Failed rendering Public Holidays Section'

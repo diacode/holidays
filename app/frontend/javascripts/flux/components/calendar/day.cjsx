@@ -47,7 +47,7 @@ module.exports = React.createClass
 
     for approvedDay in @props.approvedDays
       if @props.day.date.isSame approvedDay.day
-        avatars.push <img className="avatar" src={approvedDay.user_avatar}/>
+        avatars.push <img key={approvedDay.id} className="avatar" src={approvedDay.user_avatar}/>
 
     <div className="avatars-wrapper">{avatars}</div>
 

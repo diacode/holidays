@@ -38,4 +38,7 @@ module.exports = Marty.createStateSource
       body: body
 
   findForMonth: (date) ->
-    @get Routes.api_v1_requested_days_path(date: date)
+    @get(Routes.api_v1_requested_days_path(date: date)).then (res) ->
+      if res.ok then return res.json()
+
+      throw new Error('Error', res)
