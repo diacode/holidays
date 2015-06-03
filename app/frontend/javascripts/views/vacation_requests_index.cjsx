@@ -13,7 +13,7 @@ class View extends MainView
         vacationRequestsStore: require '../flux/stores/vacation_requests_store'
         queries:
           vacationRequests: require '../flux/queries/vacation_requests_queries'
-        sources:
+        stateSources:
           vacationRequests: require '../flux/state_sources/vacation_requests_source'
         actionCreators:
           vacationRequests: require '../flux/action_creators/vacation_requests_action_creators'

@@ -4,7 +4,7 @@ module.exports = Marty.createActionCreators
   id: 'VacationRequestsActionCreators'
 
   approve: (id) ->
-    @app.sources.vacationRequests.approve(id)
+    @app.stateSources.vacationRequests.approve(id)
     .then (res) =>
       @dispatch Constants.vacationRequests.VACATION_REQUEST_APPROVED, res
     .catch (err) =>
@@ -12,7 +12,7 @@ module.exports = Marty.createActionCreators
       console.log err
 
   reject: (id) ->
-    @app.sources.vacationRequests.reject(id)
+    @app.stateSources.vacationRequests.reject(id)
     .then (res) =>
       @dispatch Constants.vacationRequests.VACATION_REQUEST_REJECTED, res
     .catch (err) =>

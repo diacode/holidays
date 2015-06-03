@@ -1,21 +1,16 @@
 Calendar = require '../calendar/calendar'
-EditVacationRequestStore = require '../../stores/edit_vacation_request_store'
 moment = require 'moment'
-EditVacationRequestActionCreators = require '../../action_creators/edit_vacation_request_action_creators'
-VacationRequestsActionCreators = require '../../action_creators/vacation_requests_action_creators'
 SelectedDayListItem = sys = require '../selected_days/list_item'
-PublicCalendarStore = require '../../stores/public_calendar_store'
-PublicHolidaysQueries = require '../../queries/public_holidays_queries'
 
 VacationRequestEditor = React.createClass
   displayName: 'VacationRequestEditor'
 
   componentDidMount: ->
     date = moment().startOf("day").format 'YYYY-MM-DD'
-    PublicHolidaysQueries.findForMonth date
+    @app.queries.publicHolidays.findForMonth date
 
   _handleMonthChanged: (month) ->
-    PublicHolidaysQueries.findForMonth month.format 'YYYY-MM-DD'
+    @app.queries.publicHolidays.findForMonth month.format 'YYYY-MM-DD'
 
   _handleDatesChanged: (dates) ->
     if dates.length > @props.vacationRequest.requested_days.length then @_createDay(dates) else @_removeDay(dates)
@@ -33,7 +28,7 @@ VacationRequestEditor = React.createClass
           day: formatedDate
           status: 'approved'
 
-        EditVacationRequestActionCreators.createDay @props.vacationRequest.id, day
+        @app.actionCreators.editVacationRequest.createDay @props.vacationRequest.id, day
 
   _removeDay: (dates) ->
     for requestedDay in @props.vacationRequest.requested_days
@@ -41,7 +36,7 @@ VacationRequestEditor = React.createClass
         formatedDate = date.format('YYYY-MM-DD')
         formatedDate == requestedDay.day
 
-      if index == -1 then EditVacationRequestActionCreators.destroyDay @props.vacationRequest.id, requestedDay
+      if index == -1 then @app.actionCreators.editVacationRequest.destroyDay @props.vacationRequest.id, requestedDay
 
   _renderRequestedDays: ->
     days = @props.vacationRequest.requested_days.map (day) =>
@@ -70,48 +65,55 @@ VacationRequestEditor = React.createClass
     e.preventDefault()
 
     if confirm('Are you sure you want to approve this vacation request?')
-      VacationRequestsActionCreators.approve @props.vacationRequest.id
+      @app.actionCreators.vacationRequests.approve @props.vacationRequest.id
 
   _onRejectAllClick: (e) ->
     e.preventDefault()
 
     if confirm('Are you sure you want to reject this vacation request?')
-      VacationRequestsActionCreators.reject @props.vacationRequest.id
+      @app.actionCreators.vacationRequests.reject @props.vacationRequest.id
 
   render: ->
-    <div className="wrapper">
-      <header className="header">
-        <img src={@props.vacationRequest.user_avatar} className="avatar" />
-        <h4>{@props.vacationRequest.user_name}</h4>
-        <p>{@props.vacationRequest.message}</p>
-        <div className="batch-actions">
-          <a className="approve" href="#" onClick={@_onApproveAllClick}>
-            <i className="fa fa-check-circle"></i> Approve all
-          </a>
-          <a className="reject" href="#" onClick={@_onRejectAllClick}>
-            <i className="fa fa-times-circle"></i> Reject all
-          </a>
+    <section id="vacation_request_editor">
+      <div className="container">
+        <header>
+          <h2>Vacation requests</h2>
+        </header>
+        <div className="wrapper box">
+          <header className="header">
+            <img src={@props.vacationRequest.user_avatar} className="avatar" />
+            <h4>{@props.vacationRequest.user_name}</h4>
+            <p>{@props.vacationRequest.message}</p>
+            <div className="batch-actions">
+              <a className="approve" href="#" onClick={@_onApproveAllClick}>
+                <i className="fa fa-check-circle"></i> Approve all
+              </a>
+              <a className="reject" href="#" onClick={@_onRejectAllClick}>
+                <i className="fa fa-times-circle"></i> Reject all
+              </a>
+            </div>
+          </header>
+          <div className="calendar-wrapper">
+            {@_renderCalendar()}
+          </div>
+          <div className="quested-dates-wrapper">
+            {@_renderRequestedDays()}
+          </div>
         </div>
-      </header>
-      <div className="calendar-wrapper">
-        {@_renderCalendar()}
       </div>
-      <div className="quested-dates-wrapper">
-        {@_renderRequestedDays()}
-      </div>
-    </div>
+    </section>
 
 module.exports = Marty.createContainer VacationRequestEditor,
   listenTo: [
-    EditVacationRequestStore
-    PublicCalendarStore
+    'editVacationRequestStore'
+    'publicCalendarStore'
   ]
 
   fetch:
     vacationRequest: ->
-      EditVacationRequestStore.fetchVacationRequest @props.vacationRequestId
+      @app.editVacationRequestStore.fetchVacationRequest @props.vacationRequestId
     publicHolidays: ->
-      PublicCalendarStore.getState().publicHolidays
+      @app.publicCalendarStore.getState().publicHolidays
 
   failed: (errors) ->
     console.log 'Failed rendering VacationRequestsList'

@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-VacationRequestsQueries = require '../queries/vacation_requests_queries'
 
 module.exports = Marty.createStore
   id: 'EditVacationRequestStore'
@@ -22,7 +21,7 @@ module.exports = Marty.createStore
       locally: ->
         @state.vacationRequest
       remotely: ->
-        VacationRequestsQueries.find id
+        @app.queries.vacationRequests.find id
 
   setVacationRequest: (vacationRequest) ->
     @setState

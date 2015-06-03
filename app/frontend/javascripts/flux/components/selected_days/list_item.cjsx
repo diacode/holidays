@@ -1,8 +1,11 @@
 SelectedDay = require '../vacation_requests/selected_day'
-EditVacationRequestActionCreators = require '../../action_creators/edit_vacation_request_action_creators'
 
 module.exports = React.createClass
   displayName: 'SelectedDayListItem'
+
+  mixins: [
+    Marty.createAppMixin()
+  ]
 
   _renderActions: ->
     actions = []
@@ -22,13 +25,13 @@ module.exports = React.createClass
   _onApproveClick: (e) ->
     e.preventDefault()
     if confirm('Are you sure you want to approve this day?')
-      EditVacationRequestActionCreators.approveDay @props.vacationRequestId, @props.id
+      @app.actionCreators.editVacationRequest.approveDay @props.vacationRequestId, @props.id
 
 
   _onRejectClick: (e) ->
     e.preventDefault()
     if confirm('Are you sure you want to reject this day?')
-      EditVacationRequestActionCreators.rejectDay @props.vacationRequestId, @props.id
+      @app.actionCreators.editVacationRequest.rejectDay @props.vacationRequestId, @props.id
 
   render: ->
     <li>

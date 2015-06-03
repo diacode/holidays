@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-RequestedDaysAPI = require '../state_sources/requested_days_source'
 
 module.exports = Marty.createActionCreators
   id: 'EditVacationRequestActionCreators'
@@ -8,41 +7,33 @@ module.exports = Marty.createActionCreators
     @dispatch Constants.editVacationRequest.SET_EDIT_SELECTED_DATES, requestedDays
 
   createDay: (vacationRequestId, requestedDay) ->
-    RequestedDaysAPI.create(vacationRequestId, requestedDay)
+    @app.stateSources.requestedDays.create(vacationRequestId, requestedDay)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.editVacationRequest.ADD_REQUESTED_DAY, res.body
+      @dispatch Constants.editVacationRequest.ADD_REQUESTED_DAY, res
     .catch (err) =>
       console.log 'Error creating requested day'
       console.log err
 
   destroyDay: (vacationRequestId, requestedDay) ->
-    RequestedDaysAPI.destroy(vacationRequestId, requestedDay)
+    @app.stateSources.requestedDays.destroy(vacationRequestId, requestedDay)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.editVacationRequest.REMOVE_REQUESTED_DAY, res.body
+      @dispatch Constants.editVacationRequest.REMOVE_REQUESTED_DAY, res
     .catch (err) =>
       console.log 'Error creating requested day'
       console.log err
 
   approveDay: (vacationRequestId, requestedDayId) ->
-    RequestedDaysAPI.approve(vacationRequestId, requestedDayId)
+    @app.stateSources.requestedDays.approve(vacationRequestId, requestedDayId)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res.body
+      @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res
     .catch (err) =>
       console.log 'Error approving requested day'
       console.log err
 
   rejectDay: (vacationRequestId, requestedDayId) ->
-    RequestedDaysAPI.reject(vacationRequestId, requestedDayId)
+    @app.stateSources.requestedDays.reject(vacationRequestId, requestedDayId)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res.body
+      @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res
     .catch (err) =>
       console.log 'Error approving requested day'
       console.log err
