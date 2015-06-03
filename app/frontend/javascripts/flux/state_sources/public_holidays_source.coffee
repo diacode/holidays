@@ -5,10 +5,18 @@ module.exports = Marty.createStateSource
   id: 'PublicHolidaysAPI'
 
   findForMonth: (date) ->
-    @get Routes.api_v1_public_holidays_path(date: date)
+    @get(Routes.api_v1_public_holidays_path(date: date)).then (res) ->
+      if res.ok
+        return res.json()
+
+      throw new Error('Error', res)
 
   findForYear: (year) ->
-    @get Routes.api_v1_public_holidays_path(year: year)
+    @get(Routes.api_v1_public_holidays_path(year: year)).then (res) ->
+      if res.ok
+        return res.json()
+
+      throw new Error('Error', res)
 
   batchCreate: (publicHolidays) ->
     publicHolidaysParams = publicHolidays.map (holiday) ->
@@ -23,4 +31,9 @@ module.exports = Marty.createStateSource
     @post
       url: Routes.batch_create_api_v1_public_holidays_path()
       body: body
+    .then (res) ->
+      if res.ok
+        return res.json()
+
+      throw new Error('Error', res)
 

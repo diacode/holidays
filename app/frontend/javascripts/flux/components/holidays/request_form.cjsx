@@ -1,8 +1,4 @@
 Calendar = require '../calendar/calendar'
-RequestFormStore = require '../../stores/request_form_store'
-RequestFormActionCreators = require '../../action_creators/request_form_action_creators'
-PublicCalendarStore = require '../../stores/public_calendar_store'
-PublicHolidaysQueries = require '../../queries/public_holidays_queries'
 moment = require 'moment'
 Modal = require '../utils/modal'
 
@@ -11,10 +7,10 @@ RequestForm = React.createClass
 
   componentDidMount: ->
     date = moment().startOf("day").format 'YYYY-MM-DD'
-    PublicHolidaysQueries.findForMonth date
+    @app.queries.findForMonth date
 
   _handleMonthChanged: (month) ->
-    PublicHolidaysQueries.findForMonth month.format 'YYYY-MM-DD'
+    @app.queries.findForMonth month.format 'YYYY-MM-DD'
 
   _renderSelectedDates: ->
     return unless @props.datesValidated
@@ -38,7 +34,7 @@ RequestForm = React.createClass
     </div>
 
   _showCalendar: ->
-    RequestFormActionCreators.setDatesValidated(false)
+    @app.actionCreators.setDatesValidated(false)
 
   _renderCalendar: ->
     return if @props.datesValidated
@@ -58,18 +54,18 @@ RequestForm = React.createClass
     </div>
 
   _handleDatesChanged: (dates) ->
-    RequestFormActionCreators.setSelectedDates dates
+    @app.actionCreators.setSelectedDates dates
 
   _validateSelectedDates: (e) ->
     e.preventDefault()
-    RequestFormActionCreators.setDatesValidated @props.selectedDates.length > 0
+    @app.actionCreators.setDatesValidated @props.selectedDates.length > 0
 
   _handleCancelClick: (e) ->
     e.preventDefault()
     @_hideForm()
 
   _hideForm: ->
-    RequestFormActionCreators.hideForm()
+    @app.actionCreators.hideForm()
 
   _renderFormInputs: ->
     return unless @props.datesValidated
@@ -104,7 +100,7 @@ RequestForm = React.createClass
       message: message
       requested_days_attributes: requestedDaysAttributes
 
-    RequestFormActionCreators.create vacationRequest
+    @app.actionCreators.create vacationRequest
 
   _renderError: ->
     return unless @props.error
@@ -120,7 +116,7 @@ RequestForm = React.createClass
 
   _handleOnShowClick: (e) ->
     e.preventDefault()
-    RequestFormActionCreators.showForm()
+    @app.actionCreators.showForm()
 
   render: ->
     <div>
@@ -147,21 +143,21 @@ RequestForm = React.createClass
 
 module.exports = Marty.createContainer RequestForm,
   listenTo: [
-    RequestFormStore
-    PublicCalendarStore
+    'requestFormStore'
+    'publicCalendarStore'
   ]
 
   fetch:
     showForm: ->
-      RequestFormStore.state.showForm
+      @app.requestFormStore.state.showForm
     selectedDates: ->
-      RequestFormStore.state.selectedDates
+      @app.requestFormStore.state.selectedDates
     datesValidated: ->
-      RequestFormStore.state.datesValidated
+      @app.requestFormStore.state.datesValidated
     error: ->
-      RequestFormStore.state.error
+      @app.requestFormStore.state.error
     publicHolidays: ->
-      PublicCalendarStore.getState().publicHolidays
+      @app.publicCalendarStore.getState().publicHolidays
 
   failed: (errors) ->
     console.log 'Failed rendering RequestForm'

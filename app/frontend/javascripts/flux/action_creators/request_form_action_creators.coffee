@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-VacationRequestsAPI = require '../state_sources/vacation_requests_source'
 
 module.exports = Marty.createActionCreators
   id: 'RequestFormActionCreators'
@@ -17,13 +16,15 @@ module.exports = Marty.createActionCreators
     @dispatch Constants.requestForm.SET_SELECTED_DATES, dates
 
   create: (vacationRequest) ->
-    VacationRequestsAPI.create(vacationRequest)
+    @app.stateSources.vacationRequests.create(vacationRequest)
     .then (res) =>
       switch res.status
         when 200
-          @dispatch Constants.requestForm.VACATION_REQUEST_CREATED, res.body
+          res.json().then (body) =>
+            @dispatch Constants.requestForm.VACATION_REQUEST_CREATED, body
         when 422
-          @dispatch Constants.requestForm.SET_ERROR, res.body
+          res.json().then (body) =>
+            @dispatch Constants.requestForm.SET_ERROR, body
     .catch (err) =>
       @dispatch Constants.requestForm.SET_ERROR, 'An error ocurred while creating vacation request'
       console.log 'Error creating Vacation request'
