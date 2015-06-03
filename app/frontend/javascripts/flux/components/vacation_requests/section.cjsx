@@ -1,5 +1,4 @@
 VacationRequestListItem = require './list_item'
-VacationRequestsStore = require '../../stores/vacation_requests_store'
 ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 VacationRequestsList = React.createClass
@@ -10,20 +9,29 @@ VacationRequestsList = React.createClass
       <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
 
   render: ->
-    <ul>
-      <ReactCSSTransitionGroup transitionName="vacation-request">
-        {@_renderItems()}
-      </ReactCSSTransitionGroup>
-    </ul>
+    <section>
+      <div className="container">
+        <header>
+          <h2>Vacation requests</h2>
+        </header>
+        <div id="vacation_requests_wrapper" className="box">
+          <ul className="vacation-requests-list">
+            <ReactCSSTransitionGroup transitionName="vacation-request">
+              {@_renderItems()}
+            </ReactCSSTransitionGroup>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 module.exports = Marty.createContainer VacationRequestsList,
   listenTo: [
-    VacationRequestsStore
+    'vacationRequestsStore'
   ]
 
   fetch:
     vacationRequests: ->
-      VacationRequestsStore.fetchVacationRequests()
+      @app.vacationRequestsStore.fetchVacationRequests()
 
   failed: (errors) ->
     console.log 'Failed rendering VacationRequestsList'

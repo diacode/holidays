@@ -1,25 +1,20 @@
 Constants = require '../constants/constants'
-VacationRequestsAPI = require '../state_sources/vacation_requests_source'
 
 module.exports = Marty.createActionCreators
   id: 'VacationRequestsActionCreators'
 
   approve: (id) ->
-    VacationRequestsAPI.approve(id)
+    @app.sources.vacationRequests.approve(id)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.vacationRequests.VACATION_REQUEST_APPROVED, res.body
+      @dispatch Constants.vacationRequests.VACATION_REQUEST_APPROVED, res
     .catch (err) =>
       console.log 'Error creating Vacation request'
       console.log err
 
   reject: (id) ->
-    VacationRequestsAPI.reject(id)
+    @app.sources.vacationRequests.reject(id)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.vacationRequests.VACATION_REQUEST_REJECTED, res.body
+      @dispatch Constants.vacationRequests.VACATION_REQUEST_REJECTED, res
     .catch (err) =>
       console.log 'Error rejecting Vacation request'
       console.log err

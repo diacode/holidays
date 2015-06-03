@@ -1,10 +1,13 @@
 moment = require 'moment'
 SelectedDay = require './selected_day'
-VacationRequestsActionCreators = require '../../action_creators/vacation_requests_action_creators'
 classnames = require 'classnames'
 
 module.exports = React.createClass
   displayName: 'VacationRequestListItem'
+
+  mixins: [
+    Marty.createAppMixin()
+  ]
 
   _renderDays: ->
     @props.requested_days.map (day) ->
@@ -14,13 +17,13 @@ module.exports = React.createClass
     e.preventDefault()
 
     if confirm('Are you sure you want to approve this vacation request?')
-      VacationRequestsActionCreators.approve @props.id
+      @app.actionCreators.vacationRequests.approve @props.id
 
   _onRejectClick: (e) ->
     e.preventDefault()
 
     if confirm('Are you sure you want to reject this vacation request?')
-      VacationRequestsActionCreators.reject @props.id
+      @app.actionCreators.vacationRequests.reject @props.id
 
   _renderActions: ->
     return unless @props.editable

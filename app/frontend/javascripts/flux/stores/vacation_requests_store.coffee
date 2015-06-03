@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-VacationRequestsQueries = require '../queries/vacation_requests_queries'
 
 module.exports = Marty.createStore
   id: 'VacationRequestsStore'
@@ -17,10 +16,10 @@ module.exports = Marty.createStore
   fetchVacationRequests: ->
     @fetch
       id: 'vacation-requests'
-      locally: ->
+      locally: =>
         @state.vacationRequests
-      remotely: ->
-        VacationRequestsQueries.findAll()
+      remotely: =>
+        @app.queries.vacationRequests.findAll()
 
   addVacationRequests: (vacationRequests) ->
     @setState
