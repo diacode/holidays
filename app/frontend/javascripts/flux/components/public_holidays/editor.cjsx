@@ -60,9 +60,6 @@ PublicHolidaysEditor = React.createClass
 
   render: ->
     <div>
-      <header>
-        <h4>Editor</h4>
-      </header>
       <div className="actions">
         <a className="btn" href="#" onClick={@_onDuplicateClick}>
           <i className="fa fa-copy"></i>

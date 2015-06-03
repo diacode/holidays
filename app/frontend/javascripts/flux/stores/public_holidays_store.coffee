@@ -8,6 +8,9 @@ module.exports = Marty.createStore
   handlers:
     setPublicHolidays: Constants.publicHolidays.RETRIEVED_YEAR_PUBLIC_HOLIDAYS
 
+  getInitialState: ->
+    editMode: false
+
   getPublicHolidays: ->
     @fetch
       id: 'current-year-public-holidays'
