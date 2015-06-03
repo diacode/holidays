@@ -1,3 +1,3 @@
 class PublicHolidaySerializer < ActiveModel::Serializer
-  attributes :name, :day
+  attributes :id, :name, :day
 end

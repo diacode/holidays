@@ -1,4 +1,3 @@
-PublicHolidaysStore = require '../../stores/public_holidays_store'
 PublicHolidaysList = require './list'
 PublicHolidaysEditor = require './editor'
 moment = require 'moment'
@@ -37,11 +36,11 @@ PublicHolidaysSection = React.createClass
     </section>
 
 module.exports = Marty.createContainer PublicHolidaysSection,
-  listenTo: PublicHolidaysStore
+  listenTo: 'publicHolidaysStore'
 
   fetch:
     publicHolidays: ->
-      PublicHolidaysStore.getPublicHolidays()
+      @app.publicHolidaysStore.getPublicHolidays()
 
     editMode: ->
-      PublicHolidaysStore.getState().editMode
+      @app.publicHolidaysStore.getState().editMode

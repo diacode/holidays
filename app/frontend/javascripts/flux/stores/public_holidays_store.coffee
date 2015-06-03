@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-PublicHolidaysQueries = require '../queries/public_holidays_queries'
 moment = require 'moment'
 
 module.exports = Marty.createStore
@@ -17,7 +16,7 @@ module.exports = Marty.createStore
       locally: ->
         @state.publicHolidays
       remotely: ->
-        PublicHolidaysQueries.findForYear moment().format()
+        @app.queries.publicHolidays.findForYear moment().format()
 
 
   setPublicHolidays: (publicHolidays) ->
