@@ -15,7 +15,7 @@
   "dependencies": {
     "classnames": "~1.2.0",
     "lodash": "~2.4.1",
-    "marty": "~0.9.12",
+    "marty": "^0.10.1",
     "moment": "2.10.2",
     "react": "~0.13.1",
     "react-gravatar": "^1.2.0"
