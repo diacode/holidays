@@ -14,26 +14,29 @@ module.exports = Marty.createActionCreators
     @dispatch Constants.users.SET_USER_FORM_ITEM, values
 
   saveItem: (item) ->
-
     if item.id is undefined then @_create(item) else @_updateItem(item)
 
   _create: (item) ->
-    UsersApi.create(item).then (res)=>
+    @app.stateSources.users.create(item).then (res)=>
       switch res.status
         when 200
-          @dispatch Constants.users.ADD_USER, res.body
+          res.json().then (body) =>
+            @dispatch Constants.users.ADD_USER, body
         when 422
-          @dispatch Constants.users.ADD_USER_FORM_ERRORS, res.body
+          res.json().then (body) =>
+            @dispatch Constants.users.ADD_USER_FORM_ERRORS, body
     .catch (err) ->
       console.log err
 
   _update: (item) ->
-    UsersApi.update(item).then (res)=>
+    @app.stateSources.users.update(item).then (res)=>
       switch res.status
         when 200
-          @dispatch Constants.users.REPLACE_USER, res.body
+          res.json().then (body) =>
+            @dispatch Constants.users.REPLACE_USER, body
         when 422
-          @dispatch Constants.users.ADD_USER_FORM_ERRORS, res.body
+          res.json().then (body) =>
+            @dispatch Constants.users.ADD_USER_FORM_ERRORS, body
     .catch (err) ->
       console.log err
 

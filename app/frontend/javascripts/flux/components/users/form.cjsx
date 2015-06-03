@@ -1,6 +1,4 @@
 Modal = require '../utils/modal'
-UserFormStore = require '../../stores/user_form_store'
-UserFormActionCreators = require '../../action_creators/user_form_action_creators'
 FormMixin = require '../../mixins/form_mixin'
 Gravatar = require 'react-gravatar'
 
@@ -15,18 +13,18 @@ UserForm = React.createClass
     showModal: false
 
   _handleHideModal: ->
-    UserFormActionCreators.hideForm()
+    @app.actionCreators.userForm.hideForm()
 
   _onSubmit: (e) ->
     e.preventDefault()
-    UserFormActionCreators.saveItem @props.item
+    @app.actionCreators.userForm.saveItem @props.item
 
   _handleOnChange: (e) ->
-    UserFormActionCreators.setItem @_formValues()
+    @app.actionCreators.userForm.setItem @_formValues()
 
   _handelCancelClick: (e) ->
     e.preventDefault()
-    UserFormActionCreators.hideForm()
+    @app.actionCreators.userForm.hideForm()
 
   _renderAvatar: ->
     <div className="avatar-wrapper">
@@ -52,13 +50,13 @@ UserForm = React.createClass
     </Modal>
 
 module.exports = Marty.createContainer UserForm,
-  listenTo: UserFormStore
+  listenTo: 'userFormStore'
 
   fetch:
     item: ->
-      UserFormStore.getState().item
+      @app.userFormStore.getState().item
     showModal: ->
-      UserFormStore.getState().showModal
+      @app.userFormStore.getState().showModal
     errors: ->
-      UserFormStore.getState().errors
+      @app.userFormStore.getState().errors
 

@@ -13,7 +13,7 @@ class MainView
     React.render @_buildApplication(), document.getElementById('request_holidays_button_wrapper')
 
   _buildApplication: ->
-    MainApplication = Marty.createApplication () ->
+    VacationRequestApp = Marty.createApplication () ->
       @register
         publicCalendarStore: require '../flux/stores/public_calendar_store'
         requestFormStore: require '../flux/stores/request_form_store'
@@ -25,7 +25,7 @@ class MainView
 
 
 
-    <ApplicationContainer app={new MainApplication()}>
+    <ApplicationContainer app={new VacationRequestApp()}>
       <RequestHolidaysForm />
     </ApplicationContainer>
 

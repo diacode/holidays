@@ -1,13 +1,10 @@
 Constants = require '../constants/constants'
-UsersApi = require '../state_sources/users_source'
 
 module.exports = Marty.createQueries
   id: 'UsersQueries'
 
   findAll: ->
-    UsersApi.findAll().then (res)=>
-      switch res.status
-        when 200
-          @dispatch Constants.users.SET_USERS, res.body.users
+    @app.stateSources.users.findAll().then (res)=>
+      @dispatch Constants.users.SET_USERS, res.users
     .catch (err) ->
       console.log err

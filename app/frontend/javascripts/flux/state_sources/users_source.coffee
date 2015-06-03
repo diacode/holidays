@@ -5,8 +5,10 @@ module.exports = Marty.createStateSource
   id: 'UsersAPI'
 
   findAll: ->
-    @get  Routes.api_v1_users_path()
+    @get(Routes.api_v1_users_path()).then (res) ->
+      if res.ok then return res.json()
 
+      throw new Error('Error', res)
 
   create: (user) ->
     body =

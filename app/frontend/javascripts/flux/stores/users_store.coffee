@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-UsersQueries = require '../queries/users_queries'
 
 module.exports = Marty.createStore
   id: 'UsersStore'
@@ -15,7 +14,7 @@ module.exports = Marty.createStore
       locally: ->
         @state.users
       remotely: ->
-        UsersQueries.findAll()
+        @app.queries.users.findAll()
 
   setUsers: (users) ->
     @setState

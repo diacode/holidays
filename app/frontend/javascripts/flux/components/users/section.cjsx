@@ -1,8 +1,6 @@
 UserCard = require './card'
-UsersStore = require '../../stores/users_store'
 UserForm = require './form'
 globals = require '../../../utils/globals'
-UserFormActionCreators = require '../../action_creators/user_form_action_creators'
 
 
 UsersSection = React.createClass
@@ -29,7 +27,7 @@ UsersSection = React.createClass
 
   _handleOnNewClick: (e) ->
     e.preventDefault()
-    UserFormActionCreators.showForm()
+    @app.actionCreators.userForm.showForm()
 
   _renderForm: ->
     return unless globals.currentUser.admin
@@ -45,11 +43,13 @@ UsersSection = React.createClass
     </div>
 
 module.exports = Marty.createContainer UsersSection,
-  listenTo: UsersStore
+  listenTo: [
+    'usersStore'
+  ]
 
   fetch:
     users: ->
-      UsersStore.findAll()
+      @app.usersStore.findAll()
 
   failed: (errors) ->
     console.log 'Failed rendering Users Section'
