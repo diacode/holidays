@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       resources :public_holidays, only: :index do
         collection do
           post :batch_create
+          patch :batch_update
         end
       end
     end
