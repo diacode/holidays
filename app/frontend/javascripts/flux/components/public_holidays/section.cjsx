@@ -15,7 +15,9 @@ PublicHolidaysSection = React.createClass
 
   _handleCancelEditClick: (e) ->
     e.preventDefault()
-    @app.actionCreators.publicHolidays.setEditMode false
+
+    if confirm('Are you sure?')
+      @app.actionCreators.publicHolidays.setEditMode false
 
   _renderHeaderActions: ->
     return if @props.publicHolidays.length == 0
@@ -31,15 +33,22 @@ PublicHolidaysSection = React.createClass
     return if @props.publicHolidays.length == 0 and @props.newPublicHolidays.length == 0
 
     if @props.editMode is true
-      <div>
-        <a href="#" onClick={@_handleCancelEditClick}><i className="fa fa-cancel"/> cancel edit</a>
+      <div className="table-actions">
+        <a href="#" onClick={@_handleCancelEditClick}><i className="fa fa-times"/> cancel edit</a>
         <a href="#" className="btn" onClick={@_handleOnUpdateClick}>Save holidays</a>
       </div>
     else
-      <div>
+      <div className="table-actions">
+        {@_renderCancelAddNewHolidays()}
         <a href="#" onClick={@_handleAddNewClick}><i className="fa fa-plus"/> add new public holiday</a>
         {@_renderSaveButton()}
       </div>
+
+  _renderCancelAddNewHolidays: ->
+    return if @props.newPublicHolidays.length == 0
+
+    <a href="#" onClick={@_handleCancelEditClick}><i className="fa fa-times"/> cancel add new holidays</a>
+
 
   _renderSaveButton: ->
     return if @props.newPublicHolidays.length is 0

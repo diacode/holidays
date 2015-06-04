@@ -33,6 +33,7 @@ module.exports = Marty.createStore
   setPublicHolidays: (publicHolidays) ->
     @setState
       publicHolidays: publicHolidays
+      newPublicHolidays: []
 
   setEditMode: (mode) ->
     @setState

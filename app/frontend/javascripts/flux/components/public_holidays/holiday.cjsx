@@ -36,7 +36,7 @@ module.exports = React.createClass
         <input ref="date" type="date" onChange={@_handleOnChange} value={@props.day} />
       </td>
       <td>
-        <input ref="name" type="text" onChange={@_handleOnChange} value={@props.name} />
+        <input ref="name" type="text" onChange={@_handleOnChange} value={@props.name} placeholder="Holiday name" />
       </td>
       <td className="actions">
         <a href="#" onClick={@_handleOnRemoveClick}>
