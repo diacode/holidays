@@ -10,8 +10,9 @@ class View extends MainView
   _buildVacationRquestsApplication: ->
     VacationRequestEditorApp = Marty.createApplication () ->
       @register
-        editVacationRequestStore: require '../flux/stores/edit_vacation_request_store'
-        publicCalendarStore: require '../flux/stores/public_calendar_store'
+        stores:
+          editVacationRequest: require '../flux/stores/edit_vacation_request_store'
+          publicCalendar: require '../flux/stores/public_calendar_store'
         queries:
           vacationRequests: require '../flux/queries/vacation_requests_queries'
           publicHolidays: require '../flux/queries/public_holidays_queries'

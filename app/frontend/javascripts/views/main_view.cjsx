@@ -15,8 +15,9 @@ class MainView
   _buildApplication: ->
     VacationRequestApp = Marty.createApplication () ->
       @register
-        publicCalendarStore: require '../flux/stores/public_calendar_store'
-        requestFormStore: require '../flux/stores/request_form_store'
+        stores:
+          publicCalendar: require '../flux/stores/public_calendar_store'
+          requestForm: require '../flux/stores/request_form_store'
         actionCreators: require '../flux/action_creators/request_form_action_creators'
         queries: require '../flux/queries/public_holidays_queries'
         stateSources:

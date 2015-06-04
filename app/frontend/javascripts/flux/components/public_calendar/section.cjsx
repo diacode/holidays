@@ -20,14 +20,14 @@ PublicCalendarSection = React.createClass
 
 module.exports = Marty.createContainer PublicCalendarSection,
   listenTo: [
-    'publicCalendarStore'
+    'stores.publicCalendar'
   ]
 
   fetch:
     publicHolidays: ->
-      @app.publicCalendarStore.getState().publicHolidays
+      @app.stores.publicCalendar.getState().publicHolidays
     approvedRequestedDays: ->
-      @app.publicCalendarStore.getState().approvedRequestedDays
+      @app.stores.publicCalendar.getState().approvedRequestedDays
 
   failed: (errors) ->
     console.log 'Failed rendering Public Holidays Section'

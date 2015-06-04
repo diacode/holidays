@@ -10,7 +10,8 @@ class View extends MainView
   _buildPublicHolidaysApp: ->
     PublicHolidaysApp = Marty.createApplication () ->
       @register
-        publicHolidaysStore: require '../flux/stores/public_holidays_store'
+        stores:
+          publicHolidays: require '../flux/stores/public_holidays_store'
         queries:
           publicHolidays: require '../flux/queries/public_holidays_queries'
         stateSources:

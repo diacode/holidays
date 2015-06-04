@@ -50,13 +50,13 @@ UserForm = React.createClass
     </Modal>
 
 module.exports = Marty.createContainer UserForm,
-  listenTo: 'userFormStore'
+  listenTo: 'stores.userForm'
 
   fetch:
     item: ->
-      @app.userFormStore.getState().item
+      @app.stores.userForm.getState().item
     showModal: ->
-      @app.userFormStore.getState().showModal
+      @app.stores.userForm.getState().showModal
     errors: ->
-      @app.userFormStore.getState().errors
+      @app.stores.userForm.getState().errors
 

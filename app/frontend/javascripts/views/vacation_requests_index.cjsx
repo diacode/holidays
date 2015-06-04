@@ -10,7 +10,8 @@ class View extends MainView
   _buildVacationRquestsApplication: ->
     VacationRequestsApp = Marty.createApplication () ->
       @register
-        vacationRequestsStore: require '../flux/stores/vacation_requests_store'
+        stores:
+          vacationRequests: require '../flux/stores/vacation_requests_store'
         queries:
           vacationRequests: require '../flux/queries/vacation_requests_queries'
         stateSources:

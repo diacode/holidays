@@ -44,12 +44,12 @@ UsersSection = React.createClass
 
 module.exports = Marty.createContainer UsersSection,
   listenTo: [
-    'usersStore'
+    'stores.users'
   ]
 
   fetch:
     users: ->
-      @app.usersStore.findAll()
+      @app.stores.users.findAll()
 
   failed: (errors) ->
     console.log 'Failed rendering Users Section'

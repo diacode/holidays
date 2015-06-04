@@ -26,12 +26,12 @@ VacationRequestsList = React.createClass
 
 module.exports = Marty.createContainer VacationRequestsList,
   listenTo: [
-    'vacationRequestsStore'
+    'stores.vacationRequests'
   ]
 
   fetch:
     vacationRequests: ->
-      @app.vacationRequestsStore.fetchVacationRequests()
+      @app.stores.vacationRequests.fetchVacationRequests()
 
   failed: (errors) ->
     console.log 'Failed rendering VacationRequestsList'

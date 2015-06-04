@@ -36,11 +36,11 @@ PublicHolidaysSection = React.createClass
     </section>
 
 module.exports = Marty.createContainer PublicHolidaysSection,
-  listenTo: 'publicHolidaysStore'
+  listenTo: 'stores.publicHolidays'
 
   fetch:
     publicHolidays: ->
-      @app.publicHolidaysStore.getPublicHolidays()
+      @app.stores.publicHolidays.getPublicHolidays()
 
     editMode: ->
-      @app.publicHolidaysStore.getState().editMode
+      @app.stores.publicHolidays.getState().editMode

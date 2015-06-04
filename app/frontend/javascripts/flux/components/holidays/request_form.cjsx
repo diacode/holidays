@@ -143,21 +143,21 @@ RequestForm = React.createClass
 
 module.exports = Marty.createContainer RequestForm,
   listenTo: [
-    'requestFormStore'
-    'publicCalendarStore'
+    'stores.requestForm'
+    'stores.publicCalendar'
   ]
 
   fetch:
     showForm: ->
-      @app.requestFormStore.state.showForm
+      @app.stores.requestForm.state.showForm
     selectedDates: ->
-      @app.requestFormStore.state.selectedDates
+      @app.stores.requestForm.state.selectedDates
     datesValidated: ->
-      @app.requestFormStore.state.datesValidated
+      @app.stores.requestForm.state.datesValidated
     error: ->
-      @app.requestFormStore.state.error
+      @app.stores.requestForm.state.error
     publicHolidays: ->
-      @app.publicCalendarStore.getState().publicHolidays
+      @app.stores.publicCalendar.getState().publicHolidays
 
   failed: (errors) ->
     console.log 'Failed rendering RequestForm'

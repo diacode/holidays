@@ -105,15 +105,15 @@ VacationRequestEditor = React.createClass
 
 module.exports = Marty.createContainer VacationRequestEditor,
   listenTo: [
-    'editVacationRequestStore'
-    'publicCalendarStore'
+    'stores.editVacationRequest'
+    'stores.publicCalendar'
   ]
 
   fetch:
     vacationRequest: ->
-      @app.editVacationRequestStore.fetchVacationRequest @props.vacationRequestId
+      @app.stores.editVacationRequest.fetchVacationRequest @props.vacationRequestId
     publicHolidays: ->
-      @app.publicCalendarStore.getState().publicHolidays
+      @app.stores.publicCalendar.getState().publicHolidays
 
   failed: (errors) ->
     console.log 'Failed rendering VacationRequestsList'

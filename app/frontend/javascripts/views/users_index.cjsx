@@ -10,8 +10,9 @@ class View extends MainView
   _buildUsersApplication: ->
     TeamApp = Marty.createApplication () ->
       @register
-        usersStore: require '../flux/stores/users_store'
-        userFormStore: require '../flux/stores/user_form_store'
+        stores:
+          users: require '../flux/stores/users_store'
+          userForm: require '../flux/stores/user_form_store'
         actionCreators:
           userForm: require '../flux/action_creators/user_form_action_creators'
         queries:

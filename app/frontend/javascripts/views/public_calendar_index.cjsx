@@ -10,7 +10,8 @@ class View extends MainView
   _buildPublicCalendarApplication: ->
     PublicCalendarApp = Marty.createApplication () ->
       @register
-        publicCalendarStore: require '../flux/stores/public_calendar_store'
+        stores:
+          publicCalendar: require '../flux/stores/public_calendar_store'
         queries:
           publicHolidays: require '../flux/queries/public_holidays_queries'
           requestedDays: require '../flux/queries/requested_days_queries'
