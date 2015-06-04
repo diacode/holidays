@@ -1,24 +1,39 @@
-PublicHolidayActionCreators = require '../../action_creators/public_holiday_action_creators'
+moment = require 'moment'
 
 module.exports = React.createClass
   displayName: 'PublicHoliday'
 
+  mixins: [
+    Marty.createAppMixin()
+  ]
+
   _handleOnChange: (e) ->
     values =
       id: @props.id
-      date: @refs.date.getDOMNode().value
+      day: @refs.date.getDOMNode().value
       name: @refs.name.getDOMNode().value
 
-    PublicHolidayActionCreators.setHoliday values
+    @app.actionCreators.publicHolidays.setHoliday values
 
   _handleOnRemoveClick: (e) ->
     e.preventDefault()
-    PublicHolidayActionCreators.removeHoliday @props.id
+    @app.actionCreators.publicHolidays.removeHoliday @props.id
 
-  render: ->
+  _renderReadOnly: ->
+    <tr key={@props.id}>
+      <td>{moment(@props.day).format('dddd, MMMM Do YYYY')}</td>
+      <td>{@props.name}</td>
+      <td className="actions">
+        <a href="#" onClick={@_handleOnRemoveClick}>
+          <i className="fa fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+
+  _renderEditable: ->
     <tr>
       <td>
-        <input ref="date" type="date" onChange={@_handleOnChange} value={@props.date} />
+        <input ref="date" type="date" onChange={@_handleOnChange} value={@props.day} />
       </td>
       <td>
         <input ref="name" type="text" onChange={@_handleOnChange} value={@props.name} />
@@ -29,3 +44,6 @@ module.exports = React.createClass
         </a>
       </td>
     </tr>
+
+  render: ->
+    if @props.editMode is true then @_renderEditable() else @_renderReadOnly()

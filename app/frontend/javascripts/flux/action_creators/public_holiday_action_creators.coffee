@@ -1,5 +1,4 @@
 Constants = require '../constants/constants'
-PublicHolidaysAPI = require '../state_sources/public_holidays_source'
 
 module.exports = Marty.createActionCreators
   id: 'PublicHolidayActionCreators'
@@ -17,15 +16,32 @@ module.exports = Marty.createActionCreators
     @dispatch Constants.publicHolidays.INVALIDATE_PUBLIC_HOLIDAYS
 
   save: (publicHolidays) ->
-    PublicHolidaysAPI.batchCreate(publicHolidays)
+    @app.stateSources.publicHolidays.batchCreate(publicHolidays)
     .then (res) =>
-      switch res.status
-        when 200
-          @dispatch Constants.publicHolidays.PUBLIC_HOLIDAYS_CREATION_SUCCESS, res.body.public_holidays
-        when 422
-          console.log 'Error creating public holidays'
+      res.json().then (body)=>
+        switch res.status
+          when 200
+            @dispatch Constants.publicHolidays.PUBLIC_HOLIDAYS_CREATION_SUCCESS, body.public_holidays
+          when 422
+            console.log 'Error creating public holidays'
     .catch (err) =>
       console.log 'Error creating public holidays'
       console.log err
+
+  update: (publicHolidays) ->
+    @app.stateSources.publicHolidays.batchUpdate(publicHolidays)
+    .then (res) =>
+      res.json().then (body)=>
+        switch res.status
+          when 200
+            @dispatch Constants.publicHolidays.PUBLIC_HOLIDAYS_UPDATE_SUCCESS, body.public_holidays
+          when 422
+            console.log 'Error updating public holidays'
+    .catch (err) =>
+      console.log 'Error creating public holidays'
+      console.log err
+
+  setEditMode: (mode) ->
+    @dispatch Constants.publicHolidays.SET_PUBLIC_HOLIDAY_EDIT_MODE, mode
 
 

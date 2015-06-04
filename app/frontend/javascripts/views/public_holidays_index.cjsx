@@ -16,7 +16,8 @@ class View extends MainView
           publicHolidays: require '../flux/queries/public_holidays_queries'
         stateSources:
           publicHolidays: require '../flux/state_sources/public_holidays_source'
-
+        actionCreators:
+          publicHolidays: require '../flux/action_creators/public_holiday_action_creators'
 
     <ApplicationContainer app={new PublicHolidaysApp()}>
       <PublicHolidaysSection />

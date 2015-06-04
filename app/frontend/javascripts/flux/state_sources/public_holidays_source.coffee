@@ -21,7 +21,7 @@ module.exports = Marty.createStateSource
   batchCreate: (publicHolidays) ->
     publicHolidaysParams = publicHolidays.map (holiday) ->
       name: holiday.name
-      day: holiday.date
+      day: holiday.day
 
     body =
       authenticity_token: Globals.authenticityToken
@@ -31,9 +31,19 @@ module.exports = Marty.createStateSource
     @post
       url: Routes.batch_create_api_v1_public_holidays_path()
       body: body
-    .then (res) ->
-      if res.ok
-        return res.json()
 
-      throw new Error('Error', res)
+  batchUpdate: (publicHolidays) ->
+    publicHolidaysParams = publicHolidays.map (holiday) ->
+      id: holiday.id
+      name: holiday.name
+      day: holiday.day
+
+    body =
+      authenticity_token: Globals.authenticityToken
+      public_holidays_params:
+        public_holidays: publicHolidaysParams
+
+    @patch
+      url: Routes.batch_update_api_v1_public_holidays_path()
+      body: body
 

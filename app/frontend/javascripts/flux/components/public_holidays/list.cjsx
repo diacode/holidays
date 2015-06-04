@@ -1,23 +1,21 @@
 PublicHolidaysStore = require '../../stores/public_holidays_store'
+PublicHoliday = require './holiday'
 moment = require 'moment'
 
 module.exports = React.createClass
   displayName: 'PublicHolidaysList'
 
   _renderPublicHolidays: ->
-    @props.publicHolidays.map (holiday) ->
-      <tr key={holiday.id}>
-        <td>{moment(holiday.day).format('dddd, MMMM Do YYYY')}</td>
-        <td>{holiday.name}</td>
-        <td className="actions">
-          <a href="#" onClick={@_handleOnRemoveClick}>
-            <i className="fa fa-trash"></i>
-          </a>
-        </td>
-      </tr>
+    publicHolidays = @props.publicHolidays.map (holiday, i) =>
+      <PublicHoliday key={i} editMode={@props.editMode} {...holiday} />
+
+    newPublicHolidays = @props.newPublicHolidays.map (holiday) =>
+      <PublicHoliday key={"new-#{holiday.id}"} editMode={true} {...holiday} />
+
+    publicHolidays.concat newPublicHolidays
 
   render: ->
-    <table className="table">
+    <table className="table form">
       <thead>
         <tr>
           <th className="day">Day</th>
