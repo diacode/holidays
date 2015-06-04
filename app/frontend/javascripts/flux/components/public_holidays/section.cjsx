@@ -1,5 +1,4 @@
 PublicHolidaysList = require './list'
-PublicHolidaysEditor = require './editor'
 moment = require 'moment'
 
 PublicHolidaysSection = React.createClass
