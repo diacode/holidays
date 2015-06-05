@@ -68,10 +68,12 @@ module.exports = Marty.createStore
       validationSucceed: false
 
   creationSuccess: (newPublicHolidays)->
-    holidays = @state.publicHolidays
+    holidays = @state.publicHolidays.concat newPublicHolidays
+    holidays = _.sortBy holidays, (holiday) ->
+      holiday.day
 
     @setState
-      publicHolidays: holidays.concat newPublicHolidays
+      publicHolidays: holidays
       newPublicHolidays: []
       validationSucceed: true
       successMessage: 'Public holidays created with success'
@@ -97,6 +99,7 @@ module.exports = Marty.createStore
   removePublicHoliday: (holiday) ->
     idx =  _.indexOf @state.publicHolidays, _.findWhere(@state.publicHolidays, id: holiday.id)
     @state.publicHolidays.splice(idx, 1)
+    @state.successMessage = 'Holiday destroyed successfully'
     @hasChanged()
 
   _add: (attributes) ->
