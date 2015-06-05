@@ -17,3 +17,14 @@ The goal of the app is to scratch one of our personal itches as a remote team: h
     $ rake db:setup
     $ foreman start -f Procfile.dev
 
+=== Configuration
+
+==== Slack notifications
+If you use Slack and you want to receive notifications about vacation requests activity in a certain channel don't forget to set the *SLACK_WEBHOOK_URL* environment variable pointing to the webhook url.
+
+    SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/KEY
+    
+==== Mailers
+To change the default from email address just change it here:
+    /config/initializers/custom_configuration.rb
+
