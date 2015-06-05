@@ -44,4 +44,12 @@ module.exports = Marty.createActionCreators
   setEditMode: (mode) ->
     @dispatch Constants.publicHolidays.SET_PUBLIC_HOLIDAY_EDIT_MODE, mode
 
+  destroyHoliday: (id) ->
+    @app.stateSources.publicHolidays.destroy(id)
+    .then (res) =>
+      @dispatch Constants.publicHolidays.PUBLIC_HOLIDAY_DESTROYED, res
+    .catch (err) ->
+      console.log 'Error destroying public holiday'
+      console.log err
+
 

@@ -10,11 +10,12 @@ module.exports = Marty.createStore
 
     addNew: Constants.publicHolidays.ADD_NEW_PUBLIC_HOLIDAY
     setHoliday: Constants.publicHolidays.SET_PUBLIC_HOLIDAY_VALUES
-    removeHoliday: Constants.publicHolidays.REMOVE_PUBLIC_HOLIDAY
+    removeNewPublicHoliday: Constants.publicHolidays.REMOVE_PUBLIC_HOLIDAY
     invalidateHolidays: Constants.publicHolidays.INVALIDATE_PUBLIC_HOLIDAYS
     creationSuccess: Constants.publicHolidays.PUBLIC_HOLIDAYS_CREATION_SUCCESS
     updateSuccess: Constants.publicHolidays.PUBLIC_HOLIDAYS_UPDATE_SUCCESS
     setRetrievedYearPublicHolidays: Constants.publicHolidays.DUPLICATE_YEAR_PUBLIC_HOLIDAYS
+    removePublicHoliday: Constants.publicHolidays.PUBLIC_HOLIDAY_DESTROYED
 
   getInitialState: ->
     editMode: false
@@ -57,7 +58,7 @@ module.exports = Marty.createStore
     _.assign(holiday, values)
     @hasChanged()
 
-  removeHoliday: (id) ->
+  removeNewPublicHoliday: (id) ->
     idx =  _.indexOf @state.newPublicHolidays, _.findWhere(@state.newPublicHolidays, id: id)
     @state.newPublicHolidays.splice(idx, 1)
     @hasChanged()
@@ -91,6 +92,11 @@ module.exports = Marty.createStore
         name: holiday.name
         day: moment(holiday.day).add(1, 'year').format('YYYY-MM-DD')
 
+    @hasChanged()
+
+  removePublicHoliday: (holiday) ->
+    idx =  _.indexOf @state.publicHolidays, _.findWhere(@state.publicHolidays, id: holiday.id)
+    @state.publicHolidays.splice(idx, 1)
     @hasChanged()
 
   _add: (attributes) ->
