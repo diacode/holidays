@@ -33,6 +33,7 @@ module.exports = Marty.createConstants
     'DUPLICATE_YEAR_PUBLIC_HOLIDAYS'
     'SET_PUBLIC_HOLIDAY_EDIT_MODE'
     'PUBLIC_HOLIDAYS_UPDATE_SUCCESS'
+    'PUBLIC_HOLIDAY_DESTROYED'
   ]
 
   users: [

@@ -19,12 +19,17 @@ module.exports = React.createClass
     e.preventDefault()
     @app.actionCreators.publicHolidays.removeHoliday @props.id
 
+  _handleOnDestroyClick: (e) ->
+    e.preventDefault()
+    if confirm('Are you sure?')
+      @app.actionCreators.publicHolidays.destroyHoliday @props.id
+
   _renderReadOnly: ->
     <tr key={@props.id}>
       <td>{moment(@props.day).format('dddd, MMMM Do YYYY')}</td>
       <td>{@props.name}</td>
       <td className="actions">
-        <a href="#" onClick={@_handleOnRemoveClick}>
+        <a href="#" onClick={@_handleOnDestroyClick}>
           <i className="fa fa-trash"></i>
         </a>
       </td>

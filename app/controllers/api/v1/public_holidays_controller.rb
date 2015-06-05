@@ -22,6 +22,13 @@ class Api::V1::PublicHolidaysController < ApplicationController
     render json: load_public_holidays, root: :public_holidays, status: :ok
   end
 
+  def destroy
+    public_holiday = PublicHoliday.find params[:id]
+    public_holiday.destroy!
+
+    render json: public_holiday, status: :ok
+  end
+
   private
 
   def load_public_holidays
