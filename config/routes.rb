@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:registrations]
 
   root to: 'dashboard#index'
-  resources :users, path: 'team', only: [:index, :show]
+  resources :users, path: 'team', only: :index
 
   resources :vacation_requests, only: [:index, :edit]
   get 'public_calendar', to: 'public_calendar#index'
