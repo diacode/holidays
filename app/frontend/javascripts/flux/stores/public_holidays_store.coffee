@@ -21,6 +21,7 @@ module.exports = Marty.createStore
     editMode: false
     newPublicHolidays: []
     validationSucceed: true
+    previousYearHolidaysEmpty: false
 
   getPublicHolidays: ->
     @fetch
@@ -88,6 +89,7 @@ module.exports = Marty.createStore
 
   setRetrievedYearPublicHolidays: (holidays) ->
     @state.newPublicHolidays = []
+    @state.previousYearHolidaysEmpty = holidays.length == 0
 
     for holiday in holidays
       @_add

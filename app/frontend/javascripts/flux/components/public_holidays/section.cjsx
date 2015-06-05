@@ -101,12 +101,18 @@ PublicHolidaysSection = React.createClass
   _renderDuplicateLastYear: ->
     return unless @props.publicHolidays.length == 0 and @props.newPublicHolidays.length == 0
 
-    <div>
-      <p>There are no public holidays registered for the current year. </p>
-      <a className="btn" href="#" onClick={@_onDuplicateClick}>
-        <i className="fa fa-copy"></i> Duplicate last year
-      </a>
-    </div>
+    if @props.previousYearHolidaysEmpty == true
+      <div>
+        <p>No public holidays last year :(</p>
+        <a href="#" onClick={@_handleAddNewClick}><i className="fa fa-plus"/> add new public holiday</a>
+      </div>
+    else
+      <div>
+        <p>There are no public holidays registered for the current year. </p>
+        <a className="btn" href="#" onClick={@_onDuplicateClick}>
+          <i className="fa fa-copy"></i> Duplicate last year
+        </a>
+      </div>
 
   render: ->
     <section>
@@ -144,3 +150,6 @@ module.exports = Marty.createContainer PublicHolidaysSection,
       @app.stores.publicHolidays.getState().validationSucceed
     successMessage: ->
       @app.stores.publicHolidays.getState().successMessage
+    previousYearHolidaysEmpty: ->
+      @app.stores.publicHolidays.getState().previousYearHolidaysEmpty
+
