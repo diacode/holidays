@@ -2,16 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:registrations]
 
   root to: 'dashboard#index'
-  resources :users, path: 'team', only: :index
-
-  resources :vacation_requests, only: [:index, :edit]
-  get 'public_calendar', to: 'public_calendar#index'
-
-  resources :settings, only: :index do
-    collection do
-      get 'public_holidays', to: 'public_holidays#index'
-    end
-  end
 
   namespace :api do
     namespace :v1 do
@@ -40,4 +30,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '*path', to: 'dashboard#index'
 end
