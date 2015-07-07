@@ -9,8 +9,5 @@
   %body{class: "application #{controller_name} #{action_name}", data: {'view-name': js_view_name}}
     = render 'layouts/partials/main_header'
     #main_wrapper
-      = render 'layouts/partials/main_nav'
-      %main#main_content
-        = yield
     = include_gon
     = javascript_include_tag 'application'
