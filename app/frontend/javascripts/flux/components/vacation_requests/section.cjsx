@@ -9,7 +9,7 @@ VacationRequestsList = React.createClass
       <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
 
   render: ->
-    <section>
+    <section className="vacation-requests-section">
       <div className="container">
         <header>
           <h2>Vacation requests</h2>

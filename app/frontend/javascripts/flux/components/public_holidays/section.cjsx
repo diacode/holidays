@@ -115,7 +115,7 @@ PublicHolidaysSection = React.createClass
       </div>
 
   render: ->
-    <section>
+    <section className="public-holidays-section">
       <div className="container">
         <header>
           <h2>Public holidays</h2>

@@ -14,7 +14,7 @@ PublicCalendarSection = React.createClass
     @app.queries.requestedDays.findForMonth month.format 'YYYY-MM-DD'
 
   render: ->
-    <div id="public_calendar_wrapper">
+    <div className="public-calendar-section" id="public_calendar_wrapper">
       <Calendar selectedDates={[]} datesChanged={false} monthChanged={@_handleMonthChanged} publicHolidays={@props.publicHolidays} approvedDays={@props.approvedRequestedDays} clickable={false}/>
     </div>
 

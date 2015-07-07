@@ -111,7 +111,7 @@ module.exports = Marty.createContainer VacationRequestEditor,
 
   fetch:
     vacationRequest: ->
-      @app.stores.editVacationRequest.fetchVacationRequest @props.vacationRequestId
+      @app.stores.editVacationRequest.fetchVacationRequest @props.params.id
     publicHolidays: ->
       @app.stores.publicCalendar.getState().publicHolidays
 
