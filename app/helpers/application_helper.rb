@@ -9,8 +9,4 @@ module ApplicationHelper
       "Open+Sans:400italic,400,600,700,800"
     ].join '|'
   end
-
-  def js_view_name
-    "#{controller_name}_#{action_name}"
-  end
 end
