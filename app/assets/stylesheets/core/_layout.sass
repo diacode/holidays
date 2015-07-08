@@ -8,6 +8,11 @@ body
   min-height: 100vh
   background: $light-gray
 
+  #application_wrapper > div
+    +display(flex)
+    +flex-direction(column)
+    min-height: 100vh
+
   #main_wrapper
     +display(flex)
     +flex(1)
@@ -17,9 +22,9 @@ body
       +flex(1)
 
 
-    div > aside
+    > aside
       +flex(0 0 12em)
-    div > main
+    > main
       +flex(1)
       +display(flex)
       > section
