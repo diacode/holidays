@@ -19,9 +19,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.cjsx$/,      loaders: ["coffee", "cjsx"]},
-      { test: /\.coffee$/,    loader: "coffee-loader"},
-      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+      { test: /\.cjsx$/, loaders: ["coffee", "cjsx"]},
+      { test: /\.coffee$/,   loader: "coffee-loader"}
     ]
   },
   plugins: [
