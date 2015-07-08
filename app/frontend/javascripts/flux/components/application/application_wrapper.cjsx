@@ -1,4 +1,5 @@
 SideBar = require './side_bar'
+MainHeader = require './main_header'
 RouteHandler = require('react-router').RouteHandler
 
 module.exports = React.createClass
@@ -6,9 +7,12 @@ module.exports = React.createClass
 
   render: ->
     <div>
-      <SideBar />
-      <main id="main_content">
-        <RouteHandler/>
-      </main>
+      <MainHeader />
+      <div id="main_wrapper">
+        <SideBar />
+        <main id="main_content">
+          <RouteHandler/>
+        </main>
+      </div>
     </div>
 

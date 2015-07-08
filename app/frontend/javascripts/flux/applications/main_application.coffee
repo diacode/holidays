@@ -7,11 +7,13 @@ module.exports = Marty.createApplication () ->
       vacationRequests: require '../stores/vacation_requests_store'
       publicHolidays: require '../stores/public_holidays_store'
       editVacationRequest: require '../stores/edit_vacation_request_store'
+      requestForm: require '../stores/request_form_store'
     actionCreators:
       userForm: require '../action_creators/user_form_action_creators'
       vacationRequests: require '../action_creators/vacation_requests_action_creators'
       publicHolidays: require '../action_creators/public_holiday_action_creators'
       editVacationRequest: require '../action_creators/edit_vacation_request_action_creators'
+      requestForm: require '../action_creators/request_form_action_creators'
     queries:
       users: require '../queries/users_queries'
       publicHolidays: require '../queries/public_holidays_queries'
