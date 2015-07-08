@@ -1,4 +1,6 @@
 classnames = require 'classnames'
+Link = require('react-router').Link
+
 
 module.exports = React.createClass
   displayName: 'UserCard'
@@ -20,7 +22,9 @@ module.exports = React.createClass
 
     <div className={userClassnames}>
       <header>
-        <img className="avatar" src={@props.avatar_url}/>
+        <Link to="home">
+          <img className="avatar" src={@props.avatar_url}/>
+        </Link>
         <h3>{@props.full_name}</h3>
         {@_renderStatus()}
       </header>

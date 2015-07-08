@@ -7,10 +7,10 @@ RequestForm = React.createClass
 
   componentDidMount: ->
     date = moment().startOf("day").format 'YYYY-MM-DD'
-    @app.queries.findForMonth date
+    @app.queries.publicHolidays.findForMonth date
 
   _handleMonthChanged: (month) ->
-    @app.queries.findForMonth month.format 'YYYY-MM-DD'
+    @app.queries.publicHolidays.findForMonth month.format 'YYYY-MM-DD'
 
   _renderSelectedDates: ->
     return unless @props.datesValidated
@@ -34,7 +34,7 @@ RequestForm = React.createClass
     </div>
 
   _showCalendar: ->
-    @app.actionCreators.setDatesValidated(false)
+    @app.actionCreators.requestForm.setDatesValidated(false)
 
   _renderCalendar: ->
     return if @props.datesValidated
@@ -54,18 +54,18 @@ RequestForm = React.createClass
     </div>
 
   _handleDatesChanged: (dates) ->
-    @app.actionCreators.setSelectedDates dates
+    @app.actionCreators.requestForm.setSelectedDates dates
 
   _validateSelectedDates: (e) ->
     e.preventDefault()
-    @app.actionCreators.setDatesValidated @props.selectedDates.length > 0
+    @app.actionCreators.requestForm.setDatesValidated @props.selectedDates.length > 0
 
   _handleCancelClick: (e) ->
     e.preventDefault()
     @_hideForm()
 
   _hideForm: ->
-    @app.actionCreators.hideForm()
+    @app.actionCreators.requestForm.hideForm()
 
   _renderFormInputs: ->
     return unless @props.datesValidated
@@ -100,7 +100,7 @@ RequestForm = React.createClass
       message: message
       requested_days_attributes: requestedDaysAttributes
 
-    @app.actionCreators.create vacationRequest
+    @app.actionCreators.requestForm.create vacationRequest
 
   _renderError: ->
     return unless @props.error
@@ -116,7 +116,7 @@ RequestForm = React.createClass
 
   _handleOnShowClick: (e) ->
     e.preventDefault()
-    @app.actionCreators.showForm()
+    @app.actionCreators.requestForm.showForm()
 
   render: ->
     <div>

@@ -2,7 +2,6 @@ UserCard = require './card'
 UserForm = require './form'
 globals = require '../../../utils/globals'
 
-
 UsersSection = React.createClass
   displayName: 'UsersSection'
 
@@ -35,7 +34,7 @@ UsersSection = React.createClass
     <UserForm />
 
   render: ->
-    <div>
+    <div className="users-section">
       <div className="wrapper">
         {@_renderUsersList()}
       </div>

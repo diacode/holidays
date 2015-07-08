@@ -1,13 +1,22 @@
 #main_nav
+  +clearfix
   background: #222
   padding: .3em 2em
   position: relative
 
+  .logo
+    width: 100px
+
   .logo-link
     +transform(translateY(-50%))
+    display: inline-block
     position: absolute
     left: 2em
     top: 50%
+    width: 100px
+    height: 47px
+    background: image-url('logo-white.png') center center
+    background-size: cover
 
   .nav
     +display(table)

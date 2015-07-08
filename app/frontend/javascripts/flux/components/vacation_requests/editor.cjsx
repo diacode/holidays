@@ -1,6 +1,8 @@
 Calendar = require '../calendar/calendar'
 moment = require 'moment'
-SelectedDayListItem = sys = require '../selected_days/list_item'
+SelectedDayListItem = require '../selected_days/list_item'
+NotFound = require '../application/not_found'
+ServerError = require '../application/server_error'
 
 VacationRequestEditor = React.createClass
   displayName: 'VacationRequestEditor'
@@ -111,10 +113,16 @@ module.exports = Marty.createContainer VacationRequestEditor,
 
   fetch:
     vacationRequest: ->
-      @app.stores.editVacationRequest.fetchVacationRequest @props.vacationRequestId
+      @app.stores.editVacationRequest.fetchVacationRequest @props.params.id
     publicHolidays: ->
       @app.stores.publicCalendar.getState().publicHolidays
 
-  failed: (errors) ->
-    console.log 'Failed rendering VacationRequestsList'
-    console.log errors
+  failed: (response) ->
+    switch response.vacationRequest.status
+      when 404
+        <NotFound/>
+      else
+        <ServerError/>
+
+
+

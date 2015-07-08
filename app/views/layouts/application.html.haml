@@ -6,11 +6,7 @@
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
     = favicon_link_tag 'favicon.png'
-  %body{class: "application #{controller_name} #{action_name}", data: {'view-name': js_view_name}}
-    = render 'layouts/partials/main_header'
-    #main_wrapper
-      = render 'layouts/partials/main_nav'
-      %main#main_content
-        = yield
+  %body.application
+    #application_wrapper
     = include_gon
     = javascript_include_tag 'application'

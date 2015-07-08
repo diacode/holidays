@@ -1,6 +1,7 @@
 moment = require 'moment'
 SelectedDay = require './selected_day'
 classnames = require 'classnames'
+Link = require('react-router').Link
 
 module.exports = React.createClass
   displayName: 'VacationRequestListItem'
@@ -40,9 +41,9 @@ module.exports = React.createClass
         </a>
       </li>
       <li>
-        <a href={Routes.edit_vacation_request_path(@props.id)}>
+        <Link to="edit_vacation_request" params={id: @props.id}>
           <i className="fa fa-edit"></i> Edit
-        </a>
+        </Link>
       </li>
     </ul>
 

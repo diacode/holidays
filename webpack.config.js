@@ -5,7 +5,7 @@ module.exports = {
   context: __dirname,
   entry: {
     devise:  "./app/frontend/javascripts/devise.coffee",
-    application:  "./app/frontend/javascripts/application.coffee",
+    application:  "./app/frontend/javascripts/application.cjsx",
   },
   output: {
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
