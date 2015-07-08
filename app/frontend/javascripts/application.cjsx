@@ -6,6 +6,7 @@ RequestHolidaysForm = require './flux/components/holidays/request_form'
 MainApplication = require './flux/applications/main_application'
 ApplicationWrapper = require './flux/components/application/application_wrapper'
 SideBar = require './flux/components/application/side_bar'
+UserNav = require './widgets/user_nav'
 
 $ ->
   vacationRequestsApplication = new VacationRequestApplication()
@@ -25,5 +26,4 @@ $ ->
 
     React.render appContainer, document.getElementById('main_wrapper')
 
-
-
+  UserNav.mount()
