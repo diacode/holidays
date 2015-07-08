@@ -20,6 +20,7 @@ $card-color: darken($light-gray, 5)
     border: 1px solid $card-color
     box-shadow: 0 2px 0 0 $card-color
     min-height: 20em
+    overflow: hidden
 
     .body
       +display(flex)
@@ -56,7 +57,7 @@ $card-color: darken($light-gray, 5)
       box-shadow: none
       cursor: pointer
       border: 1px dashed darken($card-color, 10)
-      min-height: 340px
+      min-height: 320px
 
       &:hover
         border-color: $light-blue
