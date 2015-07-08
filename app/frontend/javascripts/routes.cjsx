@@ -1,5 +1,6 @@
 Router = require 'react-router'
 Route = Router.Route
+NotFoundRoute = Router.NotFoundRoute
 Users = require './flux/components/users/section'
 ApplicationWrapper = require './flux/components/application/application_wrapper'
 PublicCalendar = require './flux/components/public_calendar/section'
@@ -7,6 +8,7 @@ VacationRequests = require './flux/components/vacation_requests/section'
 VacationRequestEditor = require './flux/components/vacation_requests/editor'
 SettingsIndex = require './flux/components/settings/index'
 PublicHolidays = require './flux/components/public_holidays/section'
+NotFound = require './flux/components/application/not_found'
 
 module.exports = (
   <Route handler={ApplicationWrapper}>
@@ -17,5 +19,7 @@ module.exports = (
     <Route name="edit_vacation_request" path="/vacation_requests/:id/edit" handler={VacationRequestEditor} />
     <Route name="settings" path="/settings" handler={SettingsIndex} />
     <Route name="public_holidays" path="/settings/public_holidays" handler={PublicHolidays} />
+
+    <NotFoundRoute handler={NotFound} />
   </Route>
 )
