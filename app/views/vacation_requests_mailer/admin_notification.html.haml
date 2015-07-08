@@ -9,4 +9,4 @@
   %h3 Message
   %p= @vacation_request.message
 
-= link_to 'Go to vacation request', edit_vacation_request_url(@vacation_request)
+= link_to 'Go to vacation request', "#{root_url}vacation_requests/#{@vacation_request.id}/edit"
