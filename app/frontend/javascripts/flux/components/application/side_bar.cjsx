@@ -1,10 +1,11 @@
 Link = require('react-router').Link
+globals = require '../../../utils/globals'
 
 module.exports = React.createClass
   displayName: 'SideBar'
 
   _renderSettings: ->
-    return unless gon.current_user.admin
+    return unless globals.currentUser.admin
 
     <li>
       <Link to="settings"><i className="fa fa-cog"></i>Settings</Link>
