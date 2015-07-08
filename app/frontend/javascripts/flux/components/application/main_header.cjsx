@@ -11,9 +11,7 @@ module.exports = React.createClass
   render: ->
     (
       <nav id="main_nav">
-        <a className="logo-link" href="#">
-          <img width="100" className="logo" src="/assets/logo-white.png" alt="Logo white 34d93c47ec1f4da8241152ebda98f5da3ea97731539f85073d026a93f5fa2a4f"/>
-        </a>
+        <a className="logo-link" href="#"></a>
         <ul className="nav">
           <li>
             <RequestHolidaysForm />
