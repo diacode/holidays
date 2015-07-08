@@ -4,7 +4,7 @@ module.exports = React.createClass
   displayName: 'SettingsIndex'
 
   render: ->
-    <div className="wrapper">
+    <section className="wrapper">
       <div className="cards-list">
         <div className="card button" href="/settings/public_holidays">
           <Link to="public_holidays">
@@ -15,4 +15,4 @@ module.exports = React.createClass
           </Link>
         </div>
       </div>
-    </div>
+    </section>
