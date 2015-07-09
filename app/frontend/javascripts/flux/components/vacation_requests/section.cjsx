@@ -11,11 +11,12 @@ VacationRequestsList = React.createClass
   _renderLoadMore: ->
     return unless @props.meta.current_page < @props.meta.total_pages
 
-    <div className="actions">
-      <button className="btn" onClick={@_handleLoadMoreClick}>Load more</button>
+    <div className="load-more">
+      <a href="#" onClick={@_handleLoadMoreClick}>Load more</a>
     </div>
 
-  _handleLoadMoreClick: ->
+  _handleLoadMoreClick: (e)->
+    e.preventDefault()
     @app.queries.vacationRequests.findAll @props.meta.current_page + 1
 
   _renderList: ->
