@@ -47,8 +47,8 @@ module.exports = Marty.createStateSource
       throw new Error('Error', res)
 
 
-  findAll: ->
-    @get(Routes.api_v1_vacation_requests_path()).then (res) ->
+  findAll: (page)->
+    @get(Routes.api_v1_vacation_requests_path(page: page)).then (res) ->
       if res.ok then return res.json()
 
       throw new Error('Error', res)

@@ -21,7 +21,7 @@ module.exports = Marty.createActionCreators
       switch res.status
         when 200
           res.json().then (body) =>
-            @dispatch Constants.users.ADD_USER, body
+            @dispatch Constants.users.ADD_USER, body.user
         when 422
           res.json().then (body) =>
             @dispatch Constants.users.ADD_USER_FORM_ERRORS, body
@@ -33,7 +33,7 @@ module.exports = Marty.createActionCreators
       switch res.status
         when 200
           res.json().then (body) =>
-            @dispatch Constants.users.REPLACE_USER, body
+            @dispatch Constants.users.REPLACE_USER, body.user
         when 422
           res.json().then (body) =>
             @dispatch Constants.users.ADD_USER_FORM_ERRORS, body

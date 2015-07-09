@@ -2,9 +2,14 @@ class Api::V1::VacationRequestsController < ApplicationController
   before_action :check_admin_user, only: [:approve, :reject]
 
   def index
-    vacation_requests = VacationRequest.includes(:user, :requested_days).ordered
+    vacation_requests = VacationRequest.includes(:user, :requested_days).ordered.page params[:page]
 
-    render json: vacation_requests, root: :vacation_requests
+    render  json: vacation_requests,
+            meta: {
+              current_page: vacation_requests.current_page,
+              total_pages: vacation_requests.total_pages,
+              total_count: vacation_requests.total_count
+            }
   end
 
   def show
