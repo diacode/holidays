@@ -8,21 +8,44 @@ VacationRequestsList = React.createClass
     @props.vacationRequests.map (vacationRequest) ->
       <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
 
+  _renderLoadMore: ->
+    return unless @props.meta.current_page < @props.meta.total_pages
+
+    <div className="actions">
+      <button className="btn" onClick={@_handleLoadMoreClick}>Load more</button>
+    </div>
+
+  _handleLoadMoreClick: ->
+    @app.queries.vacationRequests.findAll @props.meta.current_page + 1
+
+  _renderList: ->
+    <div id="vacation_requests_wrapper" className="box">
+      <ul className="vacation-requests-list">
+        <ReactCSSTransitionGroup transitionName="vacation-request">
+          {@_renderItems()}
+        </ReactCSSTransitionGroup>
+      </ul>
+      {@_renderLoadMore()}
+    </div>
+
+  _renderNoData: ->
+    <p>No data found yet</p>
+
   render: ->
     <section className="vacation-requests-section">
       <div className="container">
         <header>
           <h2>Vacation requests</h2>
         </header>
-        <div id="vacation_requests_wrapper" className="box">
-          <ul className="vacation-requests-list">
-            <ReactCSSTransitionGroup transitionName="vacation-request">
-              {@_renderItems()}
-            </ReactCSSTransitionGroup>
-          </ul>
-        </div>
+        {
+          if @props.vacationRequests.length > 0
+            @_renderList()
+          else
+            @_renderNoData()
+        }
       </div>
     </section>
+
 
 module.exports = Marty.createContainer VacationRequestsList,
   listenTo: [
@@ -32,6 +55,8 @@ module.exports = Marty.createContainer VacationRequestsList,
   fetch:
     vacationRequests: ->
       @app.stores.vacationRequests.fetchVacationRequests()
+    meta: ->
+      @app.stores.vacationRequests.getState().meta
 
   failed: (errors) ->
     console.log 'Failed rendering VacationRequestsList'
