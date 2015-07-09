@@ -9,7 +9,7 @@ module.exports = Marty.createActionCreators
   createDay: (vacationRequestId, requestedDay) ->
     @app.stateSources.requestedDays.create(vacationRequestId, requestedDay)
     .then (res) =>
-      @dispatch Constants.editVacationRequest.ADD_REQUESTED_DAY, res
+      @dispatch Constants.editVacationRequest.ADD_REQUESTED_DAY, res.requested_day
     .catch (err) =>
       console.log 'Error creating requested day'
       console.log err
@@ -17,7 +17,7 @@ module.exports = Marty.createActionCreators
   destroyDay: (vacationRequestId, requestedDay) ->
     @app.stateSources.requestedDays.destroy(vacationRequestId, requestedDay)
     .then (res) =>
-      @dispatch Constants.editVacationRequest.REMOVE_REQUESTED_DAY, res
+      @dispatch Constants.editVacationRequest.REMOVE_REQUESTED_DAY, res.requested_day
     .catch (err) =>
       console.log 'Error creating requested day'
       console.log err
@@ -25,7 +25,7 @@ module.exports = Marty.createActionCreators
   approveDay: (vacationRequestId, requestedDayId) ->
     @app.stateSources.requestedDays.approve(vacationRequestId, requestedDayId)
     .then (res) =>
-      @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res
+      @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res.requested_day
     .catch (err) =>
       console.log 'Error approving requested day'
       console.log err
@@ -33,7 +33,7 @@ module.exports = Marty.createActionCreators
   rejectDay: (vacationRequestId, requestedDayId) ->
     @app.stateSources.requestedDays.reject(vacationRequestId, requestedDayId)
     .then (res) =>
-      @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res
+      @dispatch Constants.editVacationRequest.REPLACE_REQUESTED_DAY, res.requested_day
     .catch (err) =>
       console.log 'Error approving requested day'
       console.log err

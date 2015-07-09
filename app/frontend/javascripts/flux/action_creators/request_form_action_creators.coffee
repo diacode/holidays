@@ -21,7 +21,7 @@ module.exports = Marty.createActionCreators
       switch res.status
         when 200
           res.json().then (body) =>
-            @dispatch Constants.requestForm.VACATION_REQUEST_CREATED, body
+            @dispatch Constants.requestForm.VACATION_REQUEST_CREATED, body.vacation_request
         when 422
           res.json().then (body) =>
             @dispatch Constants.requestForm.SET_ERROR, body
