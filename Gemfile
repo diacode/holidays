@@ -23,7 +23,7 @@ gem 'devise'
 
 gem 'thin'
 gem 'haml-rails'
-gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+gem 'active_model_serializers', '0.8.3'
 gem 'annotate', github: 'ctran/annotate_models'
 gem 'js-routes', github: 'railsware/js-routes'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
