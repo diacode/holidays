@@ -12,6 +12,8 @@ module.exports = Marty.createStore
     addVacationRequest: Constants.requestForm.VACATION_REQUEST_CREATED
 
   getInitialState: ->
+    meta:
+      current_page: 1
 
   fetchVacationRequests: ->
     @fetch
@@ -21,11 +23,16 @@ module.exports = Marty.createStore
       remotely: =>
         @app.queries.vacationRequests.findAll()
 
-  addVacationRequests: (vacationRequests) ->
+  addVacationRequests: (vacationRequests, meta) ->
+    currentVacationRequests = @state.vacationRequests || []
+
     @setState
-      vacationRequests: vacationRequests
+      vacationRequests: currentVacationRequests.concat vacationRequests
+      meta: meta
 
   replaceVacationRequest: (vacationRequest) ->
+    return unless @state.vacationRequests
+
     vacationRequests = @state.vacationRequests
 
     index = _.findIndex vacationRequests, (request) ->
@@ -36,8 +43,9 @@ module.exports = Marty.createStore
 
   addVacationRequest: (vacationRequest) ->
     vacationRequests = @state.vacationRequests
+
     @setState
-      vacationRequests: [vacationRequest].concat(vacationRequests)
+      vacationRequests: [vacationRequest].concat vacationRequests
 
 
 
