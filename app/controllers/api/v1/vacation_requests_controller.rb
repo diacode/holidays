@@ -2,7 +2,7 @@ class Api::V1::VacationRequestsController < ApplicationController
   before_action :check_admin_user, only: [:approve, :reject]
 
   def index
-    vacation_requests = VacationRequest.ordered
+    vacation_requests = VacationRequest.includes(:user, :requested_days).ordered
 
     render json: vacation_requests, root: :vacation_requests
   end
