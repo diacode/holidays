@@ -44,4 +44,10 @@ Rails.application.configure do
   }
 
   config.action_mailer.delivery_method = :letter_opener
+
+  # Bullet configuration
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+  end
 end
