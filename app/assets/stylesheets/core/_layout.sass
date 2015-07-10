@@ -34,6 +34,15 @@ body
           +outer-container
           > header
             margin-bottom: 1em
+            position: relative
+
+            .actions
+              +transform(translateY(-50%))
+              position: absolute
+              top: 50%
+              right: 0
+              a
+                margin-left: 1em
 
   section
     header

@@ -66,6 +66,24 @@
   &:disabled
     opacity: .5
 
+  &.approve
+    background: $green
+    color: #fff
+    border-bottom: 3px darken($green, 10) solid
+
+    &:hover
+      background: lighten($green,10)
+      color: #fff
+
+  &.reject
+    background: $red
+    color: #fff
+    border-bottom: 3px darken($red, 10) solid
+
+    &:hover
+      background: lighten($red,10)
+      color: #fff
+
 =link($primary-color: $dark-gray, $secondary-color: darken($primary-color, 10), $font-size: 1em, $line-height: 1em)
   +transition
   font-size: $font-size
