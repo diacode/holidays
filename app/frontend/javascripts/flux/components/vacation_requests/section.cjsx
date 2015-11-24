@@ -6,7 +6,7 @@ VacationRequestsList = React.createClass
 
   _renderItems: ->
     @props.vacationRequests.map (vacationRequest) ->
-      <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
+      <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} /> if vacationRequest != undefined
 
   _renderLoadMore: ->
     return unless @props.meta.current_page < @props.meta.total_pages
