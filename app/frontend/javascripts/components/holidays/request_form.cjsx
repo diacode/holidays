@@ -1,3 +1,7 @@
+{ connect } = require 'react-redux'
+
+actions = require '../../actions'
+
 Calendar = require '../calendar/calendar'
 moment = require 'moment'
 Modal = require '../utils/modal'
@@ -5,16 +9,12 @@ Modal = require '../utils/modal'
 RequestForm = React.createClass
   displayName: 'RequestForm'
 
-  getDefaultProps: ->
-    selectedDates: []
-
-
   componentDidMount: ->
     date = moment().startOf("day").format 'YYYY-MM-DD'
-    # @app.queries.publicHolidays.findForMonth date
+    @props.dispatch actions.publicHolidays.findForMonth(date)
 
   _handleMonthChanged: (month) ->
-    @app.queries.publicHolidays.findForMonth month.format 'YYYY-MM-DD'
+    @props.dispatch actions.publicHolidays.findForMonth(month.format 'YYYY-MM-DD')
 
   _renderSelectedDates: ->
     return unless @props.datesValidated
@@ -118,13 +118,13 @@ RequestForm = React.createClass
       </ul>
     </div>
 
-  _handleOnShowClick: (e) ->
+  _handleShowClick: (e) ->
     e.preventDefault()
-    @app.actionCreators.requestForm.showForm()
+    @props.dispatch actions.vacationRequestForm.showForm()
 
   render: ->
     <div>
-      <a onClick={@_handleOnShowClick} className="btn" href="#">Request holidays</a>
+      <a onClick={@_handleShowClick} className="btn" href="#">Request holidays</a>
       <Modal show={@props.showForm} hide={@_hideForm}>
         <div className="modal">
           <form onSubmit={@_onSubmit}>
@@ -145,4 +145,7 @@ RequestForm = React.createClass
       </Modal>
     </div>
 
-module.exports = RequestForm
+mapStateToProps = (state) ->
+  state.vacationRequestForm
+
+module.exports = connect(mapStateToProps)(RequestForm)
