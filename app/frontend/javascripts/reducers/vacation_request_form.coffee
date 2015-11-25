@@ -2,7 +2,7 @@ constants = require '../constants'
 
 initialState =
   showForm: false
-  datesValidated: false
+  datesAreValid: false
   selectedDates: []
   error: null
   publicHolidays: []
@@ -13,7 +13,7 @@ module.exports = (state = initialState, action) ->
       _.merge {}, state, showForm: action.showForm
 
     when constants.REQUEST_FORM_SET_DATES_ARE_VALID
-      _.merge {}, state, datesValidated: action.areValid
+      _.merge {}, state, datesAreValid: action.areValid
 
     when constants.REQUEST_FORM_SET_ERROR
       _.merge {}, state, error: action.error
@@ -23,6 +23,15 @@ module.exports = (state = initialState, action) ->
 
     when constants.PUBLIC_HOLIDAYS_SET_MONTH_HOLIDAYS
       _.merge {}, state, publicHolidays: action.publicHolidays
+
+    when constants.REQUEST_FORM_RESET_FORM
+      newState =
+        showForm: false
+        datesAreValid: false
+        selectedDates: []
+        error: null
+
+      _.assign {}, state, newState
 
     else
       state

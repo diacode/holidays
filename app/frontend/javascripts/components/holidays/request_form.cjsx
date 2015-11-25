@@ -17,7 +17,7 @@ RequestForm = React.createClass
     @props.dispatch actions.publicHolidays.findForMonth(month.format 'YYYY-MM-DD')
 
   _renderSelectedDates: ->
-    return unless @props.datesValidated
+    return unless @props.datesAreValid
 
     sortedDates = _.sortBy @props.selectedDates, (n) ->
       n
@@ -38,10 +38,10 @@ RequestForm = React.createClass
     </div>
 
   _showCalendar: ->
-    @app.actionCreators.requestForm.setDatesValidated(false)
+    @props.dispatch actions.vacationRequestForm.setDatesAreValid(false)
 
   _renderCalendar: ->
-    return if @props.datesValidated
+    return if @props.datesAreValid
 
     calendarProps =
       selectedDates: @props.selectedDates
@@ -58,21 +58,21 @@ RequestForm = React.createClass
     </div>
 
   _handleDatesChanged: (dates) ->
-    @app.actionCreators.requestForm.setSelectedDates dates
+    @props.dispatch actions.vacationRequestForm.setSelectedDates dates
 
   _validateSelectedDates: (e) ->
     e.preventDefault()
-    @app.actionCreators.requestForm.setDatesValidated @props.selectedDates.length > 0
+    @props.dispatch actions.vacationRequestForm.setDatesAreValid(@props.selectedDates.length > 0)
 
   _handleCancelClick: (e) ->
     e.preventDefault()
     @_hideForm()
 
   _hideForm: ->
-    @app.actionCreators.requestForm.hideForm()
+    @props.dispatch actions.vacationRequestForm.showForm(false)
 
   _renderFormInputs: ->
-    return unless @props.datesValidated
+    return unless @props.datesAreValid
 
     <div className="holidays-data-wrapper">
       <h5>Want to add a comment?</h5>
@@ -104,7 +104,7 @@ RequestForm = React.createClass
       message: message
       requested_days_attributes: requestedDaysAttributes
 
-    @app.actionCreators.requestForm.create vacationRequest
+    @props.dispatch actions.vacationRequestForm.create(vacationRequest)
 
   _renderError: ->
     return unless @props.error

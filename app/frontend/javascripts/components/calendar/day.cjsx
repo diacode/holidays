@@ -62,7 +62,7 @@ module.exports = React.createClass
       selected: @state.selected || @_belongsToSelectedDates()
       'public-holiday': @_isPublicHoliday()
 
-    <div id={day} key={day} className={dayClasses} onClick={@_onClick}>
+    <div id={day} key={day} className={dayClasses} onClick={@_onClick} onTouchEnd={@_onClick}>
       <span className="day-number">{@props.day.number}</span>
       {@_handleApprovedDay()}
     </div>
