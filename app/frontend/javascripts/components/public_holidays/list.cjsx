@@ -6,10 +6,10 @@ module.exports = React.createClass
 
   _renderPublicHolidays: ->
     publicHolidays = @props.publicHolidays.map (holiday, i) =>
-      <PublicHoliday key={i} editMode={@props.editMode} {...holiday} />
+      <PublicHoliday key={i} dispatch={@props.dispatch} editMode={@props.editMode} {...holiday} />
 
     newPublicHolidays = @props.newPublicHolidays.map (holiday) =>
-      <PublicHoliday key={"new-#{holiday.id}"} editMode={true} {...holiday} />
+      <PublicHoliday key={"new-#{holiday.id}"} dispatch={@props.dispatch} editMode={true} {...holiday} />
 
     publicHolidays.concat newPublicHolidays
 
@@ -26,4 +26,3 @@ module.exports = React.createClass
         {@_renderPublicHolidays()}
       </tbody>
     </table>
-

@@ -5,7 +5,7 @@ PublicCalendarIndex = require '../components/public_calendar/index'
 VacationRequestsIndex = require '../components/vacation_requests/index'
 VacationRequestEdit = require '../components/vacation_requests/edit'
 SettingsIndex = require '../components/settings/index'
-PublicHolidays = require '../components/public_holidays/section'
+PublicHolidaysIndex = require '../components/public_holidays/index'
 NotFound = require '../components/application/not_found'
 
 module.exports =
@@ -18,8 +18,10 @@ module.exports =
       <IndexRoute component={VacationRequestsIndex}/>
       <Route path=":id/edit" component={VacationRequestEdit} />
     </Route>
-    <Route path="/settings" component={SettingsIndex} />
-    <Route path="/settings/public_holidays" component={PublicHolidays} />
+    <Route path="/settings">
+      <IndexRoute component={SettingsIndex}/>
+      <Route path="public_holidays" component={PublicHolidaysIndex} />
+    </Route>
 
     <Route path="*" component={NotFound} />
   </Route>

@@ -1,23 +1,29 @@
+{ connect } = require 'react-redux'
+actions = require '../../actions'
+
 PublicHolidaysList = require './list'
 moment = require 'moment'
 
-PublicHolidaysSection = React.createClass
-  displayName: 'PublicHolidaysSection'
+PublicHolidaysIndex = React.createClass
+  displayName: 'PublicHolidaysSIndex'
+
+  componentDidMount: ->
+    @props.dispatch actions.publicHolidays.findForYear(moment().format())
 
   _renderList: ->
     return if @props.publicHolidays.length == 0 and @props.newPublicHolidays.length == 0
 
-    <PublicHolidaysList publicHolidays={@props.publicHolidays} newPublicHolidays={@props.newPublicHolidays} editMode={@props.editMode}/>
+    <PublicHolidaysList dispatch={@props.dispatch} publicHolidays={@props.publicHolidays} newPublicHolidays={@props.newPublicHolidays} editMode={@props.editMode}/>
 
   _handleEditClick: (e) ->
     e.preventDefault()
-    @app.actionCreators.publicHolidays.setEditMode true
+    @props.dispatch actions.publicHolidays.setEditMode true
 
   _handleCancelEditClick: (e) ->
     e.preventDefault()
 
     if confirm('Are you sure?')
-      @app.actionCreators.publicHolidays.setEditMode false
+      @props.dispatch actions.publicHolidays.setEditMode false
 
   _renderHeaderActions: ->
     return if @props.publicHolidays.length == 0
@@ -27,7 +33,7 @@ PublicHolidaysSection = React.createClass
 
   _handleAddNewClick: (e)->
     e.preventDefault()
-    @app.actionCreators.publicHolidays.addNew()
+    @props.dispatch actions.publicHolidays.addNew()
 
   _renderActions: ->
     return if @props.publicHolidays.length == 0 and @props.newPublicHolidays.length == 0
@@ -76,13 +82,13 @@ PublicHolidaysSection = React.createClass
     if @_validHolidays(@props.newPublicHolidays) then @_saveHolidays() else @_setValidationError()
 
   _saveHolidays: ->
-    @app.actionCreators.publicHolidays.save @props.newPublicHolidays
+    @props.dispatch actions.publicHolidays.save @props.newPublicHolidays
 
   _updateHolidays: ->
-    @app.actionCreators.publicHolidays.update @props.publicHolidays
+    @props.dispatch actions.publicHolidays.update @props.publicHolidays
 
   _setValidationError: ->
-    @app.actionCreators.publicHolidays.invalidateHolidays()
+    @props.dispatch actions.publicHolidays.invalidateHolidays()
 
   _validHolidays: (holidays)->
     valid = true
@@ -96,7 +102,7 @@ PublicHolidaysSection = React.createClass
 
   _onDuplicateClick: (e) ->
     e.preventDefault()
-    @app.queries.publicHolidays.duplicateForYear(moment().subtract(1, 'year').format())
+    @props.dispatch actions.publicHolidays.duplicateForYear(moment().subtract(1, 'year').format())
 
   _renderDuplicateLastYear: ->
     return unless @props.publicHolidays.length == 0 and @props.newPublicHolidays.length == 0
@@ -136,4 +142,7 @@ PublicHolidaysSection = React.createClass
       </div>
     </section>
 
-module.exports = PublicHolidaysSection
+mapStateToProps = (state) ->
+  state.publicHolidays
+
+module.exports = connect(mapStateToProps)(PublicHolidaysIndex)

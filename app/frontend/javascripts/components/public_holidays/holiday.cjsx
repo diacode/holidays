@@ -1,4 +1,5 @@
 moment = require 'moment'
+actions = require '../../actions'
 
 module.exports = React.createClass
   displayName: 'PublicHoliday'
@@ -9,16 +10,16 @@ module.exports = React.createClass
       day: @refs.date.value
       name: @refs.name.value
 
-    @app.actionCreators.publicHolidays.setHoliday values
+    @props.dispatch actions.publicHolidays.setHoliday values
 
   _handleOnRemoveClick: (e) ->
     e.preventDefault()
-    @app.actionCreators.publicHolidays.removeHoliday @props.id
+    @props.dispatch actions.publicHolidays.removeHoliday @props.id
 
   _handleOnDestroyClick: (e) ->
     e.preventDefault()
     if confirm('Are you sure?')
-      @app.actionCreators.publicHolidays.destroyHoliday @props.id
+      @props.dispatch actions.publicHolidays.destroy @props.id
 
   _renderReadOnly: ->
     <tr key={@props.id}>
