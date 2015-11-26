@@ -42,7 +42,3 @@ module.exports =
         dispatch
           type: constants.person.REQUEST_FORM_SET_ERROR
           errors: data.responseJSON
-
-
-
-

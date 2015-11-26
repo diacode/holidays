@@ -6,8 +6,8 @@ module.exports = React.createClass
   _handleOnChange: (e) ->
     values =
       id: @props.id
-      day: @refs.date.getDOMNode().value
-      name: @refs.name.getDOMNode().value
+      day: @refs.date.value
+      name: @refs.name.value
 
     @app.actionCreators.publicHolidays.setHoliday values
 

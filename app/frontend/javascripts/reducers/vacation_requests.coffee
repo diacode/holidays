@@ -22,7 +22,5 @@ module.exports = (state = initalState, action) ->
       vacationRequests[index] = action.vacationRequest
 
       _.assign {}, state, vacationRequests: vacationRequests
-    when constants.VACATION_REQUEST_CREATED
-      state
     else
       state

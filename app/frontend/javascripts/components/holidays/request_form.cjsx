@@ -94,7 +94,7 @@ RequestForm = React.createClass
 
     return unless @props.selectedDates.length > 0
 
-    message = if @refs.message != undefined then @refs.message.getDOMNode().value.trim() else ''
+    message = if @refs.message != undefined then @refs.message.value.trim() else ''
 
     requestedDaysAttributes = @props.selectedDates.map (date) ->
       day: date.format 'YYYY-MM-DD'
