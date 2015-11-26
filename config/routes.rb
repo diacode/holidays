@@ -9,14 +9,14 @@ Rails.application.routes.draw do
 
       resources :vacation_requests, only: [:index, :show, :create, :update, :destroy] do
         member do
-          put :approve
-          put :reject
+          patch :approve
+          patch :reject
         end
 
         resources :requested_days, only: [:create, :destroy] do
           member do
-            put :approve
-            put :reject
+            patch :approve
+            patch :reject
           end
         end
       end
