@@ -8,3 +8,4 @@ module.exports = combineReducers
   vacationRequestForm: require './vacation_request_form'
   publicCalendar: require './public_calendar'
   vacationRequests: require './vacation_requests'
+  editVacationRequest: require './edit_vacation_request'

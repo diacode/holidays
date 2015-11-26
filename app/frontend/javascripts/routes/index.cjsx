@@ -3,7 +3,7 @@ UsersIndex = require '../components/users/index'
 ApplicationWrapper = require '../layouts/application_wrapper'
 PublicCalendarIndex = require '../components/public_calendar/index'
 VacationRequestsIndex = require '../components/vacation_requests/index'
-VacationRequestEditor = require '../components/vacation_requests/editor'
+VacationRequestEdit = require '../components/vacation_requests/edit'
 SettingsIndex = require '../components/settings/index'
 PublicHolidays = require '../components/public_holidays/section'
 NotFound = require '../components/application/not_found'
@@ -12,12 +12,12 @@ module.exports =
   <Route path="/" component={ApplicationWrapper}>
     <IndexRoute component={UsersIndex} />
 
-    <Route name="team" path="/team" component={UsersIndex} />
-    <Route name="public_calendar" path="/public_calendar" component={PublicCalendarIndex} />
-    <Route name="vacation_requests" path="/vacation_requests" component={VacationRequestsIndex} />
-    <Route name="edit_vacation_request" path="/vacation_requests/:id/edit" component={VacationRequestEditor} />
-    <Route name="settings" path="/settings" component={SettingsIndex} />
-    <Route name="public_holidays" path="/settings/public_holidays" component={PublicHolidays} />
+    <Route path="/team" component={UsersIndex} />
+    <Route path="/public_calendar" component={PublicCalendarIndex} />
+    <Route path="/vacation_requests" component={VacationRequestsIndex} />
+    <Route path="/vacation_requests/:id/edit" component={VacationRequestEdit} />
+    <Route path="/settings" component={SettingsIndex} />
+    <Route path="/settings/public_holidays" component={PublicHolidays} />
 
     <Route path="*" component={NotFound} />
   </Route>

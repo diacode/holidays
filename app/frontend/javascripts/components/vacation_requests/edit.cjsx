@@ -1,18 +1,21 @@
-Calendar = require '../calendar/calendar'
+{ connect } = require 'react-redux'
+actions = require '../../actions'
 moment = require 'moment'
-SelectedDayListItem = require '../selected_days/list_item'
-NotFound = require '../application/not_found'
-ServerError = require '../application/server_error'
 
-VacationRequestEditor = React.createClass
-  displayName: 'VacationRequestEditor'
+Calendar = require '../calendar/calendar'
+SelectedDayListItem = require '../selected_days/list_item'
+
+VacationRequestEdit = React.createClass
+  displayName: 'VacationRequestEdit'
 
   componentDidMount: ->
     date = moment().startOf("day").format 'YYYY-MM-DD'
-    @app.queries.publicHolidays.findForMonth date
+    @props.dispatch actions.publicHolidays.findForMonth(date)
+    @props.dispatch actions.vacationRequests.find(@props.params.id)
+
 
   _handleMonthChanged: (month) ->
-    @app.queries.publicHolidays.findForMonth month.format 'YYYY-MM-DD'
+    @props.dispatch actions.publicHolidays.findForMonth(month.format 'YYYY-MM-DD')
 
   _handleDatesChanged: (dates) ->
     if dates.length > @props.vacationRequest.requested_days.length then @_createDay(dates) else @_removeDay(dates)
@@ -30,7 +33,7 @@ VacationRequestEditor = React.createClass
           day: formatedDate
           status: 'approved'
 
-        @app.actionCreators.editVacationRequest.createDay @props.vacationRequest.id, day
+        @props.dispatch actions.editVacationRequest.createDay(@props.vacationRequest.id, day)
 
   _removeDay: (dates) ->
     for requestedDay in @props.vacationRequest.requested_days
@@ -38,7 +41,7 @@ VacationRequestEditor = React.createClass
         formatedDate = date.format('YYYY-MM-DD')
         formatedDate == requestedDay.day
 
-      if index == -1 then @app.actionCreators.editVacationRequest.destroyDay @props.vacationRequest.id, requestedDay
+      if index == -1 then @props.dispatch actions.editVacationRequest.destroyDay(@props.vacationRequest.id, requestedDay.id)
 
   _renderRequestedDays: ->
     days = @props.vacationRequest.requested_days.map (day) =>
@@ -49,6 +52,8 @@ VacationRequestEditor = React.createClass
     </ul>
 
   _renderCalendar: ->
+    return unless @props.vacationRequest.id
+
     dates = @props.vacationRequest.requested_days.map (day) ->
       moment(day.day)
 
@@ -67,13 +72,13 @@ VacationRequestEditor = React.createClass
     e.preventDefault()
 
     if confirm('Are you sure you want to approve this vacation request?')
-      @app.actionCreators.vacationRequests.approve @props.vacationRequest.id
+      @props.dispatch actions.vacationRequests.approve(@props.vacationRequest.id)
 
   _onRejectAllClick: (e) ->
     e.preventDefault()
 
     if confirm('Are you sure you want to reject this vacation request?')
-      @app.actionCreators.vacationRequests.reject @props.vacationRequest.id
+      @props.dispatch actions.vacationRequests.reject(@props.vacationRequest.id)
 
   render: ->
     <section id="vacation_request_editor">
@@ -106,7 +111,7 @@ VacationRequestEditor = React.createClass
       </div>
     </section>
 
-module.exports = VacationRequestEditor
+mapStateToProps = (state) ->
+  state.editVacationRequest
 
-
-
+module.exports = connect(mapStateToProps)(VacationRequestEdit)

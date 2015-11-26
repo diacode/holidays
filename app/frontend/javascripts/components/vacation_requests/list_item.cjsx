@@ -38,7 +38,7 @@ module.exports = React.createClass
         </a>
       </li>
       <li>
-        <Link to="edit_vacation_request" params={id: @props.id}>
+        <Link to="/vacation_requests/#{@props.id}/edit">
           <i className="fa fa-edit"></i> Edit
         </Link>
       </li>

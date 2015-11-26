@@ -11,6 +11,14 @@ module.exports =
           vacationRequests: data.vacation_requests
           meta: data.meta
 
+  find: (id) ->
+    (dispatch) =>
+      $.get(Routes.api_v1_vacation_request_path(id))
+      .done (data) ->
+        dispatch
+          type: constants.EDIT_VACATION_REQUEST_SET
+          vacationRequest: data.vacation_request
+
   approve: (id) ->
     (dispatch) =>
       $.ajax
