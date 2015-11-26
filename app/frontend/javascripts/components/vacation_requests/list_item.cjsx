@@ -1,3 +1,4 @@
+actions = require '../../actions'
 moment = require 'moment'
 SelectedDay = require './selected_day'
 classnames = require 'classnames'
@@ -14,13 +15,13 @@ module.exports = React.createClass
     e.preventDefault()
 
     if confirm('Are you sure you want to approve this vacation request?')
-      @app.actionCreators.vacationRequests.approve @props.id
+      @props.dispatch actions.vacationRequests.approve(@props.id)
 
   _onRejectClick: (e) ->
     e.preventDefault()
 
     if confirm('Are you sure you want to reject this vacation request?')
-      @app.actionCreators.vacationRequests.reject @props.id
+      @props.dispatch actions.vacationRequests.reject(@props.id)
 
   _renderActions: ->
     return unless @props.editable

@@ -10,3 +10,27 @@ module.exports =
           type: constants.VACATION_REQUESTS_RECEIVED
           vacationRequests: data.vacation_requests
           meta: data.meta
+
+  approve: (id) ->
+    (dispatch) =>
+      $.ajax
+        url: Routes.approve_api_v1_vacation_request_path(id)
+        type: 'PATCH'
+        data:
+          authenticity_token: globals.authenticity_token
+      .done (data) =>
+        dispatch
+          type: constants.VACATION_REQUEST_REPLACE
+          vacationRequest: data.vacation_request
+
+  reject: (id) ->
+    (dispatch) =>
+      $.ajax
+        url: Routes.reject_api_v1_vacation_request_path(id)
+        type: 'PATCH'
+        data:
+          authenticity_token: globals.authenticity_token
+      .done (data) =>
+        dispatch
+          type: constants.VACATION_REQUEST_REPLACE
+          vacationRequest: data.vacation_request

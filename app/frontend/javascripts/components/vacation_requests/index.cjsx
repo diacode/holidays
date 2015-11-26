@@ -11,8 +11,8 @@ VacationRequestsIndex = React.createClass
     @props.dispatch actions.vacationRequests.fetchVacationRequests()
 
   _renderItems: ->
-    @props.vacationRequests.map (vacationRequest) ->
-      <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
+    @props.vacationRequests.map (vacationRequest) =>
+      <VacationRequestListItem key={vacationRequest.id} dispatch={@props.dispatch} {...vacationRequest} />
 
   _renderLoadMore: ->
     return unless @props.meta.current_page < @props.meta.total_pages

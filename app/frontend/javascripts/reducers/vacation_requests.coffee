@@ -13,10 +13,15 @@ module.exports = (state = initalState, action) ->
 
       _.assign {}, state, vacationRequests: newVacationRequests, meta: action.meta
 
-    when constants.VACATION_REQUEST_APPROVED
-      state
-    when constants.VACATION_REQUEST_REJECTED
-      state
+    when constants.VACATION_REQUEST_REPLACE
+      vacationRequests = _.cloneDeep state.vacationRequests
+
+      index = _.findIndex vacationRequests, (request) ->
+        action.vacationRequest.id == request.id
+
+      vacationRequests[index] = action.vacationRequest
+
+      _.assign {}, state, vacationRequests: vacationRequests
     when constants.VACATION_REQUEST_CREATED
       state
     else
