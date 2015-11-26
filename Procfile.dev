@@ -1,2 +1,2 @@
-web: bundle exec spring rails server
+web: bundle exec spring rails server --binding=0.0.0.0
 webpack: webpack --watch --colors
