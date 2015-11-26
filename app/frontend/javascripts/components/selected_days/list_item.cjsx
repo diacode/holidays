@@ -1,3 +1,4 @@
+editVacationRequestActions = require '../../actions/edit_vacation_request'
 SelectedDay = require '../vacation_requests/selected_day'
 
 module.exports = React.createClass
@@ -21,13 +22,13 @@ module.exports = React.createClass
   _onApproveClick: (e) ->
     e.preventDefault()
     if confirm('Are you sure you want to approve this day?')
-      @app.actionCreators.editVacationRequest.approveDay @props.vacationRequestId, @props.id
+      @props.dispatch editVacationRequestActions.approveDay(@props.vacationRequestId, @props.id)
 
 
   _onRejectClick: (e) ->
     e.preventDefault()
     if confirm('Are you sure you want to reject this day?')
-      @app.actionCreators.editVacationRequest.rejectDay @props.vacationRequestId, @props.id
+      @props.dispatch editVacationRequestActions.rejectDay(@props.vacationRequestId, @props.id)
 
   render: ->
     <li>

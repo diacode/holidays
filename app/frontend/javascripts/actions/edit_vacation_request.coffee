@@ -30,3 +30,31 @@ module.exports =
           requestedDay: data.requested_day
       .fail (data) =>
         throw new Error('Error', data)
+
+  approveDay: (vacationRequestId, requestedDayId) ->
+    (dispatch) =>
+      $.ajax
+        url: Routes.approve_api_v1_vacation_request_requested_day_path(vacationRequestId, requestedDayId)
+        type: 'PATCH'
+        data:
+          authenticity_token: globals.authenticity_token
+      .done (data) =>
+        dispatch
+          type: constants.EDIT_VACATION_REQUEST_REPLACE_REQUESTED_DAY
+          requestedDay: data.requested_day
+      .fail (data) =>
+        throw new Error('Error', data)
+
+  rejectDay: (vacationRequestId, requestedDayId) ->
+    (dispatch) =>
+      $.ajax
+        url: Routes.reject_api_v1_vacation_request_requested_day_path(vacationRequestId, requestedDayId)
+        type: 'PATCH'
+        data:
+          authenticity_token: globals.authenticity_token
+      .done (data) =>
+        dispatch
+          type: constants.EDIT_VACATION_REQUEST_REPLACE_REQUESTED_DAY
+          requestedDay: data.requested_day
+      .fail (data) =>
+        throw new Error('Error', data)
