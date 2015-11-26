@@ -9,7 +9,7 @@ module.exports = (state = initalState, action) ->
   switch action.type
     when constants.VACATION_REQUESTS_RECEIVED
       vacationRequests = _.cloneDeep state.vacationRequests
-      newVacationRequests = vacationRequests.concat action.vacationRequests
+      newVacationRequests = _.uniq vacationRequests.concat(action.vacationRequests), 'id'
 
       _.assign {}, state, vacationRequests: newVacationRequests, meta: action.meta
 
