@@ -36,7 +36,7 @@ VacationRequestsIndex = React.createClass
   _renderNoData: ->
     <p>No data found yet</p>
 
-  render: ->
+  _render: ->
     <section className="vacation-requests-section">
       <div className="container">
         <header>
@@ -50,6 +50,9 @@ VacationRequestsIndex = React.createClass
         }
       </div>
     </section>
+
+  render: ->
+    @props.childen || @_render()
 
 
 mapStateToProps = (state) ->

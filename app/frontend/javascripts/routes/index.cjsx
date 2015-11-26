@@ -14,8 +14,10 @@ module.exports =
 
     <Route path="/team" component={UsersIndex} />
     <Route path="/public_calendar" component={PublicCalendarIndex} />
-    <Route path="/vacation_requests" component={VacationRequestsIndex} />
-    <Route path="/vacation_requests/:id/edit" component={VacationRequestEdit} />
+    <Route path="/vacation_requests">
+      <IndexRoute component={VacationRequestsIndex}/>
+      <Route path=":id/edit" component={VacationRequestEdit} />
+    </Route>
     <Route path="/settings" component={SettingsIndex} />
     <Route path="/settings/public_holidays" component={PublicHolidays} />
 

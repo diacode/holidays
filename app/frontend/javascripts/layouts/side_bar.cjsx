@@ -8,7 +8,7 @@ module.exports = React.createClass
     return unless globals.currentUser.admin
 
     <li>
-      <Link activeClassName="active" to="settings"><i className="fa fa-cog"></i>Settings</Link>
+      <Link activeClassName="active" to="/settings"><i className="fa fa-cog"></i>Settings</Link>
     </li>
 
   render: ->
@@ -21,10 +21,10 @@ module.exports = React.createClass
             </IndexLink>
           </li>
           <li>
-            <Link activeClassName="active" to="public_calendar"><i className="fa fa-calendar"></i>Public</Link>
+            <Link activeClassName="active" to="/public_calendar"><i className="fa fa-calendar"></i>Public</Link>
           </li>
           <li>
-            <Link activeClassName="active" to="vacation_requests"><i className="fa fa-envelope-o"></i>Inbox</Link>
+            <Link activeClassName="active" to="/vacation_requests"><i className="fa fa-envelope-o"></i>Inbox</Link>
           </li>
           {@_renderSettings()}
         </ul>
