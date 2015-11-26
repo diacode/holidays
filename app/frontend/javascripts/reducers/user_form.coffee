@@ -11,16 +11,16 @@ initialState =
 module.exports = (state = initialState, action) ->
   switch action.type
     when constants.SET_SHOW_USER_FORM
-      _.merge {}, state, showForm: action.showForm
+      _.assign {}, state, showForm: action.showForm
 
     when constants.SET_USER_FORM_ITEM
-      _.merge {}, state, item: action.item
+      _.assign {}, state, item: action.item
 
     when constants.ADD_USER_FORM_ERRORS
-      _.merge {}, state, errors: action.errors
+      _.assign {}, state, errors: action.errors
 
     when constants.RESET_USER_FORM
-      _.merge {}, state, initialState
+      _.assign {}, state, initialState
 
     else
       state
