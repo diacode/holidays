@@ -1,12 +1,18 @@
+{ connect } = require 'react-redux'
+actions = require '../../actions'
+
 VacationRequestListItem = require './list_item'
 ReactCSSTransitionGroup = require 'react-addons-css-transition-group'
 
-VacationRequestsList = React.createClass
-  displayName: 'VacationRequestsList'
+VacationRequestsIndex = React.createClass
+  displayName: 'VacationRequestsIndex'
+
+  componentDidMount: ->
+    @props.dispatch actions.vacationRequests.fetchVacationRequests()
 
   _renderItems: ->
     @props.vacationRequests.map (vacationRequest) ->
-      <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} /> if vacationRequest != undefined
+      <VacationRequestListItem key={vacationRequest.id} {...vacationRequest} />
 
   _renderLoadMore: ->
     return unless @props.meta.current_page < @props.meta.total_pages
@@ -17,14 +23,12 @@ VacationRequestsList = React.createClass
 
   _handleLoadMoreClick: (e)->
     e.preventDefault()
-    @app.queries.vacationRequests.findAll @props.meta.current_page + 1
+    @props.dispatch actions.vacationRequests.fetchVacationRequests(@props.meta.current_page + 1)
 
   _renderList: ->
     <div id="vacation_requests_wrapper" className="box">
       <ul className="vacation-requests-list">
-        <ReactCSSTransitionGroup transitionName="vacation-request">
-          {@_renderItems()}
-        </ReactCSSTransitionGroup>
+        {@_renderItems()}
       </ul>
       {@_renderLoadMore()}
     </div>
@@ -48,4 +52,7 @@ VacationRequestsList = React.createClass
     </section>
 
 
-module.exports = VacationRequestsList
+mapStateToProps = (state) ->
+  state.vacationRequests
+
+module.exports = connect(mapStateToProps)(VacationRequestsIndex)

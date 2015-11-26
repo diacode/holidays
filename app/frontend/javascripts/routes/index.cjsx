@@ -2,7 +2,7 @@
 UsersIndex = require '../components/users/index'
 ApplicationWrapper = require '../layouts/application_wrapper'
 PublicCalendarIndex = require '../components/public_calendar/index'
-VacationRequests = require '../components/vacation_requests/section'
+VacationRequestsIndex = require '../components/vacation_requests/index'
 VacationRequestEditor = require '../components/vacation_requests/editor'
 SettingsIndex = require '../components/settings/index'
 PublicHolidays = require '../components/public_holidays/section'
@@ -14,7 +14,7 @@ module.exports =
 
     <Route name="team" path="/team" component={UsersIndex} />
     <Route name="public_calendar" path="/public_calendar" component={PublicCalendarIndex} />
-    <Route name="vacation_requests" path="/vacation_requests" component={VacationRequests} />
+    <Route name="vacation_requests" path="/vacation_requests" component={VacationRequestsIndex} />
     <Route name="edit_vacation_request" path="/vacation_requests/:id/edit" component={VacationRequestEditor} />
     <Route name="settings" path="/settings" component={SettingsIndex} />
     <Route name="public_holidays" path="/settings/public_holidays" component={PublicHolidays} />
