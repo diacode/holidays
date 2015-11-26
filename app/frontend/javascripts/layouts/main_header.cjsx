@@ -1,3 +1,4 @@
+{ Link } = require 'react-router'
 Globals = require '../utils/globals'
 RequestHolidaysForm = require '../components/holidays/request_form'
 UserNavWidget = require '../widgets/user_nav'
@@ -10,7 +11,7 @@ module.exports = React.createClass
 
   render: ->
     <nav id="main_nav">
-      <a className="logo-link" href="#"></a>
+      <Link to="/" className="logo-link" href="#"></Link>
       <ul className="nav">
         <li>
           <RequestHolidaysForm />
