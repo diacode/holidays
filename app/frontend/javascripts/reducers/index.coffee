@@ -6,3 +6,4 @@ module.exports = combineReducers
   users: require './users'
   userForm: require './user_form'
   vacationRequestForm: require './vacation_request_form'
+  publicCalendar: require './public_calendar'

@@ -1,7 +1,7 @@
 { Route, IndexRoute } = require 'react-router'
 UsersIndex = require '../components/users/index'
 ApplicationWrapper = require '../layouts/application_wrapper'
-PublicCalendar = require '../components/public_calendar/section'
+PublicCalendarIndex = require '../components/public_calendar/index'
 VacationRequests = require '../components/vacation_requests/section'
 VacationRequestEditor = require '../components/vacation_requests/editor'
 SettingsIndex = require '../components/settings/index'
@@ -13,7 +13,7 @@ module.exports =
     <IndexRoute component={UsersIndex} />
 
     <Route name="team" path="/team" component={UsersIndex} />
-    <Route name="public_calendar" path="/public_calendar" component={PublicCalendar} />
+    <Route name="public_calendar" path="/public_calendar" component={PublicCalendarIndex} />
     <Route name="vacation_requests" path="/vacation_requests" component={VacationRequests} />
     <Route name="edit_vacation_request" path="/vacation_requests/:id/edit" component={VacationRequestEditor} />
     <Route name="settings" path="/settings" component={SettingsIndex} />
