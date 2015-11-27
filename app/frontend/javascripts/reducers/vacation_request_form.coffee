@@ -19,7 +19,7 @@ module.exports = (state = initialState, action) ->
       _.assign {}, state, error: action.error
 
     when constants.REQUEST_FORM_SET_SELECTED_DATES
-      _.assign {}, state, selectedDates: action.dates
+      _.merge {}, state, selectedDates: action.dates
 
     when constants.PUBLIC_HOLIDAYS_SET_MONTH_HOLIDAYS
       _.assign {}, state, publicHolidays: action.publicHolidays
