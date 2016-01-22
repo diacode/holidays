@@ -4,7 +4,7 @@ The goal of the app is to scratch one of our personal itches as a remote team: h
 === Stack
 * Rails 4.2
 * React.js
-* Marty.js as Flux implementation
+* Redux as Flux implementation
 * Webpack for js management
 * PostgreSQL
 
