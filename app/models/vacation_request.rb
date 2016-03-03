@@ -35,7 +35,7 @@ class VacationRequest < ActiveRecord::Base
   end
 
   def editable?
-    requested_days.requested.any?
+    requested_days.requested.any? || requested_days.approved.any?
   end
 
   private
