@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  webpack:
+    command: webpack --watch --colors
+    build:
+      context: .
+      dockerfile: Dockerfile-webpack
+    volumes:
+      - .:/myapp
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - webpack
