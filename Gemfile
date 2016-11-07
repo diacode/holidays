@@ -74,4 +74,3 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
 end
-
