@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   # Relations
   has_many :vacation_requests, dependent: :destroy
   has_many :requested_days, through: :vacation_requests
+  has_many :granted_vacation_days
 
   # Scopes
   scope :sorted, -> { order id: :desc }
