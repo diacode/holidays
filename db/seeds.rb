@@ -15,38 +15,39 @@ User.create(email: 'admin@diacode.com', password: '12345678', first_name: 'admin
 User.create(email: 'user@diacode.com', password: '12345678', first_name: 'regular', last_name: 'user')
 
 puts '*** Creating public holidays'
+current_year = Date.today.year
 public_holidays = [
   {
     name: 'Año Nuevo',
-    day: '2015-01-01'
+    day: "#{current_year}-01-01"
   },
   {
     name: 'Epifanía del Señor',
-    day: '2015-01-06'
+    day: "#{current_year}-01-06"
   },
   {
     name: 'Viernes Santo',
-    day: '2015-04-03'
+    day: "#{current_year}-04-03"
   },
   {
     name: 'Fiesta del Trabajo',
-    day: '2015-05-01'
+    day: "#{current_year}-05-01"
   },
   {
     name: 'Asunción de la Virgen',
-    day: '2015-08-15'
+    day: "#{current_year}-08-15"
   },
   {
     name: 'Fiesta Nacional de España',
-    day: '2015-10-12'
+    day: "#{current_year}-10-12"
   },
   {
     name: 'Inmaculada Concepción',
-    day: '2015-12-08'
+    day: "#{current_year}-12-08"
   },
   {
     name: 'Natividad del Señor',
-    day: '2015-12-25'
+    day: "#{current_year}-12-25"
   }
 ]
 
