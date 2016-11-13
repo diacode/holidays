@@ -8,6 +8,32 @@ module.exports =
         type: constants.GRANT_FORM_SET_SHOW_FORM
         showForm: show
 
+  fetchUsers: ->
+    (dispatch) =>
+      $.get(Routes.api_v1_users_path())
+      .done (data) ->
+        dispatch
+          type: constants.GRANT_FORM_USERS_LOADED
+          users: data.users
+
+  save: (params) ->
+    (dispatch) =>
+      url = Routes.batch_create_api_v1_granted_vacation_days_path()
+      body =
+        authenticity_token: globals.authenticityToken
+        batch: params
+
+      $.ajax
+        url: url
+        type: "POST"
+        datatype: 'json'
+        contentType: "application/json"
+        data: JSON.stringify(body)
+      .done (data) =>
+        dispatch
+          type: constants.GRANT_FORM_SET_SHOW_FORM
+          showForm: false
+
   # setDatesAreValid: (valid = true) ->
   #   (dispatch) =>
   #     dispatch
