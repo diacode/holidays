@@ -13,7 +13,7 @@ GrantForm = React.createClass
 
   _onSubmit: (e) ->
     e.preventDefault()
-    
+
     @props.dispatch actions.grantVacationDaysForm.save(
       amount: @refs.amount.value,
       year: @refs.year.value
@@ -63,18 +63,27 @@ GrantForm = React.createClass
 
   render: ->
     <Modal show={@props.showForm} hide={@_hideForm}>
-      <div className="modal">
+      <div className="modal gvdm">
         <form onSubmit={@_onSubmit}>
           <header>
             <h3>Grant Vacation Days</h3>
           </header>
 
-          {@_renderUserList()}
+          <div className="form-content">
 
-          <div className="granted-values">
-            <input type="number" ref="amount" required="required" />
-            <input type="number" ref="year" required="required" />
-            <input type="text" ref="reason" />
+            <div className="granted-values">
+              <div className="input">
+                <input type="number" ref="amount" required="required" placeholder="Amount of days" />
+              </div>
+              <div className="input">
+                <input type="number" ref="year" required="required" placeholder="Year" value={new Date().getFullYear()} />
+              </div>
+              <div className="input">
+                <input type="text" ref="reason" placeholder="Reason" />
+              </div>
+            </div>
+            
+            {@_renderUserList()}
           </div>
 
           {@_renderActions()}
