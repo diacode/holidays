@@ -13,6 +13,7 @@ GrantForm = React.createClass
 
   _onSubmit: (e) ->
     e.preventDefault()
+    
     @props.dispatch actions.grantVacationDaysForm.save(
       amount: @refs.amount.value,
       year: @refs.year.value
@@ -22,6 +23,14 @@ GrantForm = React.createClass
 
   _hideForm: ->
     @props.dispatch actions.grantVacationDaysForm.showForm(false)
+    @_clear()
+
+  _clear: ->
+    for key, input of @refs
+      if input.type == "checkbox"
+        input.checked = false
+      else
+        input.value = ""
 
   _getSelectedUserIds: ->
     selectedCheckboxes = _.pick @refs, (val, key) ->
