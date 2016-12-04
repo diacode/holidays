@@ -1,34 +1,43 @@
-.gvdm
-  .form-content:after
-    content: ''
-    display: block
-    clear: both
+.md-overlay
+  .md-modal.gvdm
+    .md-content
+      width: 600px
+      margin-left: -300px
 
-  .user-list
-    float: left
-    width: 280px
-    padding: 0px
-    margin: 0px
+    .form-content:after
+      content: ''
+      display: block
+      clear: both
 
-    li
-      list-style-type: none
-      height: 60px
+    .user-list
+      float: left
+      width: 295px
+      height: 180px
+      padding: 0px
+      margin: 0px
+      overflow: scroll
+      margin-left: 35px
+      margin-bottom: 25px
 
-      label
-        display: block
+      li
+        list-style-type: none
         height: 60px
 
-        img, input, span
-          display: table-cell
-          vertical-align: middle
-          display: inline-block
-          margin-right: 15px
+        label
+          display: block
+          height: 60px
 
-        img
-          width: 50px
-          border-radius: 45px
+          img, input, span
+            display: table-cell
+            vertical-align: middle
+            display: inline-block
+            margin-right: 15px
 
-  .granted-values
-    float: left
-    .input
-      margin-bottom: 1em
+          img
+            width: 50px
+            border-radius: 45px
+
+    .granted-values
+      float: left
+      .input
+        margin-bottom: 1em

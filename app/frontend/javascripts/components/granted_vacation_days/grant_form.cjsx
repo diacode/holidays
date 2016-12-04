@@ -62,8 +62,8 @@ GrantForm = React.createClass
     </div>
 
   render: ->
-    <Modal show={@props.showForm} hide={@_hideForm}>
-      <div className="modal gvdm">
+    <Modal show={@props.showForm} hide={@_hideForm} modalClass="gvdm">
+      <div className="modal">
         <form onSubmit={@_onSubmit}>
           <header>
             <h3>Grant Vacation Days</h3>
@@ -76,13 +76,13 @@ GrantForm = React.createClass
                 <input type="number" ref="amount" required="required" placeholder="Amount of days" />
               </div>
               <div className="input">
-                <input type="number" ref="year" required="required" placeholder="Year" value={new Date().getFullYear()} />
+                <input type="number" ref="year" required="required" placeholder="Year" />
               </div>
               <div className="input">
                 <input type="text" ref="reason" placeholder="Reason" />
               </div>
             </div>
-            
+
             {@_renderUserList()}
           </div>
 

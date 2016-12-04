@@ -13,7 +13,7 @@ module.exports = React.createClass
       'md-overlay': true
       'md-show': @props.show
 
-    modalStyleClasses = classnames
+    modalStyleClasses = classnames @props.modalClass,
       'md-modal': true
       'md-show': @props.show
 
@@ -24,4 +24,3 @@ module.exports = React.createClass
         </div>
       </div>
     </div>
-
