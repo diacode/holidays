@@ -1,10 +1,15 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :check_admin_user, except: [:index]
+  before_action :check_admin_user, except: [:index, :show]
 
   def index
     users = User.sorted
 
     render json: users, root: :users
+  end
+
+  def show
+    user = User.includes(:granted_vacation_days).find(params[:id])
+    render json: user, serializer: UserProfileSerializer, root: :user
   end
 
   def create
