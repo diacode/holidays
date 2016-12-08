@@ -28,6 +28,12 @@ Rails.application.routes.draw do
           patch :batch_update
         end
       end
+
+      resources :granted_vacation_days do
+        collection do
+          post :batch_create
+        end
+      end
     end
   end
 

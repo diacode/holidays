@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507092017) do
+ActiveRecord::Schema.define(version: 20161107162038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "granted_vacation_days", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.text     "reason"
+    t.integer  "year",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "granted_vacation_days", ["user_id"], name: "index_granted_vacation_days_on_user_id", using: :btree
 
   create_table "public_holidays", force: :cascade do |t|
     t.string   "name"
@@ -68,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150507092017) do
 
   add_index "vacation_requests", ["user_id"], name: "index_vacation_requests_on_user_id", using: :btree
 
+  add_foreign_key "granted_vacation_days", "users"
   add_foreign_key "requested_days", "users", column: "validator_id"
   add_foreign_key "requested_days", "vacation_requests"
   add_foreign_key "vacation_requests", "users"
