@@ -11,18 +11,23 @@ UserProfile = React.createClass
     @props.dispatch actions.users.find(@props.params.id)
 
   _renderGrantedVacationDays: ->
-    years = _.keys(@props.userProfile.granted_days).sort()
+    years = _.keys(@props.userProfile.granted_days).sort (a, b) -> a < b
 
     if years.length
       years.map (year) =>
         grantedDays = @props.userProfile.granted_days[year]
-        squares = _.times grantedDays, (idx) ->
-          <div key={idx} className="granted-day-square"></div>
+        dots = _.times grantedDays, (idx) ->
+          <div key={idx} className="granted-day-dot"></div>
 
         <div className="year-wrapper" key={year}>
-          <h3>{year}</h3>
-          <div className="square-wrapper">{squares}</div>
-          {grantedDays} days granted
+          <h4>Year {year}</h4>
+          <div className="grid">
+            <div className="granted-days-amount">
+              <strong>{grantedDays}</strong>
+              days granted
+            </div>
+            <div className="dot-wrapper">{dots}</div>
+          </div>
         </div>
 
   _renderVacationHistoryRows: ->
@@ -31,6 +36,7 @@ UserProfile = React.createClass
 
       <tr key={rad.id}>
         <td>{parsedDate.format("dddd, MMMM Do YYYY")}</td>
+        <td></td>
       </tr>
 
   render: ->
@@ -43,21 +49,27 @@ UserProfile = React.createClass
       </div>
 
       <div className="subwrapper">
-        <h2>Vacation history</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-            </tr>
-          </thead>
+        <div className="left-column">
+          <div className="box">
+            <h3>Vacation history</h3>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {@_renderVacationHistoryRows()}
-          </tbody>
-        </table>
-
-        <h2>Granted Vacation Days</h2>
-        {@_renderGrantedVacationDays()}
+              <tbody>
+                {@_renderVacationHistoryRows()}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="right-column">
+          <h3>Granted Vacation Days</h3>
+          {@_renderGrantedVacationDays()}
+        </div>
       </div>
     </div>
 

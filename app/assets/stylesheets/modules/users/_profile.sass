@@ -5,6 +5,7 @@
     header
       background-color: $white
       padding: 1em
+      margin-bottom: 2em
 
       img, h1
         display: inline
@@ -15,13 +16,41 @@
         margin-right: 1em
 
 
-  .year-wrapper
-    .square-wrapper
-      width: 200px
+  .subwrapper
+    +outer-container
 
-      .granted-day-square
-        display: inline-block
-        width: 10px
-        height: 10px
-        background-color: $green
-        margin-right: 3px
+    .left-column
+      +span-columns(8)
+
+    .right-column
+      +span-columns(4)
+
+      .year-wrapper
+        margin-bottom: 2em
+        padding-bottom: 2em
+        border-bottom: 1px dotted $gray
+
+        h4
+          margin-bottom: 0.5em
+          text-align: center
+
+        .grid
+          +outer-container
+        .dot-wrapper
+          +span-columns(6)
+
+          .granted-day-dot
+            display: inline-block
+            width: 10px
+            height: 10px
+            background-color: $green
+            margin-right: 3px
+            border-radius: 10px
+
+        .granted-days-amount
+          +span-columns(4)
+          text-align: center
+
+          strong
+            font-size: 3em
+            display: block
