@@ -1,0 +1,60 @@
+.user-profile-section
+  width: 100%
+
+  .wrapper
+    header
+      background-color: $white
+      padding: 1em
+      margin-bottom: 2em
+
+      img, h1
+        display: inline
+        vertical-align: middle
+
+      img
+        border-radius: 50px
+        margin-right: 1em
+
+
+  .subwrapper
+    +outer-container
+
+    .left-column
+      +span-columns(8)
+
+    .right-column
+      +span-columns(4)
+
+      .available-days-wrapper
+        margin-bottom: 2em
+
+      .year-wrapper
+        margin-bottom: 2em
+        padding-bottom: 2em
+        border-bottom: 1px dotted $gray
+
+        h4
+          margin-bottom: 0.5em
+          text-align: center
+
+      .days-counter
+        +outer-container
+
+        .dot-wrapper
+          +span-columns(6)
+
+          .day-dot
+            display: inline-block
+            width: 10px
+            height: 10px
+            background-color: $green
+            margin-right: 3px
+            border-radius: 10px
+
+        .days-amount
+          +span-columns(4)
+          text-align: center
+
+          strong
+            font-size: 3em
+            display: block

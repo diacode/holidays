@@ -9,6 +9,14 @@ module.exports =
           type: constants.USERS_RECEIVED
           users: data.users
 
+  find: (id) ->
+    (dispatch) =>
+      $.get(Routes.api_v1_user_path(id))
+      .done (data) ->
+        dispatch
+          type: constants.USER_PROFILE_LOADED
+          userProfile: data.user
+
   showForm: (show = true) ->
     (dispatch) =>
       dispatch
@@ -17,4 +25,3 @@ module.exports =
 
       if show is false then dispatch
         type: constants.RESET_USER_FORM
-
