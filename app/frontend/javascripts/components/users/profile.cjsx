@@ -17,26 +17,46 @@ UserProfile = React.createClass
       years.map (year) =>
         grantedDays = @props.userProfile.granted_days[year]
         dots = _.times grantedDays, (idx) ->
-          <div key={idx} className="granted-day-dot"></div>
+          <div key={idx} className="day-dot"></div>
 
         <div className="year-wrapper" key={year}>
           <h4>Year {year}</h4>
-          <div className="grid">
-            <div className="granted-days-amount">
+          <div className="days-counter">
+            <div className="days-amount">
               <strong>{grantedDays}</strong>
               days granted
             </div>
             <div className="dot-wrapper">{dots}</div>
           </div>
         </div>
+    else
+      <p>This user doesn't have any vacation day granted yet.</p>
+
+  _renderDaysAvailable: ->
+    dots = _.times @props.userProfile.available_days, (idx) ->
+      <div key={idx} className="day-dot"></div>
+
+    <div className="available-days-wrapper">
+      <div className="days-counter">
+        <div className="days-amount">
+          <strong>{@props.userProfile.available_days}</strong>
+          vacation days to be taken
+        </div>
+        <div className="dot-wrapper">{dots}</div>
+      </div>
+    </div>
 
   _renderVacationHistoryRows: ->
-    @props.userProfile.requested_approved_days.map (rad) ->
-      parsedDate = moment(rad.day)
+    if @props.userProfile.requested_approved_days.length
+      @props.userProfile.requested_approved_days.map (rad) ->
+        parsedDate = moment(rad.day)
 
-      <tr key={rad.id}>
-        <td>{parsedDate.format("dddd, MMMM Do YYYY")}</td>
-        <td></td>
+        <tr key={rad.id}>
+          <td>{parsedDate.format("dddd, MMMM Do YYYY")}</td>
+        </tr>
+    else
+      <tr className="empty">
+        <td>This user haven't taken any day off yet.</td>
       </tr>
 
   render: ->
@@ -56,7 +76,6 @@ UserProfile = React.createClass
               <thead>
                 <tr>
                   <th>Date</th>
-                  <th>Reason</th>
                 </tr>
               </thead>
 
@@ -67,6 +86,9 @@ UserProfile = React.createClass
           </div>
         </div>
         <div className="right-column">
+          <h3>Days Available</h3>
+          {@_renderDaysAvailable()}
+
           <h3>Granted Vacation Days</h3>
           {@_renderGrantedVacationDays()}
         </div>

@@ -25,6 +25,9 @@
     .right-column
       +span-columns(4)
 
+      .available-days-wrapper
+        margin-bottom: 2em
+
       .year-wrapper
         margin-bottom: 2em
         padding-bottom: 2em
@@ -34,12 +37,13 @@
           margin-bottom: 0.5em
           text-align: center
 
-        .grid
-          +outer-container
+      .days-counter
+        +outer-container
+
         .dot-wrapper
           +span-columns(6)
 
-          .granted-day-dot
+          .day-dot
             display: inline-block
             width: 10px
             height: 10px
@@ -47,7 +51,7 @@
             margin-right: 3px
             border-radius: 10px
 
-        .granted-days-amount
+        .days-amount
           +span-columns(4)
           text-align: center
 
