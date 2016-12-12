@@ -1,0 +1,9 @@
+%h2 Hi #{@user.first_name}
+
+%p Welcome to the holidays app.
+
+%p We have generated a password for you: <strong>#{@password}</strong>.
+
+%p You can sign in using the following #{link_to("link", new_user_session_url)}.
+
+%p Enjoy!

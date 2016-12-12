@@ -17,6 +17,7 @@ class Api::V1::UsersController < ApplicationController
     user.password = Devise.friendly_token.first(8)
 
     if user.save
+      UserMailer.welcome_email(user).deliver_now
       render json: user.reload, status: :ok
     else
       render json: user.errors, status: :unprocessable_entity
