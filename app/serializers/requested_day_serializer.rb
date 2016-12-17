@@ -24,7 +24,6 @@ class RequestedDaySerializer < ActiveModel::Serializer
               :user_avatar
 
   def user_avatar
-    gravatar_id = Digest::MD5::hexdigest(object.vacation_request.user.email).downcase
-    "https://gravatar.com/avatar/#{gravatar_id}.png?s=80"
+    object.vacation_request.user.avatar_url(:tiny)    
   end
 end

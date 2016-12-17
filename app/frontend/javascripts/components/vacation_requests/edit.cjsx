@@ -97,7 +97,7 @@ VacationRequestEdit = React.createClass
         <div className="wrapper box">
           <header className="header">
             <img src={@props.vacationRequest.user_avatar} className="avatar" />
-            <h4>{@props.vacationRequest.user_name}</h4>
+            <h4>{@props.vacationRequest.user_full_name}</h4>
             <p>{@props.vacationRequest.message}</p>
           </header>
           <div className="calendar-wrapper">
