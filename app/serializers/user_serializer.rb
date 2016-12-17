@@ -41,7 +41,10 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def avatar_url
-    gravatar_id = Digest::MD5::hexdigest(object.email).downcase
-    "https://gravatar.com/avatar/#{gravatar_id}.png?s=100"
+    {
+      original: object.avatar_url,
+      thumb: object.avatar_url(:thumb),
+      tiny: object.avatar_url(:tiny)
+    }
   end
 end
