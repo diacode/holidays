@@ -5,6 +5,7 @@ initialState =
   userProfile:
     requested_approved_days: []
     granted_days: {}
+    avatar_url: {}
 
 module.exports = (state = initialState, action) ->
   switch action.type

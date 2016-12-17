@@ -44,6 +44,7 @@ class UserSerializer < ActiveModel::Serializer
     {
       original: object.avatar_url,
       thumb: object.avatar_url(:thumb),
+      small: object.avatar_url(:small),
       tiny: object.avatar_url(:tiny)
     }
   end
