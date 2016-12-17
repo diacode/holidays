@@ -4,7 +4,6 @@ actions = require '../../actions'
 
 Modal = require '../utils/modal'
 FormMixin = require '../../mixins/form_mixin'
-Gravatar = require 'react-gravatar'
 
 UserForm = React.createClass
   displayName: 'UserForm'
@@ -27,12 +26,6 @@ UserForm = React.createClass
   _handleOnChange: (e) ->
     @props.dispatch actions.userForm.setItem(@_formValues())
 
-
-  _renderAvatar: ->
-    <div className="avatar-wrapper">
-      <Gravatar email={@props.item.email} size={100} default="mm" />
-    </div>
-
   render: ->
     <Modal show={@props.showForm} hide={@_handleHideModal}>
       <div className="modal">
@@ -41,7 +34,6 @@ UserForm = React.createClass
             <h3>New team member</h3>
           </header>
           <div className="data-wrapper">
-            {@_renderAvatar()}
             {@_renderInput('email', 'Email', 'email')}
             {@_renderInput('first_name', 'First name')}
             {@_renderInput('last_name', 'Last name')}
@@ -55,4 +47,3 @@ mapStateToProps = (state) ->
   state.userForm
 
 module.exports = connect(mapStateToProps)(UserForm)
-

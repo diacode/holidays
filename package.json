@@ -19,7 +19,6 @@
     "lodash": "~2.4.1",
     "moment": "2.10.2",
     "react": "~0.13.1",
-    "react-gravatar": "^1.2.0",
     "react-router": "^0.13.3",
     "history": "^1.13.0",
     "react": "^0.14.2",
