@@ -21,6 +21,9 @@ gem 'jquery-rails'
 # Authentication
 gem 'devise'
 
+# Image uploads
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+
 gem 'thin'
 gem 'haml-rails'
 gem 'active_model_serializers', '0.8.3'
