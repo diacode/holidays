@@ -21,9 +21,14 @@ class RequestedDaySerializer < ActiveModel::Serializer
   attributes  :id,
               :status,
               :day,
-              :user_avatar
+              :user_avatar,
+              :user_full_name
 
   def user_avatar
-    object.vacation_request.user.avatar_url(:tiny)    
+    object.vacation_request.user.avatar_url(:tiny)
+  end
+
+  def user_full_name
+    object.vacation_request.user.full_name
   end
 end
