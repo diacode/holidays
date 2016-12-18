@@ -18,6 +18,7 @@
 #  admin                  :boolean          default(FALSE)
 #  first_name             :string
 #  last_name              :string
+#  avatar                 :string
 #
 # Indexes
 #
@@ -26,6 +27,7 @@
 #
 
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
     :validatable
 

@@ -42,7 +42,7 @@ GrantForm = React.createClass
       <li>
         <label>
           <input type="checkbox" ref="selectedUsers_#{i}" value={user.id} />
-          <img src={user.avatar_url} />
+          <img src={user.avatar_url.small} />
           {user.full_name}
         </label>
       </li>

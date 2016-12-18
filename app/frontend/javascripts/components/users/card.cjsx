@@ -19,7 +19,7 @@ module.exports = React.createClass
     <div className={userClassnames}>
       <header>
         <Link to="/team/#{@props.id}">
-          <img className="avatar" src={@props.avatar_url}/>
+          <img className="avatar" src={@props.avatar_url.thumb}/>
         </Link>
         <h3>{@props.full_name}</h3>
         {@_renderStatus()}

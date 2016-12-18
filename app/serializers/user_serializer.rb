@@ -18,6 +18,7 @@
 #  admin                  :boolean          default(FALSE)
 #  first_name             :string
 #  last_name              :string
+#  avatar                 :string
 #
 # Indexes
 #
@@ -40,7 +41,11 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def avatar_url
-    gravatar_id = Digest::MD5::hexdigest(object.email).downcase
-    "https://gravatar.com/avatar/#{gravatar_id}.png?s=100"
+    {
+      original: object.avatar_url,
+      thumb: object.avatar_url(:thumb),
+      small: object.avatar_url(:small),
+      tiny: object.avatar_url(:tiny)
+    }
   end
 end

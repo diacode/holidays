@@ -63,7 +63,7 @@ UserProfile = React.createClass
     <div className="user-profile-section">
       <div className="wrapper">
         <header>
-          <img src={@props.userProfile.avatar_url} />
+          <img src={@props.userProfile.avatar_url.thumb} />
           <h1>{@props.userProfile.full_name}</h1>
         </header>
       </div>

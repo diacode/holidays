@@ -24,7 +24,7 @@ module.exports = React.createClass
         </li>
         <li>
           <a href="#">
-            <img className="avatar" id="user_nav_toggle" src={Globals.currentUser.avatar_url}/>
+            <img className="avatar" id="user_nav_toggle" src={Globals.currentUser.avatar_url.small}/>
           </a>
           <ul className="dropdown">
             <li>

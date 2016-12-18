@@ -1,4 +1,5 @@
 classnames = require 'classnames'
+Tipsy = require 'react-tipsy'
 
 module.exports = React.createClass
   displayName: 'Day'
@@ -47,8 +48,11 @@ module.exports = React.createClass
 
     for approvedDay in @props.approvedDays
       if @props.day.date.isSame approvedDay.day
-        avatars.push <img key={approvedDay.id} className="avatar" src={approvedDay.user_avatar}/>
-
+        avatars.push(
+          <Tipsy key={approvedDay.id} content={approvedDay.user_full_name} placement="top">
+            <img className="avatar" src={approvedDay.user_avatar}/>
+          </Tipsy>
+        )
     <div className="avatars-wrapper">{avatars}</div>
 
   render: ->
