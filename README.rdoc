@@ -11,11 +11,18 @@ The goal of the app is to scratch one of our personal itches as a remote team: h
 === Installation instructions
 
     $ git clone https://github.com/diacode/holidays.git
+    $ cd holidays
     $ bundle install
     $ npm install -g webpack
     $ npm install
+    $ cp config/database.yml.example config/database.yml
     $ rake db:setup
     $ foreman start -f Procfile.dev
+    
+* Open the app in your browser (locally at http://127.0.0.1:3000)
+* Sign in with the seeded[https://github.com/diacode/holidays/blob/master/db/seeds.rb] credentials!
+  * Email: admin@diacode.com
+  * Password: +12345678+
 
 === Configuration
 
